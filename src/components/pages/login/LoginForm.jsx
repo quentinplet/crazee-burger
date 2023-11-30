@@ -25,7 +25,9 @@ const LoginForm = () => {
         value={inputValue}
         required
       />
-      <button>Accédez à votre espace</button>
+      <Link to="/order">
+        <button>Accédez à votre espace</button>
+      </Link>
     </form>
   );
 };
