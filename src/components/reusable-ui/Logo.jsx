@@ -13,7 +13,7 @@ const Logo = () => {
 export default Logo;
 
 const LogoStyled = styled.div`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   align-items: center;
   color: white;
