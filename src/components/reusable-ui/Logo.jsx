@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 const Logo = () => {
   return (
@@ -24,9 +25,9 @@ const LogoStyled = styled.div`
   h1 {
     display: inline;
     text-align: center;
-    color: #ffa01b;
+    color: ${theme.colors.primary};
     font-size: 110px;
-    font-weight: 700;
+    font-weight: ${theme.fonts.weights.bold};
     line-height: 1em;
     text-transform: uppercase;
     letter-spacing: 1.5px;

@@ -56,13 +56,14 @@ const LoginFormStyled = styled.form`
   min-width: 400px;
   max-height: 500px;
   min-height: 400px;
-  padding: 20px;
+  padding: 40px ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.round};
   font-family: "Amatic SC";
 
   h1 {
-    color: white;
-    font-size: 48px;
-    font-weight: 700;
+    color: ${theme.colors.white};
+    font-size: ${theme.fonts.size.P5};
+    font-weight: ${theme.fonts.weights.bold};
     line-height: 61px;
     margin: 0;
     margin-bottom: 32px;
@@ -70,14 +71,14 @@ const LoginFormStyled = styled.form`
 
   hr {
     width: 400px;
-    border: 1px solid #f56a2c;
-    background: #f56a2c;
-    margin-bottom: 40px;
+    border: 1px solid ${theme.colors.loginLine};
+    background: ${theme.colors.primary};
+    margin-bottom: ${theme.gridUnit * 4}px;
   }
 
   h2 {
-    color: white;
-    font-size: 36px;
+    color: ${theme.colors.white};
+    font-size: ${theme.fonts.size.P4};
     line-height: 46px;
   }
 
@@ -85,7 +86,7 @@ const LoginFormStyled = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
+    font-size: ${theme.fonts.size.P0};
     margin-left: 10px;
   }
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 const PrimaryButton = ({ label, Icon }) => {
   return (
@@ -13,9 +14,9 @@ export default PrimaryButton;
 
 const PrimaryButtonStyled = styled.button`
   width: 100%;
-  border: 1px solid #ff9f1b;
+  border: 1px solid ${theme.colors.primary};
   border-radius: 5px;
-  background: #ff9f1b;
+  background: ${theme.colors.primary};
   white-space: nowrap;
   display: flex;
   justify-content: center;
@@ -24,27 +25,27 @@ const PrimaryButtonStyled = styled.button`
   text-decoration: none;
   line-height: 1;
   padding: 18px 106px;
-  color: white;
+  color: ${theme.colors.white};
 
   span {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 15px;
+    font-size: ${theme.fonts.size.P0};
+    font-weight: ${theme.fonts.weights.bold};
+    line-height: ${theme.fonts.size.P0};
     text-align: center;
   }
 
   &:hover:not(:disabled) {
-    background-color: white;
-    color: #ff9f1b;
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
     cursor: pointer;
     transition: all 0.2s ease-in-out;
   }
 
   &:active {
-    color: white;
-    background-color: #f56a2c;
-    border: 1px solid #f56a2c;
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.primary};
+    border: 1px solid ${theme.colors.primary};
   }
 
   &:disabled {
