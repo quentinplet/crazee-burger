@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Input = ({ value, onChange, Icon, ...restProps }) => {
+const TextInput = ({ value, onChange, Icon, ...restProps }) => {
   return (
     <InputStyled>
       {Icon && Icon}
@@ -9,7 +9,7 @@ const Input = ({ value, onChange, Icon, ...restProps }) => {
   );
 };
 
-export default Input;
+export default TextInput;
 
 const InputStyled = styled.div`
   /* border: 1px solid red; */
