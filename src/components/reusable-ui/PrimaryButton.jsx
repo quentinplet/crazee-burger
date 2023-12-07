@@ -34,14 +34,6 @@ const PrimaryButtonStyled = styled.button`
     text-align: center;
   }
 
-  .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    margin-left: 10px;
-  }
-
   &:hover:not(:disabled) {
     background-color: white;
     color: #ff9f1b;

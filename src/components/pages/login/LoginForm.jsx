@@ -38,7 +38,7 @@ const LoginForm = () => {
           required
         />
         <PrimaryButton
-          label="Accéder à mon espace"
+          label={"Accéder à mon espace"}
           Icon={<IoChevronForward className="icon" />}
         />
       </div>
@@ -79,5 +79,13 @@ const LoginFormStyled = styled.form`
     color: white;
     font-size: 36px;
     line-height: 46px;
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    margin-left: 10px;
   }
 `;
