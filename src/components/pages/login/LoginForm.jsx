@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IoChevronForward } from "react-icons/io5";
 import { theme } from "../../../theme";
-import TextInput from "./TextInput";
+import TextInput from "../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
+import PrimaryButton from "../../reusable-ui/PrimaryButton";
 
 const LoginForm = () => {
   const [inputValue, setInputValue] = useState("");
@@ -36,11 +37,10 @@ const LoginForm = () => {
           placeholder={"Entrez votre prénom"}
           required
         />
-
-        <button className="button-with-icon">
-          <span>Accéder à mon espace</span>
-          <IoChevronForward className="icon" />
-        </button>
+        <PrimaryButton
+          label="Accéder à mon espace"
+          Icon={<IoChevronForward className="icon" />}
+        />
       </div>
     </LoginFormStyled>
   );
@@ -79,55 +79,5 @@ const LoginFormStyled = styled.form`
     color: white;
     font-size: 36px;
     line-height: 46px;
-  }
-
-  .button-with-icon {
-    width: 100%;
-    border: 1px solid #ff9f1b;
-    border-radius: 5px;
-    background: #ff9f1b;
-    white-space: nowrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    text-decoration: none;
-    line-height: 1;
-    padding: 18px 106px;
-    color: white;
-
-    span {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 15px;
-      text-align: center;
-    }
-
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 15px;
-      margin-left: 10px;
-    }
-
-    &:hover:not(:disabled) {
-      background-color: white;
-      color: #ff9f1b;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-    }
-
-    &:active {
-      color: white;
-      background-color: #f56a2c;
-      border: 1px solid #f56a2c;
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
   }
 `;
