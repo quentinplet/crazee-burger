@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
-import { theme } from "../../../theme";
 import Logo from "../../reusable-ui/Logo";
 
 const LoginPage = () => {
@@ -22,6 +20,6 @@ const LoginPageStyled = styled.div`
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("src/assets/burger-background.jpg");
+    url("/public/burger-background.jpg");
   background-size: cover;
 `;
