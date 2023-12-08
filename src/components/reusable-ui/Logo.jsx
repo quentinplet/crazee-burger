@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <LogoStyled>
       <h1>CRAZEE</h1>
-      <img src="/public/logo-orange.png" alt="logo" />
+      <img src="../../../public/logo-orange.png" alt="logo" />
       <h1>BURGER</h1>
     </LogoStyled>
   );
