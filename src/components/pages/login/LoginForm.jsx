@@ -52,6 +52,7 @@ const LoginFormStyled = styled.form`
   /* background: green; */
   text-align: center;
   margin: 0px auto;
+  margin-top: 40px;
   max-width: 500px;
   min-width: 400px;
   max-height: 500px;
