@@ -5,7 +5,7 @@ const Logo = ({ className, onClick }) => {
   return (
     <LogoStyled onClick={onClick} className={className}>
       <h1>CRAZEE</h1>
-      <img src="/logo-orange.png" alt="logo" />
+      <img src="/images/logo-orange.png" alt="logo" />
       <h1>BURGER</h1>
     </LogoStyled>
   );
