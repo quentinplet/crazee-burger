@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import PrimaryButton from "../../reusable-ui/PrimaryButton";
-import { formatPrice } from "../../../utils/maths";
+import PrimaryButton from "../../../reusable-ui/PrimaryButton";
+import { formatPrice } from "../../../../utils/maths";
 
 const Card = ({ imageSource, title, price }) => {
   const priceEuros = formatPrice(price);

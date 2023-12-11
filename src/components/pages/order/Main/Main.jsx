@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { theme } from "../../../theme";
+import { theme } from "../../../../theme";
 import Card from "./Card";
-import { fakeMenu1 } from "../../../fakeData/fakeMenu";
-import { fakeMenu2 } from "../../../fakeData/fakeMenu";
+import { fakeMenu1 } from "../../../../fakeData/fakeMenu";
+import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 
 const Main = () => {
   const menuArray = fakeMenu1;
@@ -13,7 +13,8 @@ const Main = () => {
 
   return (
     <MainStyled>
-      <div className="gridContainer">{listItem}</div>
+      <div className="basket">basket</div>
+      <div className="menu">{listItem}</div>
     </MainStyled>
   );
 };
@@ -28,7 +29,14 @@ const MainStyled = styled.div`
   border-bottom-right-radius: ${theme.borderRadius.extraRound};
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
 
-  .gridContainer {
+  display: grid;
+  grid-template-columns: 10% 90%;
+
+  .basket {
+    background: pink;
+  }
+
+  .menu {
     width: 100%;
     margin: 0 auto;
     /* border: 1px solid black; */
