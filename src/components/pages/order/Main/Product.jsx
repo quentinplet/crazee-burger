@@ -3,10 +3,10 @@ import styled from "styled-components";
 import PrimaryButton from "../../../reusable-ui/PrimaryButton";
 import { formatPrice } from "../../../../utils/maths";
 
-const Card = ({ imageSource, title, price }) => {
+const Product = ({ imageSource, title, price }) => {
   const priceEuros = formatPrice(price);
   return (
-    <CardStyled>
+    <ProductStyled>
       <div className="image">
         <img
           src={imageSource}
@@ -16,20 +16,20 @@ const Card = ({ imageSource, title, price }) => {
         />
       </div>
 
-      <div className="infos">
+      <div className="info-text">
         <h1>{title}</h1>
-        <div className="price-add">
+        <div className="description">
           <p className="price">{priceEuros}</p>
           <PrimaryButton className="button" label="Ajouter" />
         </div>
       </div>
-    </CardStyled>
+    </ProductStyled>
   );
 };
 
-export default Card;
+export default Product;
 
-const CardStyled = styled.div`
+const ProductStyled = styled.div`
   width: 240px;
   height: 330px;
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
@@ -56,11 +56,11 @@ const CardStyled = styled.div`
     height: 38px;
   }
 
-  .infos {
+  .info-text {
     margin: 0 20px;
   }
 
-  .price-add {
+  .description {
     padding-top: 10px;
     display: flex;
     justify-content: space-between;
