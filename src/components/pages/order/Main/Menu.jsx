@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
 import Card from "./Card";
 import { useState } from "react";
+import { theme } from "../../../../theme";
 
 const Menu = () => {
   const [menu, setMenu] = useState(fakeMenu2);
@@ -17,6 +18,9 @@ const Menu = () => {
 export default Menu;
 
 const MenuStyled = styled.div`
+  background: ${theme.colors.background_white};
+  box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
+
   width: 100%;
   margin: 0 auto;
   /* border: 1px solid black; */
