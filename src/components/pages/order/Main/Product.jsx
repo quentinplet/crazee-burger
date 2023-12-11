@@ -8,19 +8,14 @@ const Product = ({ imageSource, title, price }) => {
   return (
     <ProductStyled>
       <div className="image">
-        <img
-          src={imageSource}
-          alt="burger1 image"
-          width="200px"
-          height="145px"
-        />
+        <img src={imageSource} alt="title" />
       </div>
 
       <div className="info-text">
         <h1>{title}</h1>
         <div className="description">
           <p className="price">{priceEuros}</p>
-          <PrimaryButton className="button" label="Ajouter" />
+          <PrimaryButton className="primary-button" label="Ajouter" />
         </div>
       </div>
     </ProductStyled>
@@ -35,13 +30,12 @@ const ProductStyled = styled.div`
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   background-color: #fff;
   border-radius: 15px;
+  padding: 0 20px;
   .image {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 50px;
-    margin: 0 20px;
-    margin-bottom: 15px;
   }
 
   .image img {
@@ -51,41 +45,41 @@ const ProductStyled = styled.div`
     width: 200px;
   }
 
-  .button {
-    width: 95px;
-    height: 38px;
-  }
-
   .info-text {
-    margin: 0 20px;
-  }
+    margin-top: 15px;
 
-  .description {
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    h1 {
+      text-align: start;
+      color: #17161a;
+      font-family: Amatic SC;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
-  h1 {
-    text-align: start;
-    color: #17161a;
-    font-family: Amatic SC;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    .description {
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-  .price {
-    color: #ffa01b;
-    font-family: Open Sans;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 22px;
+      .price {
+        color: #ffa01b;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+      }
+
+      .primary-button {
+        width: 95px;
+        height: 38px;
+      }
+    }
   }
 `;

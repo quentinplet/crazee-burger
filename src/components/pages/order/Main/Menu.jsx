@@ -9,14 +9,7 @@ const Menu = () => {
   const [menu, setMenu] = useState(fakeMenu2);
 
   const listProduct = menu.map((produit) => {
-    return (
-      <Product
-        key={produit.id}
-        title={produit.title}
-        imageSource={produit.imageSource}
-        price={produit.price}
-      />
-    );
+    return <Product key={produit.id} {...produit} />;
   });
 
   return <MenuStyled>{listProduct}</MenuStyled>;
