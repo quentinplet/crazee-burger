@@ -1,36 +1,34 @@
 import React from "react";
 import styled from "styled-components";
-import PrimaryButton from "../../../reusable-ui/PrimaryButton";
-import { formatPrice } from "../../../../utils/maths";
+import PrimaryButton from "./PrimaryButton";
+import { theme } from "../../theme";
 
-const Product = ({ imageSource, title, price }) => {
-  const priceEuros = formatPrice(price);
+const Card = ({ imageSource, title, leftDescription }) => {
   return (
-    <ProductStyled>
+    <CardStyled>
       <div className="image">
         <img src={imageSource} alt="title" />
       </div>
-
       <div className="info-text">
         <h1>{title}</h1>
         <div className="description">
-          <p className="price">{priceEuros}</p>
+          <p className="price">{leftDescription}</p>
           <PrimaryButton className="primary-button" label="Ajouter" />
         </div>
       </div>
-    </ProductStyled>
+    </CardStyled>
   );
 };
 
-export default Product;
+export default Card;
 
-const ProductStyled = styled.div`
+const CardStyled = styled.div`
   width: 240px;
   height: 330px;
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
-  background-color: #fff;
-  border-radius: 15px;
-  padding: 0 20px;
+  background-color: ${theme.colors.white};
+  border-radius: ${theme.borderRadius.extraRound};
+  padding: 0 ${theme.spacing.md};
   .image {
     display: flex;
     justify-content: center;
@@ -50,11 +48,11 @@ const ProductStyled = styled.div`
 
     h1 {
       text-align: start;
-      color: #17161a;
+      color: ${theme.colors.dark};
       font-family: Amatic SC;
-      font-size: 36px;
+      font-size: ${theme.fonts.size.P4};
       font-style: normal;
-      font-weight: 700;
+      font-weight: ${theme.fonts.weights.bold};
       line-height: normal;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -68,11 +66,11 @@ const ProductStyled = styled.div`
       align-items: center;
 
       .price {
-        color: #ffa01b;
+        color: ${theme.colors.primary};
         font-family: Open Sans;
-        font-size: 16px;
+        font-size: ${theme.fonts.size.P1};
         font-style: normal;
-        font-weight: 400;
+        font-weight: ${theme.fonts.weights.regular};
         line-height: 22px;
       }
 
