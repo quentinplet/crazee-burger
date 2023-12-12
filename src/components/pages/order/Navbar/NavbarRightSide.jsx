@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Profile from "./Profile";
-import ToggleButton from "./ToggleButton";
+import ToggleButton from "../../../ToggleButton";
 import "react-toastify/dist/ReactToastify.css";
 import { theme } from "../../../../theme";
 import { ToastContainer } from "react-toastify";
@@ -9,7 +9,10 @@ import { ToastContainer } from "react-toastify";
 const NavbarRightSide = ({ userName }) => {
   return (
     <NavbarRightSideStyled>
-      <ToggleButton />
+      <ToggleButton
+        labelIfUnchecked="ACTIVER LE MODE ADMIN"
+        labelIfChecked="DÉSACTIVER LE MODE ADMIN"
+      />
       <Profile userName={userName} />
       <ToastContainer className="toaster" bodyClassName="body-toast" />
     </NavbarRightSideStyled>
@@ -25,10 +28,6 @@ const NavbarRightSideStyled = styled.div`
   display: flex;
   align-items: center;
   margin-right: 50px;
-
-  .admin-button {
-    background: lightblue;
-  }
 
   .toaster {
     max-width: 300px;
