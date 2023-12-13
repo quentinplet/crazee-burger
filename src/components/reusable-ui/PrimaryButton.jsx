@@ -30,9 +30,9 @@ const PrimaryButtonStyled = styled.button`
 
   span {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: ${theme.fonts.size.P0};
+    font-size: ${theme.fonts.size.SM};
     font-weight: ${theme.fonts.weights.bold};
-    line-height: ${theme.fonts.size.P0};
+    line-height: ${theme.fonts.size.SM};
     text-align: center;
   }
 

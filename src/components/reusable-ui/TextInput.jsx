@@ -23,13 +23,13 @@ const InputStyled = styled.div`
   margin: 18px auto;
 
   .icon {
-    font-size: ${theme.fonts.size.P0};
+    font-size: ${theme.fonts.size.SM};
     color: ${theme.colors.greyMedium};
   }
 
   input {
     border: none;
-    font-size: ${theme.fonts.size.P0};
+    font-size: ${theme.fonts.size.SM};
     font-weight: ${theme.fonts.weights.regular};
     font-family: Arial, Helvetica, sans-serif;
     line-height: 17px;
