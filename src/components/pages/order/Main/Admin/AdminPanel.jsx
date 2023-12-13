@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { theme } from "../../../../../theme";
 
 const AdminPanel = () => {
-  return <AdminPanelStyled>AdminPanel</AdminPanelStyled>;
+  return <AdminPanelStyled></AdminPanelStyled>;
 };
 
 export default AdminPanel;
