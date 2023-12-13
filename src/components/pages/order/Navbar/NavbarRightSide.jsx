@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Profile from "./Profile";
 import ToggleButton from "../../../ToggleButton";
 import ToastAdmin from "./ToastAdmin";
 import { toast } from "react-toastify";
+import OrderContext from "../../../../context/OrderContext";
 
-const NavbarRightSide = ({ userName }) => {
-  const [isModeAdmin, setIsModeAdmin] = useState(false);
+const NavbarRightSide = () => {
+  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
 
   const displayToastNotification = () => {
     if (!isModeAdmin) {
@@ -32,7 +33,7 @@ const NavbarRightSide = ({ userName }) => {
         onToggle={displayToastNotification}
         isChecked={isModeAdmin}
       />
-      <Profile userName={userName} />
+      <Profile />
       <ToastAdmin />
     </NavbarRightSideStyled>
   );

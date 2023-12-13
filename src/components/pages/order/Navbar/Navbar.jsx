@@ -5,11 +5,11 @@ import Logo from "../../../reusable-ui/Logo";
 import { theme } from "../../../../theme";
 import { refreshPage } from "../../../../utils/window";
 
-const Navbar = ({ userName }) => {
+const Navbar = () => {
   return (
     <NavbarStyled>
       <Logo className="logo-order-page" onClick={refreshPage} />
-      <NavbarRightSide userName={userName} />
+      <NavbarRightSide />
     </NavbarStyled>
   );
 };
