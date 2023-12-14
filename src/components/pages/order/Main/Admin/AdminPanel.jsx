@@ -11,6 +11,8 @@ const AdminPanel = () => {
     setisAddSelected,
     isEditSelected,
     setisEditSelected,
+    currentTabSelected,
+    setCurrentTabSelected,
   } = useContext(OrderContext);
 
   return (
