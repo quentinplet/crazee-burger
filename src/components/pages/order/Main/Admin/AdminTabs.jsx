@@ -24,9 +24,10 @@ const AdminTabs = () => {
   return (
     <AdminTabsStyled>
       <Tab
+        label=""
         Icon={isCollapsed ? <FiChevronUp /> : <FiChevronDown />}
-        className={isCollapsed ? "is-active" : ""}
         onClick={() => setIsCollapsed(!isCollapsed)}
+        className={isCollapsed ? "is-active" : ""}
       />
       {tabs.map((tab, index) => {
         return (
@@ -46,7 +47,6 @@ const AdminTabs = () => {
 export default AdminTabs;
 
 const AdminTabsStyled = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   padding: 0 20px;
 
