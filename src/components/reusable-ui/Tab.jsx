@@ -5,7 +5,7 @@ import { theme } from "../../theme";
 const Tab = ({ Icon, onClick, className, label }) => {
   return (
     <TabStyled onClick={onClick} className={className}>
-      <div className="icon">{Icon}</div>
+      {Icon && <div className="icon">{Icon}</div>}
       {label && <span className="label">{label}</span>}
     </TabStyled>
   );
@@ -54,5 +54,9 @@ const TabStyled = styled.button`
 
   .label {
     margin-left: 13px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;

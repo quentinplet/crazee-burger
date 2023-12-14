@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
+import OrderContext from "../../../../../context/OrderContext";
 
 const AdminPanel = () => {
-  return <AdminPanelStyled></AdminPanelStyled>;
+  const {
+    isCollapsed,
+    setIsCollapsed,
+    isAddSelected,
+    setisAddSelected,
+    isEditSelected,
+    setisEditSelected,
+  } = useContext(OrderContext);
+
+  return (
+    <AdminPanelStyled>
+      {isAddSelected && "Ajouter un produit"}
+      {isEditSelected && "Modifier un produit"}
+    </AdminPanelStyled>
+  );
 };
 
 export default AdminPanel;
