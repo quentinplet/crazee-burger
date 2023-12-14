@@ -32,9 +32,10 @@ const MenuStyled = styled.div`
   margin: 0 auto;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   /* grid-template-columns: repeat(minmax(auto-fill, 4), minmax(240px, 1fr)); */
   grid-row-gap: 60px;
   grid-column-gap: 60px;
   padding: 50px 50px 150px;
+  overflow-y: scroll;
 `;
