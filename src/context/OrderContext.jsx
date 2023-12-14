@@ -8,8 +8,8 @@ export default createContext({
   setIsCollapsed: () => {},
 
   isAddSelected: true,
-  setisAddSelected: () => {},
+  setIsAddSelected: () => {},
 
   isEditSelected: false,
-  setisEditSelected: () => {},
+  setIsEditSelected: () => {},
 });
