@@ -4,6 +4,7 @@ import Tab from "../../../../reusable-ui/Tab";
 import { theme } from "../../../../../theme";
 import OrderContext from "../../../../../context/OrderContext";
 import { getTabsConfig } from "./getTabsConfig";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const AdminTabs = () => {
   const {
@@ -14,17 +15,19 @@ const AdminTabs = () => {
   } = useContext(OrderContext);
 
   const selectTab = (tabSelected) => {
-    if (tabSelected === "chevronUpDown") setIsCollapsed(!isCollapsed);
-    else {
-      isCollapsed && setIsCollapsed(false);
-      setCurrentTabSelected(tabSelected);
-    }
+    isCollapsed && setIsCollapsed(false);
+    setCurrentTabSelected(tabSelected);
   };
 
   const tabs = getTabsConfig(currentTabSelected, isCollapsed);
 
   return (
     <AdminTabsStyled>
+      <Tab
+        Icon={isCollapsed ? <FiChevronUp /> : <FiChevronDown />}
+        className={isCollapsed ? "is-active" : ""}
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      />
       {tabs.map((tab, index) => {
         return (
           <Tab
@@ -32,7 +35,7 @@ const AdminTabs = () => {
             label={tab.label}
             Icon={tab.Icon}
             onClick={() => selectTab(tab.index)}
-            className={tab.className}
+            className={currentTabSelected === tab.index ? "is-active" : ""}
           />
         );
       })}
