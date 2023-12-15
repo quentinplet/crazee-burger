@@ -5,68 +5,67 @@ import TextInput from "../../../../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
 
 const AddForm = () => {
-  const [product, setProduct] = useState({
+  const [newProduct, setNewProduct] = useState({
+    id: "",
     name: "",
     imageSource: "",
-    price: "",
+    price: 0,
   });
 
   const { handleAddProduct } = useContext(MenuContext);
 
-  const handleChange = (param, event) => {
-    setProduct((prevState) => {
-      return { ...prevState, [param]: event.target.value };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setNewProduct((prevState) => {
+      return { ...prevState, [name]: value };
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newProduct = {
-      id: new Date().getTime(),
-      title: product.name,
-      imageSource: product.imageSource,
-      price: product.price,
+    const id = crypto.randomUUID();
+    const newProductToAdd = {
+      ...newProduct,
+      id,
     };
-    handleAddProduct(newProduct);
-    setProduct({
+    handleAddProduct(newProductToAdd);
+    setNewProduct({
       name: "",
       imageSource: "",
       price: "",
     });
   };
 
-  //   const handleAddProduct = (product) => {
-  //     setProducts((prevState) => {
-  //       return { ...prevState, ...product };
-  //     });
-  //   };
-
   return (
     <AddFormStyled onSubmit={handleSubmit}>
       <div className="image-preview">
-        <img src={product.imageSource} alt={product.name} />
+        {newProduct.imageSource ? (
+          <img src={newProduct.imageSource} alt={newProduct.name} />
+        ) : (
+          "Aucune image"
+        )}
       </div>
       <div className="input-fields">
         <input
           type="text"
+          name="name"
           placeholder="Nom du produit (ex: Super Burger)"
-          className="product-name"
-          value={product.name}
-          onChange={(event) => handleChange("name", event)}
+          value={newProduct.name}
+          onChange={handleChange}
         />
         <input
           type="text"
+          name="imageSource"
           placeholder="Lien URL d'une image"
-          className="url-link"
-          value={product.imageSource}
-          onChange={(event) => handleChange("imageSource", event)}
+          value={newProduct.imageSource}
+          onChange={handleChange}
         />
         <input
-          type="text"
+          type="number"
+          name="price"
           placeholder="Prix"
-          className="product-price"
-          value={product.price}
-          onChange={(event) => handleChange("price", event)}
+          value={newProduct.price ? newProduct.price : ""}
+          onChange={handleChange}
         />
         {/* <TextInput
           value={product.price}
@@ -98,11 +97,12 @@ const AddFormStyled = styled.form`
   .image-preview {
     border: 1px solid red;
     grid-area: 1 / 1 / 4 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .image-preview img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
     object-position: center;
   }
