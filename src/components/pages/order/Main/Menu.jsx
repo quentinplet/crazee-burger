@@ -5,11 +5,13 @@ import Card from "../../../reusable-ui/Card";
 import { theme } from "../../../../theme";
 import MenuContext from "../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
+import OrderContext from "../../../../context/OrderContext";
 
 const DEFAULT_IMAGE = "/public/images/coming-soon.png";
 
 const Menu = ({ menu }) => {
   const { handleDeleteProduct } = useContext(MenuContext);
+  const { isModeAdmin } = useContext(OrderContext);
 
   const listCard = menu.map(({ id, title, price, imageSource }) => {
     return (
@@ -19,6 +21,7 @@ const Menu = ({ menu }) => {
         title={title}
         imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
         handleDeleteProduct={() => handleDeleteProduct(id)}
+        hasDeleteButton={isModeAdmin}
       />
     );
   });

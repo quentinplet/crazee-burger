@@ -2,15 +2,18 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import PrimaryButton from "./PrimaryButton";
 import { theme } from "../../theme";
-import OrderContext from "../../context/OrderContext";
 import { TiDelete } from "react-icons/ti";
 
-const Card = ({ imageSource, title, leftDescription, handleDeleteProduct }) => {
-  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
-
+const Card = ({
+  imageSource,
+  title,
+  leftDescription,
+  handleDeleteProduct,
+  hasDeleteButton,
+}) => {
   return (
     <CardStyled>
-      {isModeAdmin && (
+      {hasDeleteButton && (
         <button
           onClick={handleDeleteProduct}
           className="delete-button"
