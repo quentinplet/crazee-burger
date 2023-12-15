@@ -6,6 +6,8 @@ import { theme } from "../../../../theme";
 import MenuContext from "../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
 
+const DEFAULT_IMAGE = "/public/images/coming-soon.png";
+
 const Menu = ({ menu }) => {
   const { handleDeleteProduct } = useContext(MenuContext);
 
@@ -15,7 +17,7 @@ const Menu = ({ menu }) => {
         key={id}
         leftDescription={formatPrice(price)}
         title={title}
-        imageSource={imageSource}
+        imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
         handleDeleteProduct={() => handleDeleteProduct(id)}
       />
     );

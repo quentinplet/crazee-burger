@@ -105,6 +105,8 @@ const AddFormStyled = styled.form`
   .image-preview img {
     object-fit: cover;
     object-position: center;
+    width: 100px;
+    height: 100px;
   }
 
   .input-fields {
