@@ -14,10 +14,10 @@ const Main = () => {
 
   const [menu, setMenu] = useState(menuTest);
 
-  const handleDeleteProduct = (id) => {
+  const handleDeleteProduct = (productId) => {
     const menuCopy = [...menu];
 
-    const menuUpdated = menuCopy.filter((item) => item.id !== id);
+    const menuUpdated = menuCopy.filter((product) => product.id !== productId);
 
     setMenu(menuUpdated);
   };
@@ -34,6 +34,7 @@ const Main = () => {
     handleAddProduct,
     handleDeleteProduct,
     generateNewMenu,
+    menu,
   };
 
   return (

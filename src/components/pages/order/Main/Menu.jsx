@@ -20,7 +20,7 @@ const Menu = ({ menu }) => {
         leftDescription={formatPrice(price)}
         title={title}
         imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
-        handleDeleteProduct={() => handleDeleteProduct(id)}
+        onDelete={() => handleDeleteProduct(id)}
         hasDeleteButton={isModeAdmin}
       />
     );

@@ -8,14 +8,14 @@ const Card = ({
   imageSource,
   title,
   leftDescription,
-  handleDeleteProduct,
+  onDelete,
   hasDeleteButton,
 }) => {
   return (
     <CardStyled>
       {hasDeleteButton && (
         <button
-          onClick={handleDeleteProduct}
+          onClick={onDelete}
           className="delete-button"
           aria-label="delete-button"
         >
