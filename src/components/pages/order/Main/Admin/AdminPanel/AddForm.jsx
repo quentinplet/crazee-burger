@@ -4,6 +4,7 @@ import MenuContext from "../../../../../../context/MenuContext";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
 import { FiCheck } from "react-icons/fi";
+import { theme } from "../../../../../../theme";
 
 const EMPTY_PRODUCT = {
   id: "",
@@ -52,7 +53,7 @@ const AddForm = () => {
         {newProduct.imageSource ? (
           <img src={newProduct.imageSource} alt={newProduct.name} />
         ) : (
-          <div>Aucune Image</div>
+          <div className="empty-image">Aucune Image</div>
         )}
       </div>
       <div className="input-fields">
@@ -110,14 +111,28 @@ const AddFormStyled = styled.form`
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: repeat(4, 1fr);
-  gap: 10px;
+  grid-column-gap: 20px;
+  grid-row-gap: 8px;
 
   .image-preview {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     grid-area: 1 / 1 / 4 / 2;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .empty-image {
+      width: 100%;
+      height: 100%;
+      border-radius: ${theme.borderRadius.round};
+      border: 1px solid ${theme.colors.greyLight};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.5;
+      color: ${theme.colors.greySemiDark};
+    }
   }
 
   .image-preview img {
