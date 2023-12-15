@@ -42,11 +42,11 @@ const AddForm = () => {
   //   };
 
   return (
-    <AddFormStyled>
-      <div className="image-container">
+    <AddFormStyled onSubmit={handleSubmit}>
+      <div className="image-preview">
         <img src={product.imageSource} alt={product.name} />
       </div>
-      <form action="submit" className="input-fields" onSubmit={handleSubmit}>
+      <div className="input-fields">
         <input
           type="text"
           placeholder="Nom du produit (ex: Super Burger)"
@@ -61,47 +61,46 @@ const AddForm = () => {
           value={product.imageSource}
           onChange={(event) => handleChange("imageSource", event)}
         />
-        {/* <input
+        <input
           type="text"
           placeholder="Prix"
           className="product-price"
           value={product.price}
           onChange={(event) => handleChange("price", event)}
-        /> */}
-        <TextInput
+        />
+        {/* <TextInput
           value={product.price}
           onChange={(event) => handleChange("price", event)}
           Icon={<BsPersonCircle className="icon" />}
           placeholder={"Prix"}
           required
           className="text-input"
-        />
-        <div className="submit-button">
-          <input type="submit" value="Ajouter un nouveau produit au menu" />
-        </div>
-      </form>
+        /> */}
+      </div>
+      <div className="submit-button">
+        <input type="submit" value="Ajouter un nouveau produit au menu" />
+      </div>
     </AddFormStyled>
   );
 };
 
 export default AddForm;
 
-const AddFormStyled = styled.div`
+const AddFormStyled = styled.form`
   border: 1px solid black;
-  margin-top: 31px;
-  margin-left: 71px;
   width: 880px;
+  height: 100%;
   display: grid;
-  grid-template-columns: 215px 1fr;
+  grid-template-columns: 1fr 3fr;
   grid-template-rows: repeat(4, 1fr);
-  gap: 20px;
+  gap: 10px;
 
-  .image-container {
+  .image-preview {
     border: 1px solid red;
-    grid-area: 1 / 1 / span 3 / span 1;
+    grid-area: 1 / 1 / 4 / 2;
   }
 
-  .image-container img {
+  .image-preview img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -110,12 +109,12 @@ const AddFormStyled = styled.div`
 
   .input-fields {
     border: 1px solid blue;
-    grid-area: 1 / 2 / span 4 / span 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    grid-area: 1 / 2 / 4 / 3;
     gap: 8px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
 
     input {
       padding: 8px 16px 8px 24px;
@@ -140,5 +139,10 @@ const AddFormStyled = styled.div`
         background-color: #f5f5f7;
       }
     }
+  }
+
+  .submit-button {
+    border: 1px solid green;
+    grid-area: 4 / 2 / -1 / -1;
   }
 `;
