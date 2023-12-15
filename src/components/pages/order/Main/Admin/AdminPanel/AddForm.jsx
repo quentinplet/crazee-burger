@@ -4,13 +4,15 @@ import MenuContext from "../../../../../../context/MenuContext";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
 
+const EMPTY_PRODUCT = {
+  id: "",
+  name: "",
+  imageSource: "",
+  price: 0,
+};
+
 const AddForm = () => {
-  const [newProduct, setNewProduct] = useState({
-    id: "",
-    name: "",
-    imageSource: "",
-    price: 0,
-  });
+  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const { handleAddProduct } = useContext(MenuContext);
 
@@ -29,11 +31,7 @@ const AddForm = () => {
       id,
     };
     handleAddProduct(newProductToAdd);
-    setNewProduct({
-      name: "",
-      imageSource: "",
-      price: "",
-    });
+    setNewProduct(EMPTY_PRODUCT);
   };
 
   return (
@@ -56,7 +54,7 @@ const AddForm = () => {
         <input
           type="text"
           name="imageSource"
-          placeholder="Lien URL d'une image"
+          placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"
           value={newProduct.imageSource}
           onChange={handleChange}
         />
