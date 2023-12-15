@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { formatPrice } from "../../../../utils/maths";
-import Card from "../../../reusable-ui/Card";
-import { theme } from "../../../../theme";
-import MenuContext from "../../../../context/MenuContext";
+import { formatPrice } from "../../../../../utils/maths";
+import Card from "../../../../reusable-ui/Card";
+import { theme } from "../../../../../theme";
+import MenuContext from "../../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
-import OrderContext from "../../../../context/OrderContext";
+import OrderContext from "../../../../../context/OrderContext";
 
 const DEFAULT_IMAGE = "/public/images/coming-soon.png";
 

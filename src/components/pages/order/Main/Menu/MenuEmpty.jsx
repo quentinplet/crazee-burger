@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import PrimaryButton from "../../../reusable-ui/PrimaryButton";
-import OrderContext from "../../../../context/OrderContext";
-import MenuContext from "../../../../context/MenuContext";
+import PrimaryButton from "../../../../reusable-ui/PrimaryButton";
+import OrderContext from "../../../../../context/OrderContext";
+import MenuContext from "../../../../../context/MenuContext";
 
 const MenuEmpty = () => {
   const { isModeAdmin } = useContext(OrderContext);
@@ -50,8 +50,15 @@ const MenuEmptyStyled = styled.div`
     font-family: Amatic SC;
     font-size: 36px;
     font-style: normal;
-    font-weight: 700;
     line-height: normal;
+
+    &:nth-child(1) {
+      font-weight: 700;
+    }
+
+    &:nth-child(2) {
+      font-weight: 400;
+    }
   }
 
   .button {
