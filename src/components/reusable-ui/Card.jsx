@@ -3,19 +3,24 @@ import styled from "styled-components";
 import PrimaryButton from "./PrimaryButton";
 import { theme } from "../../theme";
 import OrderContext from "../../context/OrderContext";
+import { TiDelete } from "react-icons/ti";
 
 const Card = ({ imageSource, title, leftDescription, handleDeleteProduct }) => {
   const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
 
   return (
     <CardStyled>
+      {isModeAdmin && (
+        <button
+          onClick={handleDeleteProduct}
+          className="delete-button"
+          aria-label="delete-button"
+        >
+          <TiDelete className="icon" />
+        </button>
+      )}
       <div className="image">
         <img src={imageSource} alt="title" />
-        {isModeAdmin && (
-          <button onClick={handleDeleteProduct} className="delete-button">
-            X
-          </button>
-        )}
       </div>
       <div className="info-text">
         <h1>{title}</h1>
@@ -37,12 +42,42 @@ const CardStyled = styled.div`
   background-color: ${theme.colors.white};
   border-radius: ${theme.borderRadius.extraRound};
   padding: 0 ${theme.spacing.md};
+  position: relative;
+
+  .delete-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    color: ${theme.colors.primary};
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 0;
+    background: none;
+
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
+
+    :hover {
+      color: ${theme.colors.red};
+    }
+
+    :active {
+      color: ${theme.colors.primary};
+    }
+  }
+
   .image {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 50px;
-    position: relative;
   }
 
   .image img {
@@ -50,20 +85,6 @@ const CardStyled = styled.div`
     object-position: center;
     height: 145px;
     width: 200px;
-  }
-
-  .delete-button {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: ${theme.colors.background_white};
-    border: 1px solid ${theme.colors.greyLight};
-    border-radius: ${theme.borderRadius.extraRound};
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .info-text {

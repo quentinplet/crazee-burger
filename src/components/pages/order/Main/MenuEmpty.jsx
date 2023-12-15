@@ -6,8 +6,7 @@ import MenuContext from "../../../../context/MenuContext";
 
 const MenuEmpty = () => {
   const { isModeAdmin } = useContext(OrderContext);
-  const { generatenewMenu } = useContext(MenuContext);
-  console.log(generatenewMenu);
+  const { generateNewMenu } = useContext(MenuContext);
 
   const displayMenuEmpty = () => {
     if (isModeAdmin) {
@@ -18,7 +17,7 @@ const MenuEmpty = () => {
           <PrimaryButton
             className="button"
             label="Générer de nouveaux produits"
-            onClick={generatenewMenu}
+            onClick={generateNewMenu}
           />
         </>
       );
