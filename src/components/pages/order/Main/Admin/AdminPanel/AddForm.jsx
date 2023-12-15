@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MenuContext from "../../../../../../context/MenuContext";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
+import { FiCheck } from "react-icons/fi";
 
 const EMPTY_PRODUCT = {
   id: "",
@@ -13,6 +14,8 @@ const EMPTY_PRODUCT = {
 
 const AddForm = () => {
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { handleAddProduct } = useContext(MenuContext);
 
@@ -32,6 +35,15 @@ const AddForm = () => {
     };
     handleAddProduct(newProductToAdd);
     setNewProduct(EMPTY_PRODUCT);
+
+    displaySuccessMessage();
+  };
+
+  const displaySuccessMessage = () => {
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+    }, 2000);
   };
 
   return (
@@ -74,9 +86,17 @@ const AddForm = () => {
           className="text-input"
         /> */}
       </div>
-      <button className="submit-button">
-        Ajouter un nouveau produit au menu
-      </button>
+      <div className="submit">
+        <button className="submit-button">
+          Ajouter un nouveau produit au menu
+        </button>
+        {isSubmitted && (
+          <div className="submit-message">
+            <FiCheck />
+            <span>Ajouté avec succés</span>
+          </div>
+        )}
+      </div>
     </AddFormStyled>
   );
 };
@@ -141,19 +161,28 @@ const AddFormStyled = styled.form`
     }
   }
 
-  .submit-button {
+  .submit {
     border: 1px solid green;
     grid-area: 4 / 2 / -1 / -1;
-    width: 50%;
+    display: flex;
+    align-items: center;
 
-    cursor: pointer;
+    .submit-button {
+      cursor: pointer;
 
-    &:hover {
-      background-color: #f5f5f7;
+      width: 50%;
+
+      &:hover {
+        background-color: #f5f5f7;
+      }
+
+      &:active {
+        background-color: #f5f5f7;
+      }
     }
 
-    &:active {
-      background-color: #f5f5f7;
+    .submit-message {
+      border: 1px solid red;
     }
   }
 `;
