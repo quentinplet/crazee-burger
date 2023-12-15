@@ -22,10 +22,10 @@ const AddForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newProduct = {
-      id: Date.now(),
+      id: new Date().getTime(),
       title: product.name,
       imageSource: product.imageSource,
-      price: event.target[2].value,
+      price: product.price,
     };
     handleAddProduct(newProduct);
     setProduct({
@@ -77,9 +77,9 @@ const AddForm = () => {
           className="text-input"
         /> */}
       </div>
-      <div className="submit-button">
-        <input type="submit" value="Ajouter un nouveau produit au menu" />
-      </div>
+      <button className="submit-button">
+        Ajouter un nouveau produit au menu
+      </button>
     </AddFormStyled>
   );
 };
@@ -144,5 +144,16 @@ const AddFormStyled = styled.form`
   .submit-button {
     border: 1px solid green;
     grid-area: 4 / 2 / -1 / -1;
+    width: 50%;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f5f7;
+    }
+
+    &:active {
+      background-color: #f5f5f7;
+    }
   }
 `;

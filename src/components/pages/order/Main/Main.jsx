@@ -12,28 +12,28 @@ const Main = () => {
 
   const menuTest = fakeMenu.MEDIUM;
 
-  const [newMenu, setNewMenu] = useState(menuTest);
+  const [menu, setMenu] = useState(menuTest);
 
   const handleDeleteProduct = (id) => {
-    const menuCopy = [...newMenu];
+    const menuCopy = [...menu];
 
-    const newMenuUpdated = menuCopy.filter((item) => item.id !== id);
+    const menuUpdated = menuCopy.filter((item) => item.id !== id);
 
-    setNewMenu(newMenuUpdated);
+    setMenu(menuUpdated);
   };
 
-  const handleAddProduct = (menuToAdd) => {
-    setNewMenu((prevState) => [...prevState, menuToAdd]);
+  const handleAddProduct = (newProduct) => {
+    setMenu((prevState) => [newProduct, ...prevState]);
   };
 
-  const generatenewMenu = () => {
-    setNewMenu(menuTest);
+  const generateNewMenu = () => {
+    setMenu(menuTest);
   };
 
   const menuContextValue = {
     handleAddProduct,
     handleDeleteProduct,
-    generatenewMenu,
+    generateNewMenu,
   };
 
   return (
@@ -41,7 +41,7 @@ const Main = () => {
       <MainStyled>
         {/* <div className="basket">basket</div> */}
         <div className="menu-and-admin">
-          <Menu newMenu={newMenu} isModeAdmin={isModeAdmin} />
+          <Menu menu={menu} isModeAdmin={isModeAdmin} />
           {isModeAdmin && <Admin />}
         </div>
       </MainStyled>

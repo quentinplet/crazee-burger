@@ -6,10 +6,10 @@ import { theme } from "../../../../theme";
 import MenuContext from "../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
 
-const Menu = ({ newMenu }) => {
+const Menu = ({ menu }) => {
   const { handleDeleteProduct } = useContext(MenuContext);
 
-  const listCard = newMenu.map(({ id, title, price, imageSource }) => {
+  const listCard = menu.map(({ id, title, price, imageSource }) => {
     return (
       <Card
         key={id}
@@ -21,7 +21,7 @@ const Menu = ({ newMenu }) => {
     );
   });
 
-  const displayMenu = newMenu.length > 0 ? listCard : <MenuEmpty />;
+  const displayMenu = menu.length > 0 ? listCard : <MenuEmpty />;
 
   return <MenuStyled>{displayMenu}</MenuStyled>;
 };
