@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { theme } from "../../../../../theme";
-import OrderContext from "../../../../../context/OrderContext";
-import { tabsConfig, getTabSelected } from "./tabsConfig";
-import AddForm from "./AddForm/AddForm";
+import { theme } from "../../../../../../theme";
+import OrderContext from "../../../../../../context/OrderContext";
+import { tabsConfig, getTabSelected } from "../tabsConfig";
+import AddForm from "./AddForm";
 
 const AdminPanel = () => {
   const { currentTabSelected, setCurrentTabSelected } =
@@ -12,20 +12,11 @@ const AdminPanel = () => {
   const tabs = tabsConfig;
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
-  const displayTabSelected = () => {
-    switch (currentTabSelected) {
-      case "add":
-        return <AddForm />;
-      case "edit":
-        return <div>edit</div>;
-      default:
-        return <AddForm />;
-    }
-  };
-
   return (
     // <AdminPanelStyled>{tabSelected && tabSelected.label}</AdminPanelStyled>
-    <AdminPanelStyled>{displayTabSelected()}</AdminPanelStyled>
+    <AdminPanelStyled>
+      <>{tabSelected && tabSelected.content}</>
+    </AdminPanelStyled>
   );
 };
 
