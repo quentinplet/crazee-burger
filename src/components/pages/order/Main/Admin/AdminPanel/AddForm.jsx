@@ -42,7 +42,7 @@ const AddForm = () => {
         {newProduct.imageSource ? (
           <img src={newProduct.imageSource} alt={newProduct.name} />
         ) : (
-          "Aucune image"
+          <div>Aucune Image</div>
         )}
       </div>
       <div className="input-fields">
@@ -87,7 +87,7 @@ export default AddForm;
 
 const AddFormStyled = styled.form`
   border: 1px solid black;
-  width: 880px;
+  width: 70%;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 3fr;
