@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { fakeMenu2 } from "../../../../fakeData/fakeMenu";
-import { useState } from "react";
 import { formatPrice } from "../../../../utils/maths";
 import Card from "../../../reusable-ui/Card";
 import { theme } from "../../../../theme";
+import MenuContext from "../../../../context/MenuContext";
+import MenuEmpty from "./MenuEmpty";
 
-const Menu = () => {
-  const [menu, setMenu] = useState(fakeMenu2);
+const Menu = ({ newMenu }) => {
+  const { handleDeleteProduct } = useContext(MenuContext);
 
-  const listCard = menu.map(({ id, title, price, imageSource }) => {
+  const listCard = newMenu.map(({ id, title, price, imageSource }) => {
     return (
       <Card
         key={id}
         leftDescription={formatPrice(price)}
         title={title}
         imageSource={imageSource}
+        handleDeleteProduct={() => handleDeleteProduct(id)}
       />
     );
   });
 
-  return <MenuStyled>{listCard}</MenuStyled>;
+  const displayMenu = newMenu.length > 0 ? listCard : <MenuEmpty />;
+
+  return <MenuStyled>{displayMenu}</MenuStyled>;
 };
 
 export default Menu;

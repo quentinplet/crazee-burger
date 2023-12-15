@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-const TextInput = ({ value, onChange, Icon, ...restProps }) => {
+const TextInput = ({ value, onChange, Icon, className, ...restProps }) => {
   return (
-    <InputStyled>
+    <InputStyled className={className}>
       {Icon && Icon}
       <input value={value} onChange={onChange} type="text" {...restProps} />
     </InputStyled>

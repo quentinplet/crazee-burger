@@ -1,21 +1,51 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Menu from "./Menu";
 import Admin from "./Admin/Admin";
 import OrderContext from "../../../../context/OrderContext";
+import MenuContext from "../../../../context/MenuContext";
+import { fakeMenu } from "../../../../fakeData/fakeMenu";
 
 const Main = () => {
   const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
 
+  const menuTest = fakeMenu.MEDIUM;
+
+  const [newMenu, setNewMenu] = useState(menuTest);
+
+  const handleDeleteProduct = (id) => {
+    const menuCopy = [...newMenu];
+
+    const newMenuUpdated = menuCopy.filter((item) => item.id !== id);
+
+    setNewMenu(newMenuUpdated);
+  };
+
+  const handleAddProduct = (menuToAdd) => {
+    setNewMenu((prevState) => [...prevState, menuToAdd]);
+  };
+
+  const generatenewMenu = () => {
+    setNewMenu(menuTest);
+  };
+
+  const menuContextValue = {
+    handleAddProduct,
+    handleDeleteProduct,
+    generatenewMenu,
+  };
+
   return (
-    <MainStyled>
-      {/* <div className="basket">basket</div> */}
-      <div className="menu-and-admin">
-        <Menu />
-        {isModeAdmin && <Admin />}
-      </div>
-    </MainStyled>
+    <MenuContext.Provider value={menuContextValue}>
+      <MainStyled>
+        {/* <div className="basket">basket</div> */}
+        <div className="menu-and-admin">
+          <Menu newMenu={newMenu} isModeAdmin={isModeAdmin} />
+          {isModeAdmin && <Admin />}
+        </div>
+      </MainStyled>
+    </MenuContext.Provider>
   );
 };
 

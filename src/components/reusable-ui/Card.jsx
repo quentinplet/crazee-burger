@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import PrimaryButton from "./PrimaryButton";
 import { theme } from "../../theme";
+import OrderContext from "../../context/OrderContext";
 
-const Card = ({ imageSource, title, leftDescription }) => {
+const Card = ({ imageSource, title, leftDescription, handleDeleteProduct }) => {
+  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
+
   return (
     <CardStyled>
       <div className="image">
         <img src={imageSource} alt="title" />
+        {isModeAdmin && (
+          <button onClick={handleDeleteProduct} className="delete-button">
+            X
+          </button>
+        )}
       </div>
       <div className="info-text">
         <h1>{title}</h1>
@@ -34,6 +42,7 @@ const CardStyled = styled.div`
     justify-content: center;
     align-items: center;
     padding-top: 50px;
+    position: relative;
   }
 
   .image img {
@@ -41,6 +50,20 @@ const CardStyled = styled.div`
     object-position: center;
     height: 145px;
     width: 200px;
+  }
+
+  .delete-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: ${theme.colors.background_white};
+    border: 1px solid ${theme.colors.greyLight};
+    border-radius: ${theme.borderRadius.extraRound};
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .info-text {
