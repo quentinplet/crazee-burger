@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import PrimaryButton from "./PrimaryButton";
+import Button from "./Button";
 import { theme } from "../../theme";
 import { TiDelete } from "react-icons/ti";
 
@@ -29,7 +29,7 @@ const Card = ({
         <h1>{title}</h1>
         <div className="description">
           <p className="price">{leftDescription}</p>
-          <PrimaryButton className="primary-button" label="Ajouter" />
+          <Button className="primary-button" label="Ajouter" />
         </div>
       </div>
     </CardStyled>
@@ -124,6 +124,10 @@ const CardStyled = styled.div`
       .primary-button {
         width: 95px;
         height: 38px;
+
+        span {
+          font-size: ${theme.fonts.size.XS};
+        }
       }
     }
   }

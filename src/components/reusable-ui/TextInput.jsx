@@ -13,7 +13,7 @@ const TextInput = ({
     <TextInputStyled className={className} version={version}>
       {Icon && <div className="icon">{Icon}</div>}
       <input
-        autocomplete="off"
+        autoComplete="off"
         value={value}
         onChange={onChange}
         type="text"

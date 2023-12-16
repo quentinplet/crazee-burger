@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import PrimaryButton from "../../../../reusable-ui/PrimaryButton";
+import Button from "../../../../reusable-ui/Button";
 import OrderContext from "../../../../../context/OrderContext";
 import MenuContext from "../../../../../context/MenuContext";
 
@@ -14,7 +14,7 @@ const MenuEmpty = () => {
         <>
           <p>Le menu est vide ?</p>
           <p>Cliquez ci-dessous pour le réinitialiser</p>
-          <PrimaryButton
+          <Button
             className="button"
             label="Générer de nouveaux produits"
             onClick={generateNewMenu}
