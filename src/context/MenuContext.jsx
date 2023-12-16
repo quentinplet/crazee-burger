@@ -6,4 +6,6 @@ export default createContext({
   generateNewMenu: () => {},
 
   menu: [],
+  newProduct: {},
+  setNewProduct: () => {},
 });

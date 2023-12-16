@@ -10,7 +10,7 @@ import { FiCheck } from "react-icons/fi";
 import { theme } from "../../../../../../theme";
 import Button from "../../../../../reusable-ui/Button";
 
-const EMPTY_PRODUCT = {
+export const EMPTY_PRODUCT = {
   id: "",
   title: "",
   imageSource: "",
@@ -18,9 +18,9 @@ const EMPTY_PRODUCT = {
 };
 
 const AddForm = () => {
-  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
-
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const { newProduct, setNewProduct } = useContext(MenuContext);
 
   const { handleAddProduct } = useContext(MenuContext);
 
