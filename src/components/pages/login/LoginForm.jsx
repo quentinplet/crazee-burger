@@ -33,13 +33,14 @@ const LoginForm = () => {
         <TextInput
           value={inputValue}
           onChange={handleChange}
-          Icon={<BsPersonCircle className="icon" />}
+          Icon={<BsPersonCircle />}
           placeholder={"Entrez votre prénom"}
           required
+          className="input-login"
         />
         <PrimaryButton
           label={"Accéder à mon espace"}
-          Icon={<IoChevronForward className="icon" />}
+          Icon={<IoChevronForward />}
         />
       </div>
     </LoginFormStyled>
@@ -83,11 +84,7 @@ const LoginFormStyled = styled.form`
     line-height: 46px;
   }
 
-  .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: ${theme.fonts.size.SM};
-    margin-left: 10px;
+  .input-login {
+    margin: 18px auto;
   }
 `;

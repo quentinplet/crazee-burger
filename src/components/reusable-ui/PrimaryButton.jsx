@@ -5,7 +5,7 @@ const PrimaryButton = ({ label, Icon, className, onClick }) => {
   return (
     <PrimaryButtonStyled className={className} onClick={onClick}>
       <span>{label}</span>
-      {Icon && Icon}
+      {Icon && <div className="icon">{Icon}</div>}
     </PrimaryButtonStyled>
   );
 };
@@ -52,5 +52,12 @@ const PrimaryButtonStyled = styled.button`
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
   }
 `;
