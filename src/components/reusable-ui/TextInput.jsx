@@ -1,25 +1,34 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 
-const TextInput = ({ value, onChange, Icon, className, ...restProps }) => {
+const TextInput = ({
+  value,
+  onChange,
+  Icon,
+  className,
+  version = "normal",
+  ...restProps
+}) => {
   return (
-    <InputStyled className={className}>
+    <TextInputStyled className={className} version={version}>
       {Icon && <div className="icon">{Icon}</div>}
-      <input value={value} onChange={onChange} type="text" {...restProps} />
-    </InputStyled>
+      <input
+        autocomplete="off"
+        value={value}
+        onChange={onChange}
+        type="text"
+        {...restProps}
+      />
+    </TextInputStyled>
   );
 };
 
 export default TextInput;
 
-const InputStyled = styled.div`
-  /* border: 1px solid red; */
-  background-color: ${theme.colors.white};
+const TextInputStyled = styled.div`
   display: flex;
   align-items: center;
   border-radius: ${theme.borderRadius.round};
-  padding: 18px 24px;
-  gap: 12px;
 
   .icon {
     display: flex;
@@ -33,19 +42,41 @@ const InputStyled = styled.div`
   input {
     border: none;
     font-size: ${theme.fonts.size.SM};
-    font-weight: ${theme.fonts.weights.regular};
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 17px;
     width: 100%;
+
+    &::placeholder {
+      color: ${theme.colors.greyMedium};
+    }
+  }
+  ${(props) => props.version === "normal" && extraNormalStyle};
+  ${(props) => props.version === "minimalist" && extraMinimalistStyle};
+`;
+
+const extraNormalStyle = css`
+  background-color: ${theme.colors.white};
+  padding: 18px 28px;
+  color: ${theme.colors.greySemiDark};
+
+  input {
     color: ${theme.colors.dark};
-  }
 
-  input:focus {
-    outline: none;
+    &::placeholder {
+      background: ${theme.colors.white};
+    }
   }
+`;
 
-  input::placeholder {
-    color: ${theme.colors.greyMedium};
-    background-color: ${theme.colors.white};
+const extraMinimalistStyle = css`
+  background-color: ${theme.colors.background_white};
+  padding: 8px 16px;
+  color: ${theme.colors.greyBlue};
+
+  input {
+    background: ${theme.colors.background_white};
+    color: ${theme.colors.dark};
+
+    &:focus {
+      outline: 0;
+    }
   }
 `;

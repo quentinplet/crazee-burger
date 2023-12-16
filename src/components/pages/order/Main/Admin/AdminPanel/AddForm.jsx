@@ -3,6 +3,9 @@ import styled from "styled-components";
 import MenuContext from "../../../../../../context/MenuContext";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
+import { FaHamburger } from "react-icons/fa";
+import { BsFillCameraFill } from "react-icons/bs";
+import { MdOutlineEuro } from "react-icons/md";
 import { FiCheck } from "react-icons/fi";
 import { theme } from "../../../../../../theme";
 
@@ -57,35 +60,33 @@ const AddForm = () => {
         )}
       </div>
       <div className="input-fields">
-        <input
+        <TextInput
           type="text"
           name="name"
           placeholder="Nom du produit (ex: Super Burger)"
           value={newProduct.name}
           onChange={handleChange}
+          Icon={<FaHamburger />}
+          version="minimalist"
         />
-        <input
+        <TextInput
           type="text"
           name="imageSource"
           placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"
           value={newProduct.imageSource}
           onChange={handleChange}
+          Icon={<BsFillCameraFill />}
+          version="minimalist"
         />
-        <input
+        <TextInput
           type="number"
           name="price"
           placeholder="Prix"
           value={newProduct.price ? newProduct.price : ""}
           onChange={handleChange}
+          Icon={<MdOutlineEuro />}
+          version="minimalist"
         />
-        {/* <TextInput
-          value={product.price}
-          onChange={(event) => handleChange("price", event)}
-          Icon={<BsPersonCircle className="icon" />}
-          placeholder={"Prix"}
-          required
-          className="text-input"
-        /> */}
       </div>
       <div className="submit">
         <button className="submit-button">
@@ -105,7 +106,6 @@ const AddForm = () => {
 export default AddForm;
 
 const AddFormStyled = styled.form`
-  border: 1px solid black;
   width: 70%;
   height: 100%;
   display: grid;
@@ -115,7 +115,6 @@ const AddFormStyled = styled.form`
   grid-row-gap: 8px;
 
   .image-preview {
-    /* border: 1px solid red; */
     grid-area: 1 / 1 / 4 / 2;
     display: flex;
     align-items: center;
@@ -136,49 +135,22 @@ const AddFormStyled = styled.form`
   }
 
   .image-preview img {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     width: 100px;
     height: 100px;
   }
 
   .input-fields {
-    border: 1px solid blue;
-    grid-area: 1 / 2 / 4 / 3;
-    gap: 8px;
-
+    grid-area: 1 / 2 / -2 / 3;
+    grid-row-gap: 8px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
-
-    input {
-      padding: 8px 16px 8px 24px;
-      width: 100%;
-    }
-
-    .text-input {
-      /* padding: 8px 16px 8px 24px; */
-      padding: 0;
-      margin: 0;
-      border-radius: 5px;
-      width: 100%;
-      background-color: #f5f5f7;
-
-      input {
-        padding: 8px 16px 8px 24px;
-        width: 100%;
-        background-color: #f5f5f7;
-      }
-
-      input::placeholder {
-        background-color: #f5f5f7;
-      }
-    }
   }
 
   .submit {
-    border: 1px solid green;
-    grid-area: 4 / 2 / -1 / -1;
+    grid-area: 4 / -2 / -1 / -1;
     display: flex;
     align-items: center;
 
