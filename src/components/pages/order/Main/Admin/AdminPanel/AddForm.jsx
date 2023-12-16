@@ -12,7 +12,7 @@ import Button from "../../../../../reusable-ui/Button";
 
 const EMPTY_PRODUCT = {
   id: "",
-  name: "",
+  title: "",
   imageSource: "",
   price: 0,
 };
@@ -40,7 +40,6 @@ const AddForm = () => {
     };
     handleAddProduct(newProductToAdd);
     setNewProduct(EMPTY_PRODUCT);
-
     displaySuccessMessage();
   };
 
@@ -55,7 +54,7 @@ const AddForm = () => {
     <AddFormStyled onSubmit={handleSubmit}>
       <div className="image-preview">
         {newProduct.imageSource ? (
-          <img src={newProduct.imageSource} alt={newProduct.name} />
+          <img src={newProduct.imageSource} alt={newProduct.title} />
         ) : (
           <div className="empty-image">Aucune Image</div>
         )}
@@ -63,9 +62,9 @@ const AddForm = () => {
       <div className="input-fields">
         <TextInput
           type="text"
-          name="name"
+          name="title"
           placeholder="Nom du produit (ex: Super Burger)"
-          value={newProduct.name}
+          value={newProduct.title}
           onChange={handleChange}
           Icon={<FaHamburger />}
           version="minimalist"
@@ -139,8 +138,8 @@ const AddFormStyled = styled.form`
   .image-preview img {
     object-fit: contain;
     object-position: center;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
   }
 
   .input-fields {
