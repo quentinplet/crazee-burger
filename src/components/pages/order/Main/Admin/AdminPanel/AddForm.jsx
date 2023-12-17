@@ -9,6 +9,7 @@ import { MdOutlineEuro } from "react-icons/md";
 import { FiCheck } from "react-icons/fi";
 import { theme } from "../../../../../../theme";
 import Button from "../../../../../reusable-ui/Button";
+import ImagePreview from "./ImagePreview";
 
 export const EMPTY_PRODUCT = {
   id: "",
@@ -52,13 +53,10 @@ const AddForm = () => {
 
   return (
     <AddFormStyled onSubmit={handleSubmit}>
-      <div className="image-preview">
-        {newProduct.imageSource ? (
-          <img src={newProduct.imageSource} alt={newProduct.title} />
-        ) : (
-          <div className="empty-image">Aucune Image</div>
-        )}
-      </div>
+      <ImagePreview
+        imageSource={newProduct.imageSource}
+        title={newProduct.title}
+      />
       <div className="input-fields">
         <TextInput
           type="text"
@@ -114,33 +112,6 @@ const AddFormStyled = styled.form`
   grid-template-rows: repeat(4, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 8px;
-
-  .image-preview {
-    grid-area: 1 / 1 / 4 / 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .empty-image {
-      width: 100%;
-      height: 100%;
-      border-radius: ${theme.borderRadius.round};
-      border: 1px solid ${theme.colors.greyLight};
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      line-height: 1.5;
-      color: ${theme.colors.greySemiDark};
-    }
-  }
-
-  .image-preview img {
-    object-fit: contain;
-    object-position: center;
-    width: 150px;
-    height: 150px;
-  }
 
   .input-fields {
     grid-area: 1 / 2 / -2 / 3;
