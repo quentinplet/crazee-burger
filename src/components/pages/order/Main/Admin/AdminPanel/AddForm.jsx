@@ -2,15 +2,10 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import MenuContext from "../../../../../../context/MenuContext";
 import TextInput from "../../../../../reusable-ui/TextInput";
-import { BsPersonCircle } from "react-icons/bs";
-import { FaHamburger } from "react-icons/fa";
-import { BsFillCameraFill } from "react-icons/bs";
-import { MdOutlineEuro } from "react-icons/md";
-import { FiCheck } from "react-icons/fi";
-import { theme } from "../../../../../../theme";
 import Button from "../../../../../reusable-ui/Button";
 import ImagePreview from "./ImagePreview";
 import SubmitMessage from "./SubmitMessage";
+import { getInputTextConfig } from "./InputTextConfig";
 
 export const EMPTY_PRODUCT = {
   id: "",
@@ -52,6 +47,7 @@ const AddForm = () => {
     }, 2000);
   };
 
+  const inputTexts = getInputTextConfig(newProduct);
   return (
     <AddFormStyled onSubmit={handleSubmit}>
       <ImagePreview
@@ -59,33 +55,14 @@ const AddForm = () => {
         title={newProduct.title}
       />
       <div className="input-fields">
-        <TextInput
-          type="text"
-          name="title"
-          placeholder="Nom du produit (ex: Super Burger)"
-          value={newProduct.title}
-          onChange={handleChange}
-          Icon={<FaHamburger />}
-          version="minimalist"
-        />
-        <TextInput
-          type="text"
-          name="imageSource"
-          placeholder="Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)"
-          value={newProduct.imageSource}
-          onChange={handleChange}
-          Icon={<BsFillCameraFill />}
-          version="minimalist"
-        />
-        <TextInput
-          type="number"
-          name="price"
-          placeholder="Prix"
-          value={newProduct.price ? newProduct.price : ""}
-          onChange={handleChange}
-          Icon={<MdOutlineEuro />}
-          version="minimalist"
-        />
+        {inputTexts.map((input) => (
+          <TextInput
+            {...input}
+            key={input.id}
+            onChange={handleChange}
+            version="minimalist"
+          />
+        ))}
       </div>
       <div className="submit">
         <Button
