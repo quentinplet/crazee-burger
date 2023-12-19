@@ -6,14 +6,12 @@ import { tabsConfig, getTabSelected } from "../tabsConfig";
 import AddForm from "./AddForm";
 
 const AdminPanel = () => {
-  const { currentTabSelected, setCurrentTabSelected } =
-    useContext(OrderContext);
+  const { currentTabSelected } = useContext(OrderContext);
 
   const tabs = tabsConfig;
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
   return (
-    // <AdminPanelStyled>{tabSelected && tabSelected.label}</AdminPanelStyled>
     <AdminPanelStyled>{tabSelected && tabSelected.content}</AdminPanelStyled>
   );
 };

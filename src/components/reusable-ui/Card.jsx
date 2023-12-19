@@ -26,7 +26,7 @@ const Card = ({
         <img src={imageSource} alt="title" />
       </div>
       <div className="info-text">
-        <h1>{title}</h1>
+        <div className="title">{title}</div>
         <div className="description">
           <p className="price">{leftDescription}</p>
           <Button className="primary-button" label="Ajouter" />
@@ -41,9 +41,12 @@ export default Card;
 const CardStyled = styled.div`
   width: 240px;
   height: 330px;
+  padding: 20px;
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   background-color: ${theme.colors.white};
   border-radius: ${theme.borderRadius.extraRound};
+  display: grid;
+  grid-template-rows: 65% 1fr;
   padding: 0 ${theme.spacing.md};
   position: relative;
 
@@ -80,7 +83,10 @@ const CardStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    margin-bottom: 15px;
   }
 
   .image img {
@@ -91,12 +97,15 @@ const CardStyled = styled.div`
   }
 
   .info-text {
-    margin-top: 15px;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    padding: 5px;
 
-    h1 {
+    .title {
+      margin: auto 0;
       text-align: start;
       color: ${theme.colors.dark};
-      font-family: Amatic SC;
+      font-family: "Amatic SC", cursive;
       font-size: ${theme.fonts.size.P4};
       font-style: normal;
       font-weight: ${theme.fonts.weights.bold};
@@ -104,10 +113,13 @@ const CardStyled = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      bottom: 10px;
+      position: relative;
+      width: 100%;
     }
 
     .description {
-      padding-top: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;

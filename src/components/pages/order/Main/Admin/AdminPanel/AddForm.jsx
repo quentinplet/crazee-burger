@@ -57,8 +57,8 @@ const AddForm = () => {
       <div className="input-fields">
         {inputTexts.map((input) => (
           <TextInput
-            {...input}
             key={input.id}
+            {...input}
             onChange={handleChange}
             version="minimalist"
           />
