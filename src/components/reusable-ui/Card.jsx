@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import PrimaryButton from "./PrimaryButton";
+import Button from "./Button";
 import { theme } from "../../theme";
+import { TiDelete } from "react-icons/ti";
 
-const Card = ({ imageSource, title, leftDescription }) => {
+const Card = ({
+  imageSource,
+  title,
+  leftDescription,
+  onDelete,
+  hasDeleteButton,
+}) => {
   return (
     <CardStyled>
+      {hasDeleteButton && (
+        <button
+          onClick={onDelete}
+          className="delete-button"
+          aria-label="delete-button"
+        >
+          <TiDelete className="icon" />
+        </button>
+      )}
       <div className="image">
         <img src={imageSource} alt="title" />
       </div>
       <div className="info-text">
-        <h1>{title}</h1>
+        <div className="title">{title}</div>
         <div className="description">
           <p className="price">{leftDescription}</p>
-          <PrimaryButton className="primary-button" label="Ajouter" />
+          <Button className="primary-button" label="Ajouter" />
         </div>
       </div>
     </CardStyled>
@@ -25,15 +41,52 @@ export default Card;
 const CardStyled = styled.div`
   width: 240px;
   height: 330px;
+  padding: 20px;
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   background-color: ${theme.colors.white};
   border-radius: ${theme.borderRadius.extraRound};
+  display: grid;
+  grid-template-rows: 65% 1fr;
   padding: 0 ${theme.spacing.md};
+  position: relative;
+
+  .delete-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    color: ${theme.colors.primary};
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 0;
+    background: none;
+
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
+
+    :hover {
+      color: ${theme.colors.red};
+    }
+
+    :active {
+      color: ${theme.colors.primary};
+    }
+  }
+
   .image {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+    margin-bottom: 15px;
   }
 
   .image img {
@@ -44,12 +97,15 @@ const CardStyled = styled.div`
   }
 
   .info-text {
-    margin-top: 15px;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    padding: 5px;
 
-    h1 {
+    .title {
+      margin: auto 0;
       text-align: start;
       color: ${theme.colors.dark};
-      font-family: Amatic SC;
+      font-family: "Amatic SC", cursive;
       font-size: ${theme.fonts.size.P4};
       font-style: normal;
       font-weight: ${theme.fonts.weights.bold};
@@ -57,10 +113,13 @@ const CardStyled = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      bottom: 10px;
+      position: relative;
+      width: 100%;
     }
 
     .description {
-      padding-top: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -77,6 +136,10 @@ const CardStyled = styled.div`
       .primary-button {
         width: 95px;
         height: 38px;
+
+        span {
+          font-size: ${theme.fonts.size.XS};
+        }
       }
     }
   }

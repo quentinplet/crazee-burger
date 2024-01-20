@@ -1,48 +1,95 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 
-const TextInput = ({ value, onChange, Icon, ...restProps }) => {
+const TextInput = ({
+  value,
+  onChange,
+  Icon,
+  className,
+  version = "normal",
+  ...restProps
+}) => {
   return (
-    <InputStyled>
-      {Icon && Icon}
-      <input value={value} onChange={onChange} type="text" {...restProps} />
-    </InputStyled>
+    <TextInputStyled className={className} version={version}>
+      {Icon && <div className="icon">{Icon}</div>}
+      <input
+        autoComplete="off"
+        value={value}
+        onChange={onChange}
+        type="text"
+        {...restProps}
+      />
+    </TextInputStyled>
   );
 };
 
 export default TextInput;
 
-const InputStyled = styled.div`
-  /* border: 1px solid red; */
-  background-color: ${theme.colors.white};
+const TextInputStyled = styled.div`
   display: flex;
   align-items: center;
   border-radius: ${theme.borderRadius.round};
-  padding: 18px 24px;
-  gap: 12px;
-  margin: 18px auto;
 
   .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: ${theme.fonts.size.SM};
+    margin: 0 8px 0 10px;
     color: ${theme.colors.greyMedium};
   }
 
   input {
     border: none;
     font-size: ${theme.fonts.size.SM};
-    font-weight: ${theme.fonts.weights.regular};
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 17px;
     width: 100%;
+
+    &::placeholder {
+      color: ${theme.colors.greyMedium};
+    }
+  }
+  /* ${(props) => {
+    if (props.version === "normal") return extraNormalStyle;
+    if (props.version === "minimalist") return extraMinimalistStyle;
+  }}; */
+
+  ${({ version }) => extraStyle[version]}
+`;
+
+const extraNormalStyle = css`
+  background-color: ${theme.colors.white};
+  padding: 18px 28px;
+  color: ${theme.colors.greySemiDark};
+
+  input {
     color: ${theme.colors.dark};
-  }
 
-  input:focus {
-    outline: none;
-  }
+    &:focus {
+      outline: 0;
+    }
 
-  input::placeholder {
-    color: ${theme.colors.greyMedium};
-    background-color: ${theme.colors.white};
+    &::placeholder {
+      background: ${theme.colors.white};
+    }
   }
 `;
+
+const extraMinimalistStyle = css`
+  background-color: ${theme.colors.background_white};
+  padding: 8px 16px;
+  color: ${theme.colors.greyBlue};
+
+  input {
+    background: ${theme.colors.background_white};
+    color: ${theme.colors.dark};
+
+    &:focus {
+      outline: 0;
+    }
+  }
+`;
+
+const extraStyle = {
+  normal: extraNormalStyle,
+  minimalist: extraMinimalistStyle,
+};

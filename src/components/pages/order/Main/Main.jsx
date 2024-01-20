@@ -1,21 +1,56 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 import Admin from "./Admin/Admin";
 import OrderContext from "../../../../context/OrderContext";
+import MenuContext from "../../../../context/MenuContext";
+import { fakeMenu } from "../../../../fakeData/fakeMenu";
+import { EMPTY_PRODUCT } from "./Admin/AdminPanel/AddForm";
 
 const Main = () => {
   const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
+  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
+
+  const menuTest = fakeMenu.MEDIUM;
+
+  const [menu, setMenu] = useState(menuTest);
+
+  const handleDeleteProduct = (productId) => {
+    const menuCopy = [...menu];
+
+    const menuUpdated = menuCopy.filter((product) => product.id !== productId);
+
+    setMenu(menuUpdated);
+  };
+
+  const handleAddProduct = (newProduct) => {
+    setMenu((prevState) => [newProduct, ...prevState]);
+  };
+
+  const generateNewMenu = () => {
+    setMenu(menuTest);
+  };
+
+  const menuContextValue = {
+    handleAddProduct,
+    handleDeleteProduct,
+    generateNewMenu,
+    menu,
+    newProduct,
+    setNewProduct,
+  };
 
   return (
-    <MainStyled>
-      {/* <div className="basket">basket</div> */}
-      <div className="menu-and-admin">
-        <Menu />
-        {isModeAdmin && <Admin />}
-      </div>
-    </MainStyled>
+    <MenuContext.Provider value={menuContextValue}>
+      <MainStyled>
+        {/* <div className="basket">basket</div> */}
+        <div className="menu-and-admin">
+          <Menu menu={menu} isModeAdmin={isModeAdmin} />
+          {isModeAdmin && <Admin />}
+        </div>
+      </MainStyled>
+    </MenuContext.Provider>
   );
 };
 
