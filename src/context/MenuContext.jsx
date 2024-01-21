@@ -14,4 +14,5 @@ export default createContext({
 
   productIsSelected: false,
   setProductIsSelected: () => {},
+  handleEditProduct: () => {},
 });

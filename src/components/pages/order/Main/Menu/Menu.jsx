@@ -21,19 +21,12 @@ const Menu = ({ menu }) => {
       const productSelected = menu.find(
         (product) => product.id === idProductSelected
       );
-      console.log("productSelected", productSelected);
+      // console.log("productSelected", productSelected);
       setProductSelected(productSelected);
     }
   };
 
-  const menuUpdated = menu.map((product) => {
-    if (product.id === productSelected.id) {
-      return productSelected;
-    }
-    return product;
-  });
-
-  const listCard = menuUpdated.map(({ id, title, price, imageSource }) => {
+  const listCard = menu.map(({ id, title, price, imageSource }) => {
     return (
       <Card
         key={id}

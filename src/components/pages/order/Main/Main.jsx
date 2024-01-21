@@ -31,6 +31,25 @@ const Main = () => {
     setMenu((prevState) => [newProduct, ...prevState]);
   };
 
+  const handleEditProduct = (productBeingEdited) => {
+    const menuCopy = structuredClone(menu);
+
+    const indexOfProductToEdit = menu.findIndex(
+      (product) => product.id === productBeingEdited.id
+    );
+
+    menuCopy[indexOfProductToEdit] = productBeingEdited;
+
+    // const menuUpdated = menuCopy.map((product) => {
+    //   if (product.id === productBeingEdited.id) {
+    //     return productBeingEdited;
+    //   }
+    //   return product;
+    // });
+
+    setMenu(menuCopy);
+  };
+
   const generateNewMenu = () => {
     setMenu(menuTest);
   };
@@ -46,6 +65,7 @@ const Main = () => {
     setProductSelected,
     productIsSelected,
     setProductIsSelected,
+    handleEditProduct,
   };
 
   return (

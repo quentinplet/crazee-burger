@@ -3,33 +3,29 @@ import styled from "styled-components";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import ImagePreview from "./ImagePreview";
 import { getInputTextConfig } from "./InputTextConfig";
-import Menu from "../../Menu/Menu";
 import MenuContext from "../../../../../../context/MenuContext";
 import HintMessage from "./HintMessage";
-import { useState } from "react";
-
-export const EMPTY_PRODUCT = {
-  id: "",
-  title: "",
-  imageSource: "",
-  price: 0,
-};
 
 const EditForm = () => {
-  const { productSelected, setProductSelected, productIsSelected } =
-    useContext(MenuContext);
-
-  const [productBeingEdited, setProductBeingEdited] = useState(EMPTY_PRODUCT); //state interne à editForm
+  const {
+    productSelected,
+    setProductSelected,
+    productIsSelected,
+    handleEditProduct,
+  } = useContext(MenuContext);
 
   const inputTexts = getInputTextConfig(productSelected);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (productIsSelected) {
-      setProductBeingEdited((prevState) => {
-        return { ...prevState, [name]: value };
-      });
-    }
+
+    const productBeingUpdated = {
+      ...productSelected,
+      [name]: value,
+    };
+
+    setProductSelected(productBeingUpdated);
+    handleEditProduct(productBeingUpdated);
   };
 
   return (
@@ -43,7 +39,7 @@ const EditForm = () => {
             key={input.id}
             name={input.name}
             placeholder={input.placeholder}
-            value={productSelected[input.name]}
+            value={input.value}
             // value={input.value}
             onChange={handleChange}
             Icon={input.Icon}
