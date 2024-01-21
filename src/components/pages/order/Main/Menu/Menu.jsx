@@ -37,6 +37,7 @@ const Menu = ({ menu }) => {
         hasDeleteButton={isModeAdmin}
         className={isModeAdmin && "admin"}
         onClick={() => handleClick(id)}
+        isHoverable={isModeAdmin}
       />
     );
   });
@@ -62,7 +63,7 @@ const MenuStyled = styled.div`
   padding: 50px 50px 150px;
   overflow-y: scroll;
 
-  .admin {
+  /* .admin {
     &:hover {
       border: 1px solid ${theme.colors.primary};
       cursor: pointer;
@@ -70,5 +71,5 @@ const MenuStyled = styled.div`
     &:active {
       background-color: ${theme.colors.primary};
     }
-  }
+  } */
 `;
