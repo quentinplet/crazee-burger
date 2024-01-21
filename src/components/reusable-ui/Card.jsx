@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import { theme } from "../../theme";
@@ -41,15 +41,16 @@ const Card = ({
 export default Card;
 
 const CardStyled = styled.div`
+  box-sizing: border-box;
   width: 240px;
   height: 330px;
-  padding: 20px;
+  /* padding: 20px; */
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   background-color: ${theme.colors.white};
   border-radius: ${theme.borderRadius.extraRound};
   display: grid;
   grid-template-rows: 65% 1fr;
-  padding: 0 ${theme.spacing.md};
+  padding: 0px ${theme.spacing.md};
   position: relative;
 
   .delete-button {
