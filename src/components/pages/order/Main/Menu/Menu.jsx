@@ -12,8 +12,28 @@ const DEFAULT_IMAGE = "/public/images/coming-soon.png";
 const Menu = ({ menu }) => {
   const { handleDeleteProduct } = useContext(MenuContext);
   const { isModeAdmin } = useContext(OrderContext);
+  const { productSelected, setProductSelected, setProductIsSelected } =
+    useContext(MenuContext);
 
-  const listCard = menu.map(({ id, title, price, imageSource }) => {
+  const handleClick = (idProductSelected) => {
+    if (isModeAdmin) {
+      setProductIsSelected(true);
+      const productSelected = menu.find(
+        (product) => product.id === idProductSelected
+      );
+      console.log("productSelected", productSelected);
+      setProductSelected(productSelected);
+    }
+  };
+
+  const menuUpdated = menu.map((product) => {
+    if (product.id === productSelected.id) {
+      return productSelected;
+    }
+    return product;
+  });
+
+  const listCard = menuUpdated.map(({ id, title, price, imageSource }) => {
     return (
       <Card
         key={id}
@@ -22,6 +42,8 @@ const Menu = ({ menu }) => {
         imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
         onDelete={() => handleDeleteProduct(id)}
         hasDeleteButton={isModeAdmin}
+        className={isModeAdmin && "admin"}
+        onClick={() => handleClick(id)}
       />
     );
   });
@@ -46,4 +68,14 @@ const MenuStyled = styled.div`
   grid-column-gap: 60px;
   padding: 50px 50px 150px;
   overflow-y: scroll;
+
+  .admin {
+    &:hover {
+      border: 1px solid ${theme.colors.primary};
+      cursor: pointer;
+    }
+    &:active {
+      background-color: ${theme.colors.primary};
+    }
+  }
 `;

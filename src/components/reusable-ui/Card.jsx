@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import { theme } from "../../theme";
@@ -10,9 +10,11 @@ const Card = ({
   leftDescription,
   onDelete,
   hasDeleteButton,
+  className,
+  onClick,
 }) => {
   return (
-    <CardStyled>
+    <CardStyled className={className} onClick={onClick}>
       {hasDeleteButton && (
         <button
           onClick={onDelete}

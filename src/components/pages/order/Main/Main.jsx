@@ -6,11 +6,14 @@ import Admin from "./Admin/Admin";
 import OrderContext from "../../../../context/OrderContext";
 import MenuContext from "../../../../context/MenuContext";
 import { fakeMenu } from "../../../../fakeData/fakeMenu";
-import { EMPTY_PRODUCT } from "./Admin/AdminPanel/AddForm";
+import { EMPTY_PRODUCT } from "../../../../enums/product";
 
 const Main = () => {
   const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
+
+  const [productSelected, setProductSelected] = useState({});
+  const [productIsSelected, setProductIsSelected] = useState(false);
 
   const menuTest = fakeMenu.MEDIUM;
 
@@ -39,6 +42,10 @@ const Main = () => {
     menu,
     newProduct,
     setNewProduct,
+    productSelected,
+    setProductSelected,
+    productIsSelected,
+    setProductIsSelected,
   };
 
   return (
