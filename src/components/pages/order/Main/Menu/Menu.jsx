@@ -18,11 +18,11 @@ const Menu = ({ menu }) => {
   const handleClick = (idProductSelected) => {
     if (isModeAdmin) {
       setProductIsSelected(true);
-      const productSelected = menu.find(
+      const productClickedOn = menu.find(
         (product) => product.id === idProductSelected
       );
       // console.log("productSelected", productSelected);
-      setProductSelected(productSelected);
+      setProductSelected(productClickedOn);
     }
   };
 

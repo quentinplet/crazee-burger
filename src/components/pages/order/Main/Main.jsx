@@ -20,7 +20,7 @@ const Main = () => {
   const [menu, setMenu] = useState(menuTest);
 
   const handleDeleteProduct = (productId) => {
-    const menuCopy = [...menu];
+    const menuCopy = structuredClone(menu);
 
     const menuUpdated = menuCopy.filter((product) => product.id !== productId);
 
@@ -28,7 +28,9 @@ const Main = () => {
   };
 
   const handleAddProduct = (newProduct) => {
-    setMenu((prevState) => [newProduct, ...prevState]);
+    const menuCopy = structuredClone(menu);
+    menuUpdated = [newProduct, ...menuCopy];
+    setMenu(menuUpdated);
   };
 
   const handleEditProduct = (productBeingEdited) => {
