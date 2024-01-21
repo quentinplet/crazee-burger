@@ -26,6 +26,10 @@ const Menu = ({ menu }) => {
     }
   };
 
+  const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
+    return idProductInMenu === idProductClickedOn;
+  };
+
   const listCard = menu.map(({ id, title, price, imageSource }) => {
     return (
       <Card
@@ -35,9 +39,10 @@ const Menu = ({ menu }) => {
         imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
         onDelete={() => handleDeleteProduct(id)}
         hasDeleteButton={isModeAdmin}
-        className={isModeAdmin && "admin"}
+        // className={isModeAdmin && "admin"}
         onClick={() => handleClick(id)}
         isHoverable={isModeAdmin}
+        isSelected={checkIfProductIsSelected(id, productSelected.id)}
       />
     );
   });

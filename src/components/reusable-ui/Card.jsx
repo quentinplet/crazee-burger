@@ -10,17 +10,13 @@ const Card = ({
   leftDescription,
   onDelete,
   hasDeleteButton,
-  className,
   onClick,
   isHoverable,
+  isSelected,
 }) => {
   return (
-    <CardStyled
-      className={className}
-      onClick={onClick}
-      isHoverable={isHoverable}
-    >
-      <div className="card">
+    <CardStyled onClick={onClick} $isHoverable={isHoverable}>
+      <div className="card" style={isSelected ? { background: "orange" } : {}}>
         {hasDeleteButton && (
           <button
             onClick={onDelete}
@@ -47,10 +43,21 @@ const Card = ({
 
 export default Card;
 
+const hoverableStyle = css`
+  &:hover {
+    transform: scale(1.05);
+    transition: ease-in-out 0.4s;
+    box-shadow: ${theme.shadows.orangeHighLight};
+    cursor: pointer;
+    border: 1px solid ${theme.colors.primary};
+  }
+`;
+
 const CardStyled = styled.div`
-  ${({ isHoverable }) => isHoverable && hoverableStyle}
+  ${({ $isHoverable }) => $isHoverable && hoverableStyle}
   border-radius: ${theme.borderRadius.extraRound};
   width: 242px;
+  height: 332px;
 
   .card {
     box-sizing: border-box;
@@ -158,15 +165,5 @@ const CardStyled = styled.div`
         }
       }
     }
-  }
-`;
-
-const hoverableStyle = css`
-  &:hover {
-    transform: scale(1.05);
-    transition: ease-in-out 0.4s;
-    box-shadow: ${theme.shadows.orangeHighLight};
-    cursor: pointer;
-    border: 1px solid ${theme.colors.primary};
   }
 `;
