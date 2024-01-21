@@ -6,6 +6,7 @@ import { getInputTextConfig } from "./InputTextConfig";
 import Menu from "../../Menu/Menu";
 import MenuContext from "../../../../../../context/MenuContext";
 import HintMessage from "./HintMessage";
+import { useState } from "react";
 
 export const EMPTY_PRODUCT = {
   id: "",
@@ -18,15 +19,16 @@ const EditForm = () => {
   const { productSelected, setProductSelected, productIsSelected } =
     useContext(MenuContext);
 
+  const [productBeingEdited, setProductBeingEdited] = useState(EMPTY_PRODUCT); //state interne à editForm
+
   const inputTexts = getInputTextConfig(productSelected);
 
   const handleChange = (event) => {
+    const { name, value } = event.target;
     if (productIsSelected) {
-      const { name, value } = event.target;
-      setProductSelected((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      setProductBeingEdited((prevState) => {
+        return { ...prevState, [name]: value };
+      });
     }
   };
 
