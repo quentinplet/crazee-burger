@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import Button from "./Button";
 import { theme } from "../../theme";
 import { TiDelete } from "react-icons/ti";
+import { BsXLg } from "react-icons/bs";
 
 const Card = ({
   imageSource,
@@ -13,6 +14,7 @@ const Card = ({
   onClick,
   isHoverable,
   isSelected,
+  handleClickPropagation,
 }) => {
   return (
     <CardStyled
@@ -23,7 +25,10 @@ const Card = ({
       <div className="card">
         {hasDeleteButton && (
           <button
-            onClick={onDelete}
+            onClick={(e) => {
+              handleClickPropagation(e);
+              onDelete();
+            }}
             className="delete-button"
             aria-label="delete-button"
           >
@@ -37,7 +42,11 @@ const Card = ({
           <div className="title">{title}</div>
           <div className="description">
             <p className="price">{leftDescription}</p>
-            <Button className="primary-button" label="Ajouter" />
+            <Button
+              className="primary-button"
+              label="Ajouter"
+              onClick={(e) => handleClickPropagation(e)}
+            />
           </div>
         </div>
       </div>
@@ -183,13 +192,13 @@ const selectedStyle = css`
     background: ${theme.colors.white};
     border: 1px solid ${theme.colors.white};
     transition: all 0.2s ease-in-out;
-    :hover {
+    &:hover {
       background-color: ${theme.colors.primary};
       color: ${theme.colors.white};
       border: 1px solid ${theme.colors.white};
       transition: all 0.2s ease-in-out;
     }
-    :active {
+    &:active {
       background-color: ${theme.colors.white};
       color: ${theme.colors.primary};
     }

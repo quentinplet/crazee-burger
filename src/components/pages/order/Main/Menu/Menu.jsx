@@ -26,6 +26,10 @@ const Menu = ({ menu }) => {
     }
   };
 
+  const handleClickPropagation = (event) => {
+    event.stopPropagation();
+  };
+
   const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
     return idProductInMenu === idProductClickedOn;
   };
@@ -43,6 +47,7 @@ const Menu = ({ menu }) => {
         onClick={() => handleClick(id)}
         isHoverable={isModeAdmin}
         isSelected={checkIfProductIsSelected(id, productSelected.id)}
+        handleClickPropagation={(event) => handleClickPropagation(event)}
       />
     );
   });
