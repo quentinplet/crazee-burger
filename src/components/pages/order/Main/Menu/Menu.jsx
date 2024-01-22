@@ -16,14 +16,12 @@ const Menu = ({ menu }) => {
     useContext(MenuContext);
 
   const handleClick = (idProductSelected) => {
-    if (isModeAdmin) {
-      setProductIsSelected(true);
-      const productClickedOn = menu.find(
-        (product) => product.id === idProductSelected
-      );
-      // console.log("productSelected", productSelected);
-      setProductSelected(productClickedOn);
-    }
+    if (!isModeAdmin) return;
+    setProductIsSelected(true);
+    const productClickedOn = menu.find(
+      (product) => product.id === idProductSelected
+    );
+    setProductSelected(productClickedOn);
   };
 
   const handleClickPropagation = (event) => {
