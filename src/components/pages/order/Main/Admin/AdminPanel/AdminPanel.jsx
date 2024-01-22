@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { theme } from "../../../../../../theme";
 import OrderContext from "../../../../../../context/OrderContext";
 import { getTabsConfig, getTabSelected } from "../tabsConfig";
-import AddForm from "./AddForm";
 import MenuContext from "../../../../../../context/MenuContext";
 
 const AdminPanel = () => {

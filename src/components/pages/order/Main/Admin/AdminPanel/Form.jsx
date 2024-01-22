@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import TextInput from "../../../../../reusable-ui/TextInput";
-import Button from "../../../../../reusable-ui/Button";
 import ImagePreview from "./ImagePreview";
-import SubmitMessage from "./SubmitMessage";
 import { getInputTextConfig } from "./InputTextConfig";
-import { EMPTY_PRODUCT } from "../../../../../../enums/product";
 
 const Form = React.forwardRef(
   ({ product, onSubmit, onChange, children }, ref) => {
