@@ -7,14 +7,17 @@ import ImagePreview from "./ImagePreview";
 import SubmitMessage from "./SubmitMessage";
 import { getInputTextConfig } from "./InputTextConfig";
 import { EMPTY_PRODUCT } from "../../../../../../enums/product";
+import Form from "./Form";
 
 const AddForm = () => {
+  //State
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { newProduct, setNewProduct } = useContext(MenuContext);
 
   const { handleAddProduct } = useContext(MenuContext);
 
+  // comportements (gestionnaire d'évènements)
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewProduct((prevState) => {
@@ -41,31 +44,46 @@ const AddForm = () => {
     }, 2000);
   };
 
-  const inputTexts = getInputTextConfig(newProduct);
+  //affichage
   return (
-    <AddFormStyled onSubmit={handleSubmit}>
-      <ImagePreview
-        imageSource={newProduct.imageSource}
-        title={newProduct.title}
-      />
-      <div className="input-fields">
-        {inputTexts.map((input) => (
-          <TextInput
-            key={input.id}
-            {...input}
-            onChange={handleChange}
-            version="minimalist"
+    // <AddFormStyled onSubmit={handleSubmit}>
+    //   <ImagePreview
+    //     imageSource={newProduct.imageSource}
+    //     title={newProduct.title}
+    //   />
+    //   <div className="input-fields">
+    //     {inputTexts.map((input) => (
+    //       <TextInput
+    //         key={input.id}
+    //         {...input}
+    //         onChange={handleChange}
+    //         version="minimalist"
+    //       />
+    //     ))}
+    //   </div>
+    //   <div className="submit">
+    //     <Button
+    //       label={"Ajouter un nouveau produit au menu"}
+    //       version="success"
+    //     />
+    //     {isSubmitted && <SubmitMessage />}
+    //   </div>
+    // </AddFormStyled>
+    <Form
+      onSubmit={handleSubmit}
+      isSubmitted={isSubmitted}
+      onChange={handleChange}
+      product={newProduct}
+      messageTest={
+        <>
+          <Button
+            label={"Ajouter un nouveau produit au menu"}
+            version="success"
           />
-        ))}
-      </div>
-      <div className="submit">
-        <Button
-          label={"Ajouter un nouveau produit au menu"}
-          version="success"
-        />
-        {isSubmitted && <SubmitMessage />}
-      </div>
-    </AddFormStyled>
+          {isSubmitted && <SubmitMessage />}
+        </>
+      }
+    />
   );
 };
 

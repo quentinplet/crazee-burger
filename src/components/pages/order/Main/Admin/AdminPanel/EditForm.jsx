@@ -5,6 +5,8 @@ import ImagePreview from "./ImagePreview";
 import { getInputTextConfig } from "./InputTextConfig";
 import MenuContext from "../../../../../../context/MenuContext";
 import { theme } from "../../../../../../theme";
+import EditInfoMessage from "./EditInfoMessage";
+import Form from "./Form";
 
 const EditForm = () => {
   const {
@@ -29,27 +31,30 @@ const EditForm = () => {
   };
 
   return (
-    <EditFormStyled>
-      <ImagePreview imageSource={productSelected.imageSource} />
-      <div className="input-fields">
-        {inputTexts.map((input) => (
-          <TextInput
-            key={input.id}
-            name={input.name}
-            placeholder={input.placeholder}
-            value={input.value}
-            onChange={handleChange}
-            Icon={input.Icon}
-            version="minimalist"
-            ref={input.name === "title" ? titleEditRef : null}
-          />
-        ))}
-        <div className="edit-message">
-          Cliquer sur un produit du menu pour le modifier{" "}
-          <span>en temps réel</span>
-        </div>
-      </div>
-    </EditFormStyled>
+    // <EditFormStyled>
+    //   <ImagePreview imageSource={productSelected.imageSource} />
+    //   <div className="input-fields">
+    //     {inputTexts.map((input) => (
+    //       <TextInput
+    //         key={input.id}
+    //         name={input.name}
+    //         placeholder={input.placeholder}
+    //         value={input.value}
+    //         onChange={handleChange}
+    //         Icon={input.Icon}
+    //         version="minimalist"
+    //         ref={input.name === "title" ? titleEditRef : null}
+    //       />
+    //     ))}
+    //     <EditInfoMessage />
+    //   </div>
+    // </EditFormStyled>
+    <Form
+      product={productSelected}
+      onChange={handleChange}
+      ref={titleEditRef}
+      messageTest={<EditInfoMessage />}
+    />
   );
 };
 
@@ -70,17 +75,5 @@ const EditFormStyled = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
-
-    .edit-message {
-      font-family: "Open Sans", sans-serif;
-      color: ${theme.colors.primary};
-      font-size: ${theme.fonts.size.SM};
-      font-weight: ${theme.fonts.weights.regular};
-      margin-top: 15px;
-
-      span {
-        text-decoration: underline;
-      }
-    }
   }
 `;
