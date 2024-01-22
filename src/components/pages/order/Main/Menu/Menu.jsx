@@ -12,20 +12,22 @@ const DEFAULT_IMAGE = "/public/images/coming-soon.png";
 const Menu = ({ menu }) => {
   const { handleDeleteProduct } = useContext(MenuContext);
   const { isModeAdmin } = useContext(OrderContext);
-  const { productSelected, setProductSelected, setProductIsSelected } =
+  const { productSelected, setProductSelected, titleEditRef } =
     useContext(MenuContext);
 
   const { setIsCollapsed, setCurrentTabSelected } = useContext(OrderContext);
 
-  const handleClick = (idProductSelected) => {
+  const handleClick = async (idProductSelected) => {
     if (!isModeAdmin) return;
-    setIsCollapsed(false);
-    setCurrentTabSelected("edit");
-    setProductIsSelected(true);
+
+    await setIsCollapsed(false);
+    await setCurrentTabSelected("edit");
+
     const productClickedOn = menu.find(
       (product) => product.id === idProductSelected
     );
-    setProductSelected(productClickedOn);
+    await setProductSelected(productClickedOn);
+    titleEditRef.current.focus();
   };
 
   const handleClickPropagation = (event) => {

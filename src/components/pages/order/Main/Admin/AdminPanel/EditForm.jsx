@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import styled from "styled-components";
 import TextInput from "../../../../../reusable-ui/TextInput";
 import ImagePreview from "./ImagePreview";
@@ -10,8 +10,8 @@ const EditForm = () => {
   const {
     productSelected,
     setProductSelected,
-    productIsSelected,
     handleEditProduct,
+    titleEditRef,
   } = useContext(MenuContext);
 
   const inputTexts = getInputTextConfig(productSelected);
@@ -40,10 +40,10 @@ const EditForm = () => {
             name={input.name}
             placeholder={input.placeholder}
             value={input.value}
-            // value={input.value}
             onChange={handleChange}
             Icon={input.Icon}
             version="minimalist"
+            ref={input.name === "title" ? titleEditRef : null}
           />
         ))}
       </div>

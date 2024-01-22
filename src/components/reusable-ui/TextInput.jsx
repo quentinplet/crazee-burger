@@ -1,27 +1,27 @@
+import React from "react";
 import styled, { css } from "styled-components";
 import { theme } from "../../theme";
 
-const TextInput = ({
-  value,
-  onChange,
-  Icon,
-  className,
-  version = "normal",
-  ...restProps
-}) => {
-  return (
-    <TextInputStyled className={className} version={version}>
-      {Icon && <div className="icon">{Icon}</div>}
-      <input
-        autoComplete="off"
-        value={value}
-        onChange={onChange}
-        type="text"
-        {...restProps}
-      />
-    </TextInputStyled>
-  );
-};
+const TextInput = React.forwardRef(
+  (
+    { value, onChange, Icon, className, version = "normal", ...restProps },
+    ref
+  ) => {
+    return (
+      <TextInputStyled className={className} version={version}>
+        {Icon && <div className="icon">{Icon}</div>}
+        <input
+          ref={ref}
+          autoComplete="off"
+          value={value}
+          onChange={onChange}
+          type="text"
+          {...restProps}
+        />
+      </TextInputStyled>
+    );
+  }
+);
 
 export default TextInput;
 

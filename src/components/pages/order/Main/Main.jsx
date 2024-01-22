@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Menu from "./Menu/Menu";
@@ -52,6 +52,8 @@ const Main = () => {
     setMenu(menuCopy);
   };
 
+  const titleEditRef = useRef();
+
   const generateNewMenu = () => {
     setMenu(menuTest);
   };
@@ -68,6 +70,7 @@ const Main = () => {
     productIsSelected,
     setProductIsSelected,
     handleEditProduct,
+    titleEditRef,
   };
 
   return (
