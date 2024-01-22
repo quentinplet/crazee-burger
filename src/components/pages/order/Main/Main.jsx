@@ -7,6 +7,7 @@ import OrderContext from "../../../../context/OrderContext";
 import MenuContext from "../../../../context/MenuContext";
 import { fakeMenu } from "../../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../../enums/product";
+import Basket from "./Basket/Basket";
 
 const Main = () => {
   const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
@@ -80,7 +81,7 @@ const Main = () => {
   return (
     <MenuContext.Provider value={menuContextValue}>
       <MainStyled>
-        {/* <div className="basket">basket</div> */}
+        <Basket />
         <div className="menu-and-admin">
           <Menu menu={menu} isModeAdmin={isModeAdmin} />
           {isModeAdmin && <Admin />}
@@ -99,11 +100,7 @@ const MainStyled = styled.div`
 
   display: grid;
   //this code wiil be use for the basket
-  /* grid-template-columns: 25% 1fr; */
-
-  /* .basket {
-    background: pink;
-  } */
+  grid-template-columns: 25% 1fr;
 
   .menu-and-admin {
     position: relative;
