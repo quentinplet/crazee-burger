@@ -4,6 +4,7 @@ import TextInput from "../../../../../reusable-ui/TextInput";
 import ImagePreview from "./ImagePreview";
 import { getInputTextConfig } from "./InputTextConfig";
 import MenuContext from "../../../../../../context/MenuContext";
+import { theme } from "../../../../../../theme";
 
 const EditForm = () => {
   const {
@@ -43,6 +44,10 @@ const EditForm = () => {
             ref={input.name === "title" ? titleEditRef : null}
           />
         ))}
+        <div className="edit-message">
+          Cliquer sur un produit du menu pour le modifier{" "}
+          <span>en temps réel</span>
+        </div>
       </div>
     </EditFormStyled>
   );
@@ -65,5 +70,17 @@ const EditFormStyled = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
+
+    .edit-message {
+      font-family: "Open Sans", sans-serif;
+      color: ${theme.colors.primary};
+      font-size: ${theme.fonts.size.SM};
+      font-weight: ${theme.fonts.weights.regular};
+      margin-top: 15px;
+
+      span {
+        text-decoration: underline;
+      }
+    }
   }
 `;

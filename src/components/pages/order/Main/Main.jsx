@@ -35,7 +35,7 @@ const Main = () => {
 
   const handleAddProduct = (newProduct) => {
     const menuCopy = structuredClone(menu);
-    menuUpdated = [newProduct, ...menuCopy];
+    const menuUpdated = [newProduct, ...menuCopy];
     setMenu(menuUpdated);
   };
 
