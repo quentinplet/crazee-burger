@@ -8,7 +8,7 @@ import { getInputTextConfig } from "./InputTextConfig";
 import { EMPTY_PRODUCT } from "../../../../../../enums/product";
 
 const Form = React.forwardRef(
-  ({ product, onSubmit, onChange, isSubmitted, messageTest }, ref) => {
+  ({ product, onSubmit, onChange, children }, ref) => {
     const inputTexts = getInputTextConfig(product);
 
     return (
@@ -25,7 +25,7 @@ const Form = React.forwardRef(
             />
           ))}
         </div>
-        <div className="submit">{messageTest}</div>
+        <div className="submit">{children}</div>
       </FormStyled>
     );
   }

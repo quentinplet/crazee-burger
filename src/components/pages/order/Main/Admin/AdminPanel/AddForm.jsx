@@ -8,6 +8,7 @@ import SubmitMessage from "./SubmitMessage";
 import { getInputTextConfig } from "./InputTextConfig";
 import { EMPTY_PRODUCT } from "../../../../../../enums/product";
 import Form from "./Form";
+import SubmitButton from "./SubmitButton";
 
 const AddForm = () => {
   //State
@@ -69,21 +70,9 @@ const AddForm = () => {
     //     {isSubmitted && <SubmitMessage />}
     //   </div>
     // </AddFormStyled>
-    <Form
-      onSubmit={handleSubmit}
-      isSubmitted={isSubmitted}
-      onChange={handleChange}
-      product={newProduct}
-      messageTest={
-        <>
-          <Button
-            label={"Ajouter un nouveau produit au menu"}
-            version="success"
-          />
-          {isSubmitted && <SubmitMessage />}
-        </>
-      }
-    />
+    <Form onSubmit={handleSubmit} onChange={handleChange} product={newProduct}>
+      <SubmitButton isSubmitted={isSubmitted} />
+    </Form>
   );
 };
 

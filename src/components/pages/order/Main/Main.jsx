@@ -30,7 +30,7 @@ const Main = () => {
     if (productSelected.id === productId) {
       setProductSelected({ EMPTY_PRODUCT });
     }
-    titleEditRef.current.focus();
+    titleEditRef.current && titleEditRef.current.focus();
   };
 
   const handleAddProduct = (newProduct) => {

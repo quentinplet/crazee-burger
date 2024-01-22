@@ -49,12 +49,9 @@ const EditForm = () => {
     //     <EditInfoMessage />
     //   </div>
     // </EditFormStyled>
-    <Form
-      product={productSelected}
-      onChange={handleChange}
-      ref={titleEditRef}
-      messageTest={<EditInfoMessage />}
-    />
+    <Form product={productSelected} onChange={handleChange} ref={titleEditRef}>
+      <EditInfoMessage />
+    </Form>
   );
 };
 
