@@ -15,6 +15,8 @@ const Main = () => {
   const [productSelected, setProductSelected] = useState({});
   const [productIsSelected, setProductIsSelected] = useState(false);
 
+  const titleEditRef = useRef();
+
   const menuTest = fakeMenu.MEDIUM;
 
   const [menu, setMenu] = useState(menuTest);
@@ -25,6 +27,10 @@ const Main = () => {
     const menuUpdated = menuCopy.filter((product) => product.id !== productId);
 
     setMenu(menuUpdated);
+    if (productSelected.id === productId) {
+      setProductSelected({ EMPTY_PRODUCT });
+    }
+    titleEditRef.current.focus();
   };
 
   const handleAddProduct = (newProduct) => {
@@ -51,8 +57,6 @@ const Main = () => {
 
     setMenu(menuCopy);
   };
-
-  const titleEditRef = useRef();
 
   const generateNewMenu = () => {
     setMenu(menuTest);

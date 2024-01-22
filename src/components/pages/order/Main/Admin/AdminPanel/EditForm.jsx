@@ -4,7 +4,6 @@ import TextInput from "../../../../../reusable-ui/TextInput";
 import ImagePreview from "./ImagePreview";
 import { getInputTextConfig } from "./InputTextConfig";
 import MenuContext from "../../../../../../context/MenuContext";
-import HintMessage from "./HintMessage";
 
 const EditForm = () => {
   const {
@@ -30,8 +29,6 @@ const EditForm = () => {
 
   return (
     <EditFormStyled>
-      {/* <HintMessage /> */}
-
       <ImagePreview imageSource={productSelected.imageSource} />
       <div className="input-fields">
         {inputTexts.map((input) => (

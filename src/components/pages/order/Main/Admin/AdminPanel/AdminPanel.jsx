@@ -2,13 +2,17 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../theme";
 import OrderContext from "../../../../../../context/OrderContext";
-import { tabsConfig, getTabSelected } from "../tabsConfig";
+import { getTabsConfig, getTabSelected } from "../tabsConfig";
 import AddForm from "./AddForm";
+import MenuContext from "../../../../../../context/MenuContext";
 
 const AdminPanel = () => {
   const { currentTabSelected } = useContext(OrderContext);
+  const { productSelected } = useContext(MenuContext);
 
-  const tabs = tabsConfig;
+  const hasAlreadyBeenClicked = productSelected.id;
+
+  const tabs = getTabsConfig(hasAlreadyBeenClicked);
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
   return (
