@@ -15,8 +15,12 @@ const Card = ({
   isSelected,
 }) => {
   return (
-    <CardStyled onClick={onClick} $isHoverable={isHoverable}>
-      <div className="card" style={isSelected ? { background: "orange" } : {}}>
+    <CardStyled
+      onClick={onClick}
+      $isSelected={isSelected}
+      $isHoverable={isHoverable}
+    >
+      <div className="card">
         {hasDeleteButton && (
           <button
             onClick={onDelete}
@@ -27,7 +31,7 @@ const Card = ({
           </button>
         )}
         <div className="image">
-          <img src={imageSource} alt="title" />
+          <img src={imageSource} alt="title" draggable="false" />
         </div>
         <div className="info-text">
           <div className="title">{title}</div>
@@ -163,6 +167,67 @@ const CardStyled = styled.div`
             font-size: ${theme.fonts.size.XS};
           }
         }
+      }
+    }
+
+    ${({ $isHoverable, $isSelected }) =>
+      $isHoverable && $isSelected && selectedStyle}
+  }
+`;
+
+const selectedStyle = css`
+  background: ${theme.colors.primary};
+
+  .primary-button {
+    color: ${theme.colors.primary};
+    background: ${theme.colors.white};
+    border: 1px solid ${theme.colors.white};
+    transition: all 0.2s ease-in-out;
+    :hover {
+      background-color: ${theme.colors.primary};
+      color: ${theme.colors.white};
+      border: 1px solid ${theme.colors.white};
+      transition: all 0.2s ease-in-out;
+    }
+    :active {
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.primary};
+    }
+
+    &.is-disabled {
+      opacity: 50%;
+      cursor: not-allowed;
+      z-index: 2;
+    }
+
+    &.with-focus {
+      border: 1px solid white;
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.primary};
+      :hover {
+        color: ${theme.colors.white};
+        background-color: ${theme.colors.primary};
+        border: 1px solid ${theme.colors.white};
+      }
+      :active {
+        background-color: ${theme.colors.white};
+        color: ${theme.colors.primary};
+      }
+    }
+  }
+
+  .delete-button {
+    color: ${theme.colors.white};
+
+    :active {
+      color: ${theme.colors.white};
+    }
+  }
+
+  .info-text {
+    .description {
+      .price {
+        color: ${theme.colors.white};
       }
     }
   }
