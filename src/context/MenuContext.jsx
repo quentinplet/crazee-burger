@@ -8,4 +8,13 @@ export default createContext({
   menu: [],
   newProduct: {},
   setNewProduct: () => {},
+
+  productSelected: {},
+  setProductSelected: () => {},
+
+  productIsSelected: false,
+  setProductIsSelected: () => {},
+  handleEditProduct: () => {},
+
+  titleEditRef: {},
 });

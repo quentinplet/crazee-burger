@@ -12,6 +12,31 @@ const DEFAULT_IMAGE = "/public/images/coming-soon.png";
 const Menu = ({ menu }) => {
   const { handleDeleteProduct } = useContext(MenuContext);
   const { isModeAdmin } = useContext(OrderContext);
+  const { productSelected, setProductSelected, titleEditRef } =
+    useContext(MenuContext);
+
+  const { setIsCollapsed, setCurrentTabSelected } = useContext(OrderContext);
+
+  const handleClick = async (idProductSelected) => {
+    if (!isModeAdmin) return;
+
+    await setIsCollapsed(false);
+    await setCurrentTabSelected("edit");
+
+    const productClickedOn = menu.find(
+      (product) => product.id === idProductSelected
+    );
+    await setProductSelected(productClickedOn);
+    titleEditRef.current.focus();
+  };
+
+  const handleClickPropagation = (event) => {
+    event.stopPropagation();
+  };
+
+  const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
+    return idProductInMenu === idProductClickedOn;
+  };
 
   const listCard = menu.map(({ id, title, price, imageSource }) => {
     return (
@@ -22,6 +47,11 @@ const Menu = ({ menu }) => {
         imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
         onDelete={() => handleDeleteProduct(id)}
         hasDeleteButton={isModeAdmin}
+        // className={isModeAdmin && "admin"}
+        onClick={() => handleClick(id)}
+        isHoverable={isModeAdmin}
+        isSelected={checkIfProductIsSelected(id, productSelected.id)}
+        handleClickPropagation={(event) => handleClickPropagation(event)}
       />
     );
   });
@@ -46,4 +76,14 @@ const MenuStyled = styled.div`
   grid-column-gap: 60px;
   padding: 50px 50px 150px;
   overflow-y: scroll;
+
+  /* .admin {
+    &:hover {
+      border: 1px solid ${theme.colors.primary};
+      cursor: pointer;
+    }
+    &:active {
+      background-color: ${theme.colors.primary};
+    }
+  } */
 `;

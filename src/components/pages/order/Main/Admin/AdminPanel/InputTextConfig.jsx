@@ -8,7 +8,7 @@ export const getInputTextConfig = (newProduct) => {
       id: "0",
       name: "title",
       placeholder: "Nom du produit (ex: Super Burger)",
-      value: newProduct.title,
+      value: newProduct.title ? newProduct.title : "",
       Icon: <FaHamburger />,
     },
     {
@@ -16,7 +16,7 @@ export const getInputTextConfig = (newProduct) => {
       name: "imageSource",
       placeholder:
         "Lien URL d'une image (ex: https://la-photo-de-mon-produit.png)",
-      value: newProduct.imageSource,
+      value: newProduct.imageSource ? newProduct.imageSource : "",
       Icon: <BsFillCameraFill />,
     },
     {
