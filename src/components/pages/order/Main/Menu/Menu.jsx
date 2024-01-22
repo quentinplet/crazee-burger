@@ -15,8 +15,12 @@ const Menu = ({ menu }) => {
   const { productSelected, setProductSelected, setProductIsSelected } =
     useContext(MenuContext);
 
+  const { setIsCollapsed, setCurrentTabSelected } = useContext(OrderContext);
+
   const handleClick = (idProductSelected) => {
     if (!isModeAdmin) return;
+    setIsCollapsed(false);
+    setCurrentTabSelected("edit");
     setProductIsSelected(true);
     const productClickedOn = menu.find(
       (product) => product.id === idProductSelected
