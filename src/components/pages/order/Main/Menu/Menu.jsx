@@ -7,7 +7,7 @@ import MenuContext from "../../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
 import OrderContext from "../../../../../context/OrderContext";
 
-const DEFAULT_IMAGE = "/public/images/coming-soon.png";
+const DEFAULT_IMAGE = "/images/coming-soon.png";
 
 const Menu = ({ menu }) => {
   const { handleDeleteProduct } = useContext(MenuContext);
