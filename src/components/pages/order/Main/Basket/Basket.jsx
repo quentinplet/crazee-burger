@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
 import Total from "./Total";
-import Header from "./Header";
+import Header from "../../../../reusable-ui/Header";
 import { formatPrice } from "../../../../../utils/maths";
 import Footer from "./Footer";
 
@@ -13,7 +13,7 @@ const Basket = () => {
       <div className="body">
         <p>Votre Commande est vide</p>
       </div>
-      <Footer>Codé ave ❤️ et React.JS</Footer>
+      <Footer />
     </BasketStyled>
   );
 };

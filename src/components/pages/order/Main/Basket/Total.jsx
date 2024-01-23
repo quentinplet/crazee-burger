@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
-import Header from "./Header";
+import Header from "../../../../reusable-ui/Header";
 
 const Total = ({ amountToPay }) => {
   return (
