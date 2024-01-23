@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
+import Total from "./Total";
+import Header from "./Header";
+import { formatPrice } from "../../../../../utils/maths";
+import Footer from "./Footer";
 
 const Basket = () => {
   return (
     <BasketStyled>
-      <div className="head">
-        <div className="div">Total</div>
-        <div className="price">0.00 €</div>
-      </div>
+      <Total amountToPay={formatPrice(0.0)} />
       <div className="body">
         <p>Votre Commande est vide</p>
       </div>
-      <div className="footer">Codé ave ❤️ et React.JS</div>
+      <Footer>Codé ave ❤️ et React.JS</Footer>
     </BasketStyled>
   );
 };
@@ -37,9 +38,9 @@ const BasketStyled = styled.div`
   }
 
   .body {
-    background: ${theme.colors.background_white};
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2) inset;
     flex: 1;
+    background: ${theme.colors.background_white};
+    box-shadow: ${theme.shadows.basket};
   }
 
   .footer {
