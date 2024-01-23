@@ -3,7 +3,7 @@ import MenuContext from "../../../../../../context/MenuContext";
 import { EMPTY_PRODUCT } from "../../../../../../enums/product";
 import Form from "./Form";
 import SubmitButton from "./SubmitButton";
-import { useSuccessMessage } from "../../../../../../hooks/useDisplaySuccessMessage";
+import { useSuccessMessage } from "../../../../../../hooks/useSuccessMessage";
 
 const AddForm = () => {
   //State
