@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../theme";
 
 const Basket = () => {
   return (
@@ -30,15 +31,20 @@ const BasketStyled = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 12px 16px;
+    height: 70px;
+    background: ${theme.colors.background_dark};
+    color: ${theme.colors.primary};
   }
 
   .body {
-    background: blue;
-    border-radius: 0px 0px 0px 15px;
+    background: ${theme.colors.background_white};
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2) inset;
+    flex: 1;
   }
 
   .footer {
-    background: green;
     bottom: 0;
+    height: 70px;
+    background: ${theme.colors.background_dark};
   }
 `;

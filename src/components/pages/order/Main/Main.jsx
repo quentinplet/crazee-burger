@@ -102,12 +102,14 @@ const MainStyled = styled.div`
   //this code wiil be use for the basket
   grid-template-columns: 25% 1fr;
 
+  overflow-y: hidden;
+
   .menu-and-admin {
     position: relative;
     overflow-y: hidden;
     display: grid;
 
-    border-bottom-left-radius: ${theme.borderRadius.extraRound};
+    /* border-bottom-left-radius: ${theme.borderRadius.extraRound}; */
     border-bottom-right-radius: ${theme.borderRadius.extraRound};
   }
 `;
