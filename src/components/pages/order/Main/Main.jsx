@@ -7,6 +7,8 @@ import OrderContext from "../../../../context/OrderContext";
 import MenuContext from "../../../../context/MenuContext";
 import { fakeMenu } from "../../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../../enums/product";
+import Basket from "./Basket/Basket";
+import { useMenu } from "../../../../hooks/useMenu";
 
 const Main = () => {
   const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
@@ -19,48 +21,13 @@ const Main = () => {
 
   const menuTest = fakeMenu.MEDIUM;
 
-  const [menu, setMenu] = useState(menuTest);
-
-  const handleDeleteProduct = (productId) => {
-    const menuCopy = structuredClone(menu);
-
-    const menuUpdated = menuCopy.filter((product) => product.id !== productId);
-
-    setMenu(menuUpdated);
-    if (productSelected.id === productId) {
-      setProductSelected({ EMPTY_PRODUCT });
-    }
-    titleEditRef.current && titleEditRef.current.focus();
-  };
-
-  const handleAddProduct = (newProduct) => {
-    const menuCopy = structuredClone(menu);
-    const menuUpdated = [newProduct, ...menuCopy];
-    setMenu(menuUpdated);
-  };
-
-  const handleEditProduct = (productBeingEdited) => {
-    const menuCopy = structuredClone(menu);
-
-    const indexOfProductToEdit = menu.findIndex(
-      (product) => product.id === productBeingEdited.id
-    );
-
-    menuCopy[indexOfProductToEdit] = productBeingEdited;
-
-    // const menuUpdated = menuCopy.map((product) => {
-    //   if (product.id === productBeingEdited.id) {
-    //     return productBeingEdited;
-    //   }
-    //   return product;
-    // });
-
-    setMenu(menuCopy);
-  };
-
-  const generateNewMenu = () => {
-    setMenu(menuTest);
-  };
+  const {
+    menu,
+    handleAddProduct,
+    handleDeleteProduct,
+    handleEditProduct,
+    generateNewMenu,
+  } = useMenu(menuTest);
 
   const menuContextValue = {
     handleAddProduct,
@@ -80,7 +47,7 @@ const Main = () => {
   return (
     <MenuContext.Provider value={menuContextValue}>
       <MainStyled>
-        {/* <div className="basket">basket</div> */}
+        <Basket />
         <div className="menu-and-admin">
           <Menu menu={menu} isModeAdmin={isModeAdmin} />
           {isModeAdmin && <Admin />}
@@ -98,19 +65,16 @@ const MainStyled = styled.div`
   border-bottom-right-radius: ${theme.borderRadius.extraRound};
 
   display: grid;
-  //this code wiil be use for the basket
-  /* grid-template-columns: 25% 1fr; */
+  grid-template-columns: 25% 1fr;
 
-  /* .basket {
-    background: pink;
-  } */
+  overflow-y: hidden;
 
   .menu-and-admin {
     position: relative;
     overflow-y: hidden;
     display: grid;
 
-    border-bottom-left-radius: ${theme.borderRadius.extraRound};
+    /* border-bottom-left-radius: ${theme.borderRadius.extraRound}; */
     border-bottom-right-radius: ${theme.borderRadius.extraRound};
   }
 `;

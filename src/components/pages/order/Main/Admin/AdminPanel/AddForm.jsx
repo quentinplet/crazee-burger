@@ -3,14 +3,13 @@ import MenuContext from "../../../../../../context/MenuContext";
 import { EMPTY_PRODUCT } from "../../../../../../enums/product";
 import Form from "./Form";
 import SubmitButton from "./SubmitButton";
+import { useSuccessMessage } from "../../../../../../hooks/useSuccessMessage";
 
 const AddForm = () => {
   //State
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
   const { newProduct, setNewProduct } = useContext(MenuContext);
-
   const { handleAddProduct } = useContext(MenuContext);
+  const { isSubmitted, displaySuccessMessage } = useSuccessMessage();
 
   // comportements (gestionnaire d'évènements)
   const handleChange = (event) => {
@@ -30,13 +29,6 @@ const AddForm = () => {
     handleAddProduct(newProductToAdd);
     setNewProduct(EMPTY_PRODUCT);
     displaySuccessMessage();
-  };
-
-  const displaySuccessMessage = () => {
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 2000);
   };
 
   //affichage
