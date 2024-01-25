@@ -50,12 +50,13 @@ const BasketCardStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 70px;
 
     img {
       object-fit: contain;
       object-position: center;
-      height: 70px;
-      width: 85px;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -84,6 +85,8 @@ const BasketCardStyled = styled.div`
     width: 115px;
     overflow: hidden;
     white-space: nowrap;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 
     .basketCardTitle {
       font-family: "Amatic SC";

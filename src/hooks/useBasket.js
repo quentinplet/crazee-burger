@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { fakeBasket } from "../fakeData/fakeBasket";
 
 export const useBasket = (menu) => {
-  const [basketProducts, setBasketProducts] = useState([]);
+  const fakeBasketTest = fakeBasket.LARGE_WEIRD;
+  //   const [basketProducts, setBasketProducts] = useState([]);
+  const [basketProducts, setBasketProducts] = useState(fakeBasketTest);
+
+  const isBasketEmpty = basketProducts.length === 0;
 
   const handleAddProductToBasket = (id) => {
     const productToAddToBasket = menu.find((product) => product.id === id);
@@ -36,5 +41,6 @@ export const useBasket = (menu) => {
     setBasketProducts,
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
+    isBasketEmpty,
   };
 };
