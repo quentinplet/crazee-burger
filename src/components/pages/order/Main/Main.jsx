@@ -15,7 +15,37 @@ const Main = () => {
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const [productSelected, setProductSelected] = useState({});
-  const [productIsSelected, setProductIsSelected] = useState(false);
+
+  // const [productAddedToBasket, setProductAddedToBasket] = useState({});
+  const [basketProducts, setBasketProducts] = useState([]);
+
+  const handleAddProductToBasket = (id) => {
+    const productToAddToBasket = menu.find((product) => product.id === id);
+    const basketProductsCopy = structuredClone(basketProducts);
+
+    const existingProductIndex = basketProductsCopy.findIndex(
+      (product) => product.id === id
+    );
+    if (existingProductIndex !== -1) {
+      basketProductsCopy[existingProductIndex].quantity++;
+    } else {
+      productToAddToBasket.quantity = 1;
+      basketProductsCopy.unshift(productToAddToBasket);
+    }
+    setBasketProducts(basketProductsCopy);
+  };
+
+  const handleDeleteProductFromBasket = (id) => {
+    const basketProductsCopy = structuredClone(basketProducts);
+    const productToDeleteFromBasket = basketProductsCopy.find(
+      (product) => product.id === id
+    );
+    const indexProductToDeleteFromBasket = basketProductsCopy.indexOf(
+      productToDeleteFromBasket
+    );
+    basketProductsCopy.splice(indexProductToDeleteFromBasket, 1);
+    setBasketProducts(basketProductsCopy);
+  };
 
   const titleEditRef = useRef();
 
@@ -38,10 +68,13 @@ const Main = () => {
     setNewProduct,
     productSelected,
     setProductSelected,
-    productIsSelected,
-    setProductIsSelected,
     handleEditProduct,
     titleEditRef,
+    // productAddedToBasket,
+    // setProductAddedToBasket,
+    handleAddProductToBasket,
+    handleDeleteProductFromBasket,
+    basketProducts,
   };
 
   return (

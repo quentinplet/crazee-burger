@@ -9,10 +9,6 @@ export const useMenu = (fakeMenu) => {
     const menuUpdated = menuCopy.filter((product) => product.id !== productId);
 
     setMenu(menuUpdated);
-    if (productSelected.id === productId) {
-      setProductSelected({ EMPTY_PRODUCT });
-    }
-    titleEditRef.current && titleEditRef.current.focus();
   };
 
   const handleAddProduct = (newProduct) => {

@@ -6,11 +6,16 @@ import { theme } from "../../../../../theme";
 import MenuContext from "../../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
 import OrderContext from "../../../../../context/OrderContext";
+import { EMPTY_PRODUCT } from "../../../../../enums/product";
 
 const DEFAULT_IMAGE = "/images/coming-soon.png";
 
 const Menu = ({ menu }) => {
-  const { handleDeleteProduct } = useContext(MenuContext);
+  const {
+    handleDeleteProduct,
+    handleAddProductToBasket,
+    handleDeleteProductFromBasket,
+  } = useContext(MenuContext);
   const { isModeAdmin } = useContext(OrderContext);
   const { productSelected, setProductSelected, titleEditRef } =
     useContext(MenuContext);
@@ -34,6 +39,15 @@ const Menu = ({ menu }) => {
     event.stopPropagation();
   };
 
+  const handleCardDelete = (event, idProductToDelete) => {
+    handleClickPropagation(event);
+    handleDeleteProduct(idProductToDelete);
+    handleDeleteProductFromBasket(idProductToDelete);
+    idProductToDelete === productSelected.id &&
+      setProductSelected(EMPTY_PRODUCT);
+    titleEditRef.current && titleEditRef.current.focus();
+  };
+
   const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
     return idProductInMenu === idProductClickedOn;
   };
@@ -45,13 +59,14 @@ const Menu = ({ menu }) => {
         leftDescription={formatPrice(price)}
         title={title}
         imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
-        onDelete={() => handleDeleteProduct(id)}
+        onDelete={(event) => handleCardDelete(event, id)}
         hasDeleteButton={isModeAdmin}
         // className={isModeAdmin && "admin"}
         onClick={() => handleClick(id)}
         isHoverable={isModeAdmin}
         isSelected={checkIfProductIsSelected(id, productSelected.id)}
         handleClickPropagation={(event) => handleClickPropagation(event)}
+        handleAddProductToBasket={() => handleAddProductToBasket(id)}
       />
     );
   });
