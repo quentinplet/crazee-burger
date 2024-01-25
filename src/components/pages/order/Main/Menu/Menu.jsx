@@ -15,12 +15,13 @@ const Menu = ({ menu }) => {
     handleDeleteProduct,
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
+    productSelected,
+    setProductSelected,
+    titleEditRef,
   } = useContext(MenuContext);
-  const { isModeAdmin } = useContext(OrderContext);
-  const { productSelected, setProductSelected, titleEditRef } =
-    useContext(MenuContext);
 
-  const { setIsCollapsed, setCurrentTabSelected } = useContext(OrderContext);
+  const { isModeAdmin, setIsCollapsed, setCurrentTabSelected } =
+    useContext(OrderContext);
 
   const handleClick = async (idProductSelected) => {
     if (!isModeAdmin) return;
