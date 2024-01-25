@@ -49,6 +49,12 @@ const Menu = ({ menu }) => {
     titleEditRef.current && titleEditRef.current.focus();
   };
 
+  const handleAddButton = (event, id) => {
+    handleClickPropagation(event);
+    const productToAddToBasket = menu.find((product) => product.id === id);
+    handleAddProductToBasket(productToAddToBasket);
+  };
+
   const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
     return idProductInMenu === idProductClickedOn;
   };
@@ -67,7 +73,7 @@ const Menu = ({ menu }) => {
         isHoverable={isModeAdmin}
         isSelected={checkIfProductIsSelected(id, productSelected.id)}
         handleClickPropagation={(event) => handleClickPropagation(event)}
-        handleAddProductToBasket={() => handleAddProductToBasket(id)}
+        onAdd={(event) => handleAddButton(event, id)}
       />
     );
   });

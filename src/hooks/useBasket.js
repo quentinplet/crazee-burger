@@ -8,12 +8,11 @@ export const useBasket = (menu) => {
 
   const isBasketEmpty = basketProducts.length === 0;
 
-  const handleAddProductToBasket = (id) => {
-    const productToAddToBasket = menu.find((product) => product.id === id);
+  const handleAddProductToBasket = (productToAddToBasket) => {
     const basketProductsCopy = structuredClone(basketProducts);
 
     const existingProductIndex = basketProductsCopy.findIndex(
-      (product) => product.id === id
+      (product) => product.id === productToAddToBasket.id
     );
     if (existingProductIndex !== -1) {
       basketProductsCopy[existingProductIndex].quantity++;

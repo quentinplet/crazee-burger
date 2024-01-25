@@ -15,7 +15,7 @@ const Card = ({
   isHoverable,
   isSelected,
   handleClickPropagation,
-  handleAddProductToBasket,
+  onAdd,
 }) => {
   return (
     <CardStyled
@@ -43,10 +43,7 @@ const Card = ({
             <Button
               className="primary-button"
               label="Ajouter"
-              onClick={(e) => {
-                handleClickPropagation(e);
-                handleAddProductToBasket();
-              }}
+              onClick={onAdd}
             />
           </div>
         </div>

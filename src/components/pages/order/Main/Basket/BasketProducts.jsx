@@ -6,8 +6,7 @@ import Basket from "./Basket";
 import BasketCard from "./BasketCard";
 import { fakeBasket } from "../../../../../fakeData/fakeBasket";
 import { formatPrice } from "../../../../../utils/maths";
-
-const DEFAULT_IMAGE = "/images/coming-soon.png";
+import { IMAGE_COMING_SOON } from "../../../../../enums/product";
 
 const BasketProducts = ({ basketProducts, handleDeleteProductFromBasket }) => {
   return (
@@ -20,7 +19,7 @@ const BasketProducts = ({ basketProducts, handleDeleteProductFromBasket }) => {
           }
           price={formatPrice(price)}
           title={title ? title : " "}
-          imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
+          imageSource={imageSource ? imageSource : IMAGE_COMING_SOON}
           quantity={quantity}
         />
       ))}
