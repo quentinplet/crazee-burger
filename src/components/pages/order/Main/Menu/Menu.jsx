@@ -7,6 +7,7 @@ import MenuContext from "../../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
 import OrderContext from "../../../../../context/OrderContext";
 import { EMPTY_PRODUCT } from "../../../../../enums/product";
+import { findArrayElementById } from "../../../../../utils/array";
 
 const DEFAULT_IMAGE = "/images/coming-soon.png";
 
@@ -28,10 +29,7 @@ const Menu = ({ menu }) => {
 
     await setIsCollapsed(false);
     await setCurrentTabSelected("edit");
-
-    const productClickedOn = menu.find(
-      (product) => product.id === idProductSelected
-    );
+    const productClickedOn = findArrayElementById(menu, idProductSelected);
     await setProductSelected(productClickedOn);
     titleEditRef.current.focus();
   };
@@ -51,7 +49,7 @@ const Menu = ({ menu }) => {
 
   const handleAddButton = (event, id) => {
     handleClickPropagation(event);
-    const productToAddToBasket = menu.find((product) => product.id === id);
+    const productToAddToBasket = findArrayElementById(menu, id);
     handleAddProductToBasket(productToAddToBasket);
   };
 

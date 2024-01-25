@@ -35,7 +35,7 @@ const Main = () => {
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
     isBasketEmpty,
-  } = useBasket(menu);
+  } = useBasket();
 
   const menuContextValue = {
     handleAddProduct,

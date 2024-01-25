@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { fakeBasket } from "../fakeData/fakeBasket";
 
-export const useBasket = (menu) => {
+export const useBasket = () => {
   const fakeBasketTest = fakeBasket.LARGE_WEIRD;
   //   const [basketProducts, setBasketProducts] = useState([]);
-  const [basketProducts, setBasketProducts] = useState(fakeBasketTest);
+  const [basketProducts, setBasketProducts] = useState([]);
 
   const isBasketEmpty = basketProducts.length === 0;
 
