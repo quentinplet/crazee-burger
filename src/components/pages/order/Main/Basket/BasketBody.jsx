@@ -7,6 +7,8 @@ import BasketCard from "./BasketCard";
 import { fakeBasket } from "../../../../../fakeData/fakeBasket";
 import { formatPrice } from "../../../../../utils/maths";
 
+const DEFAULT_IMAGE = "/images/coming-soon.png";
+
 const BasketBody = ({ basketProducts, handleDeleteProductFromBasket }) => {
   return (
     <BodyStyled>
@@ -28,7 +30,9 @@ const BasketBody = ({ basketProducts, handleDeleteProductFromBasket }) => {
           }
           price={formatPrice(product.price)}
           title={product.title}
-          imageSource={product.imageSource}
+          imageSource={
+            product.imageSource ? product.imageSource : DEFAULT_IMAGE
+          }
           quantity={product.quantity}
         />
       ))}
