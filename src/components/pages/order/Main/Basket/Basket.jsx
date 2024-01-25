@@ -31,7 +31,6 @@ const Basket = () => {
 export default Basket;
 
 const BasketStyled = styled.div`
-  background: pink;
   display: flex;
   flex-direction: column;
 `;
