@@ -9,13 +9,13 @@ import { fakeMenu } from "../../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../../enums/product";
 import Basket from "./Basket/Basket";
 import { useMenu } from "../../../../hooks/useMenu";
+import { useBasket } from "../../../../hooks/useBasket";
 
 const Main = () => {
   const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const [productSelected, setProductSelected] = useState({});
-  const [productIsSelected, setProductIsSelected] = useState(false);
 
   const titleEditRef = useRef();
 
@@ -29,6 +29,14 @@ const Main = () => {
     generateNewMenu,
   } = useMenu(menuTest);
 
+  const {
+    basketProducts,
+    setBasketProducts,
+    handleAddProductToBasket,
+    handleDeleteProductFromBasket,
+    isBasketEmpty,
+  } = useBasket();
+
   const menuContextValue = {
     handleAddProduct,
     handleDeleteProduct,
@@ -38,10 +46,12 @@ const Main = () => {
     setNewProduct,
     productSelected,
     setProductSelected,
-    productIsSelected,
-    setProductIsSelected,
     handleEditProduct,
     titleEditRef,
+    handleAddProductToBasket,
+    handleDeleteProductFromBasket,
+    basketProducts,
+    isBasketEmpty,
   };
 
   return (

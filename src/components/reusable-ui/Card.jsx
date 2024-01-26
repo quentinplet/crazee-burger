@@ -15,6 +15,7 @@ const Card = ({
   isHoverable,
   isSelected,
   handleClickPropagation,
+  onAdd,
 }) => {
   return (
     <CardStyled
@@ -25,10 +26,7 @@ const Card = ({
       <div className="card">
         {hasDeleteButton && (
           <button
-            onClick={(e) => {
-              handleClickPropagation(e);
-              onDelete();
-            }}
+            onClick={onDelete}
             className="delete-button"
             aria-label="delete-button"
           >
@@ -45,7 +43,7 @@ const Card = ({
             <Button
               className="primary-button"
               label="Ajouter"
-              onClick={(e) => handleClickPropagation(e)}
+              onClick={onAdd}
             />
           </div>
         </div>

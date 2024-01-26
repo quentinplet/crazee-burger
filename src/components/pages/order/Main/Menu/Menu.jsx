@@ -6,32 +6,51 @@ import { theme } from "../../../../../theme";
 import MenuContext from "../../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
 import OrderContext from "../../../../../context/OrderContext";
+import { EMPTY_PRODUCT } from "../../../../../enums/product";
+import { findArrayElementById } from "../../../../../utils/array";
 
 const DEFAULT_IMAGE = "/images/coming-soon.png";
 
 const Menu = ({ menu }) => {
-  const { handleDeleteProduct } = useContext(MenuContext);
-  const { isModeAdmin } = useContext(OrderContext);
-  const { productSelected, setProductSelected, titleEditRef } =
-    useContext(MenuContext);
+  const {
+    handleDeleteProduct,
+    handleAddProductToBasket,
+    handleDeleteProductFromBasket,
+    productSelected,
+    setProductSelected,
+    titleEditRef,
+  } = useContext(MenuContext);
 
-  const { setIsCollapsed, setCurrentTabSelected } = useContext(OrderContext);
+  const { isModeAdmin, setIsCollapsed, setCurrentTabSelected } =
+    useContext(OrderContext);
 
   const handleClick = async (idProductSelected) => {
     if (!isModeAdmin) return;
 
     await setIsCollapsed(false);
     await setCurrentTabSelected("edit");
-
-    const productClickedOn = menu.find(
-      (product) => product.id === idProductSelected
-    );
+    const productClickedOn = findArrayElementById(menu, idProductSelected);
     await setProductSelected(productClickedOn);
     titleEditRef.current.focus();
   };
 
   const handleClickPropagation = (event) => {
     event.stopPropagation();
+  };
+
+  const handleCardDelete = (event, idProductToDelete) => {
+    handleClickPropagation(event);
+    handleDeleteProduct(idProductToDelete);
+    handleDeleteProductFromBasket(idProductToDelete);
+    idProductToDelete === productSelected.id &&
+      setProductSelected(EMPTY_PRODUCT);
+    titleEditRef.current && titleEditRef.current.focus();
+  };
+
+  const handleAddButton = (event, id) => {
+    handleClickPropagation(event);
+    const productToAddToBasket = findArrayElementById(menu, id);
+    handleAddProductToBasket(productToAddToBasket);
   };
 
   const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
@@ -45,13 +64,14 @@ const Menu = ({ menu }) => {
         leftDescription={formatPrice(price)}
         title={title}
         imageSource={imageSource ? imageSource : DEFAULT_IMAGE}
-        onDelete={() => handleDeleteProduct(id)}
+        onDelete={(event) => handleCardDelete(event, id)}
         hasDeleteButton={isModeAdmin}
         // className={isModeAdmin && "admin"}
         onClick={() => handleClick(id)}
         isHoverable={isModeAdmin}
         isSelected={checkIfProductIsSelected(id, productSelected.id)}
         handleClickPropagation={(event) => handleClickPropagation(event)}
+        onAdd={(event) => handleAddButton(event, id)}
       />
     );
   });

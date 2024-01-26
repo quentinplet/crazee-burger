@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { filterArrayById } from "../utils/array";
 
 export const useMenu = (fakeMenu) => {
   const [menu, setMenu] = useState(fakeMenu);
@@ -6,13 +7,9 @@ export const useMenu = (fakeMenu) => {
   const handleDeleteProduct = (productId) => {
     const menuCopy = structuredClone(menu);
 
-    const menuUpdated = menuCopy.filter((product) => product.id !== productId);
+    const menuUpdated = filterArrayById(menuCopy, productId);
 
     setMenu(menuUpdated);
-    if (productSelected.id === productId) {
-      setProductSelected({ EMPTY_PRODUCT });
-    }
-    titleEditRef.current && titleEditRef.current.focus();
   };
 
   const handleAddProduct = (newProduct) => {
@@ -29,19 +26,11 @@ export const useMenu = (fakeMenu) => {
     );
 
     menuCopy[indexOfProductToEdit] = productBeingEdited;
-
-    // const menuUpdated = menuCopy.map((product) => {
-    //   if (product.id === productBeingEdited.id) {
-    //     return productBeingEdited;
-    //   }
-    //   return product;
-    // });
-
     setMenu(menuCopy);
   };
 
   const generateNewMenu = () => {
-    setMenu(menuTest);
+    setMenu(fakeMenu);
   };
 
   return {
