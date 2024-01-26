@@ -1,6 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import { formatPrice } from "../../../../../utils/maths";
+import styled from "styled-components";
 import { theme } from "../../../../../theme";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -30,12 +29,6 @@ const BasketCard = ({
       </div>
       <div className="delete-button" onClick={onDelete}>
         <MdDeleteForever className="icon" />
-        {/* <button
-          onClick={handleDeleteProductFromBasket}
-          className="delete-basket-button"
-        >
-          X
-        </button> */}
       </div>
     </BasketCardStyled>
   );

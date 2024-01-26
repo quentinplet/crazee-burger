@@ -2,12 +2,10 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
 import Total from "./Total";
-import Header from "../../../../reusable-ui/Header";
 import { formatPrice } from "../../../../../utils/maths";
 import Footer from "./Footer";
 import BasketProducts from "./BasketProducts";
 import MenuContext from "../../../../../context/MenuContext";
-import { fakeBasket } from "../../../../../fakeData/fakeBasket";
 import EmptyBasket from "./EmptyBasket";
 import OrderContext from "../../../../../context/OrderContext";
 
