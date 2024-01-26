@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fakeBasket } from "../fakeData/fakeBasket";
+import { findArrayElementById } from "../utils/array";
 
 export const useBasket = () => {
   const fakeBasketTest = fakeBasket.LARGE_WEIRD;
@@ -14,19 +15,22 @@ export const useBasket = () => {
     const existingProductIndex = basketProductsCopy.findIndex(
       (product) => product.id === productToAddToBasket.id
     );
-    if (existingProductIndex !== -1) {
-      basketProductsCopy[existingProductIndex].quantity++;
-    } else {
+    const isProductAlreadyInBasket = existingProductIndex !== -1;
+    if (!isProductAlreadyInBasket) {
       productToAddToBasket.quantity = 1;
       basketProductsCopy.unshift(productToAddToBasket);
+    } else {
+      basketProductsCopy[existingProductIndex].quantity++;
     }
+
     setBasketProducts(basketProductsCopy);
   };
 
   const handleDeleteProductFromBasket = (id) => {
     const basketProductsCopy = structuredClone(basketProducts);
-    const productToDeleteFromBasket = basketProductsCopy.find(
-      (product) => product.id === id
+    const productToDeleteFromBasket = findArrayElementById(
+      basketProductsCopy,
+      id
     );
     const indexProductToDeleteFromBasket = basketProductsCopy.indexOf(
       productToDeleteFromBasket
