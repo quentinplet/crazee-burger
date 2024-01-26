@@ -8,19 +8,22 @@ import { fakeBasket } from "../../../../../fakeData/fakeBasket";
 import { formatPrice } from "../../../../../utils/maths";
 import { IMAGE_COMING_SOON } from "../../../../../enums/product";
 
-const BasketProducts = ({ basketProducts, handleDeleteProductFromBasket }) => {
+const BasketProducts = ({
+  basketProducts,
+  handleDeleteProductFromBasket,
+  isModeAdmin,
+}) => {
   return (
     <BodyStyled>
       {basketProducts.map(({ id, price, title, imageSource, quantity }) => (
         <BasketCard
           key={id}
-          handleDeleteProductFromBasket={() =>
-            handleDeleteProductFromBasket(id)
-          }
+          onDelete={() => handleDeleteProductFromBasket(id)}
           price={formatPrice(price)}
           title={title ? title : " "}
           imageSource={imageSource ? imageSource : IMAGE_COMING_SOON}
           quantity={quantity}
+          isModeAdmin={isModeAdmin}
         />
       ))}
     </BodyStyled>

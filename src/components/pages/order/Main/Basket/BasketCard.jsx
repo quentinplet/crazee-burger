@@ -1,31 +1,41 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { formatPrice } from "../../../../../utils/maths";
+import { theme } from "../../../../../theme";
+import { MdDeleteForever } from "react-icons/md";
 
 const BasketCard = ({
   imageSource,
   title,
   price,
   quantity,
-  handleDeleteProductFromBasket,
+  onDelete,
+  isModeAdmin,
 }) => {
   return (
-    <BasketCardStyled>
-      <div className="basketCardImage">
-        <img src={imageSource} alt={title} />
+    <BasketCardStyled $isModeAdmin={isModeAdmin}>
+      <div className="image">
+        <img src={imageSource} alt={title} draggable="false" />
       </div>
-      <div className="basketCardInfo">
-        <div className="basketCardTitle">{title}</div>
-        <div className="basketCardPrice">{price}</div>
+      <div className="text-info">
+        <div className="left-info">
+          <div className="title">
+            <span>{title}</span>
+          </div>
+          <div className="price">{price}</div>
+        </div>
+        <div className="quantity">
+          <span> x {quantity}</span>
+        </div>
       </div>
-      <div className="basketCardQuantity"> x {quantity}</div>
-      <div className="delete-basket-card">
-        <button
+      <div className="delete-button" onClick={onDelete}>
+        <MdDeleteForever className="icon" />
+        {/* <button
           onClick={handleDeleteProductFromBasket}
           className="delete-basket-button"
         >
           X
-        </button>
+        </button> */}
       </div>
     </BasketCardStyled>
   );
@@ -34,91 +44,115 @@ const BasketCard = ({
 export default BasketCard;
 
 const BasketCardStyled = styled.div`
-  /* border: 1px solid blue; */
-  display: grid;
-  position: relative;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  justify-content: center;
+  cursor: ${({ $isModeAdmin }) => ($isModeAdmin ? "pointer" : "default")};
+  box-sizing: border-box;
+  height: 86px;
   padding: 8px 16px;
-  column-gap: 21px;
-  border-radius: 5px;
-  background: #fff;
-  box-shadow: -4px 4px 15px 0px rgba(0, 0, 0, 0.2);
-  .basketCardImage {
-    /* border: 1px solid red; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 30% 1fr;
+
+  border-radius: ${theme.borderRadius.round};
+  background: ${theme.colors.white};
+  box-shadow: ${theme.shadows.basketCard};
+
+  position: relative;
+
+  .image {
+    box-sizing: border-box;
     height: 70px;
 
     img {
-      object-fit: contain;
-      object-position: center;
       height: 100%;
       width: 100%;
+      object-fit: contain;
     }
   }
 
-  .basketCardInfo {
-    width: 115px;
-    overflow: hidden;
-    white-space: nowrap;
+  .text-info {
+    user-select: none;
+    box-sizing: border-box;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 70% 1fr;
+    font-size: ${theme.fonts.size.P0};
+    color: ${theme.colors.primary};
 
-    .basketCardTitle {
-      font-family: "Amatic SC";
-      color: #17161a;
-      font-size: 24px;
-      line-height: 32px;
-      font-weight: 700;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
+    .left-info {
+      display: grid;
+      grid-template-rows: 60% 40%;
+      margin-left: 21px;
+
+      .title {
+        display: flex;
+        align-items: center;
+        font-family: ${theme.fonts.family.stylish}, cursive;
+        font-size: ${theme.fonts.size.P3};
+        line-height: 32px;
+        font-weight: ${theme.fonts.weights.bold};
+        color: ${theme.colors.dark};
+        min-width: 0;
+
+        span {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .price {
+        font-size: ${theme.fonts.size.SM};
+        font-weight: ${theme.fonts.weights.medium};
+        font-family: "Open Sans", sans-serif;
+      }
     }
 
-    .basketCardPrice {
-      color: #ffa01b;
-      font-family: "Open Sans";
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
+    .quantity {
+      font-weight: ${theme.fonts.weights.medium};
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-right: 20px;
+      font-size: ${theme.fonts.size.SM};
     }
   }
 
-  .basketCardQuantity {
-    /* border: 1px solid red; */
-    height: 70px;
-    width: auto;
-    /* padding-right: 20px; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffa01b;
-
-    font-family: "Open Sans";
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  .delete-button {
+    display: none;
+    z-index: 1;
   }
 
-  .delete-basket-card {
-    position: absolute;
-    top: 0;
-    right: 5px;
-
-    .delete-basket-button {
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #ffa01b;
-      color: #fff;
+  &:hover {
+    .delete-button {
       border: none;
-      outline: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 76px;
+      border-top-right-radius: ${theme.borderRadius.round};
+      border-bottom-right-radius: ${theme.borderRadius.round};
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: ${theme.colors.red};
+      color: ${theme.colors.white};
       cursor: pointer;
+
+      .icon {
+        width: ${theme.fonts.size.P3};
+        height: ${theme.fonts.size.P3};
+      }
+
+      &:hover {
+        .icon {
+          color: ${theme.colors.dark};
+        }
+      }
+      &:active {
+        .icon {
+          color: ${theme.colors.white};
+        }
+      }
     }
   }
 `;

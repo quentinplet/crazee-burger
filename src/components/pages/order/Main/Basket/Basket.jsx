@@ -9,11 +9,15 @@ import BasketProducts from "./BasketProducts";
 import MenuContext from "../../../../../context/MenuContext";
 import { fakeBasket } from "../../../../../fakeData/fakeBasket";
 import EmptyBasket from "./EmptyBasket";
+import OrderContext from "../../../../../context/OrderContext";
 
 const Basket = () => {
   const { basketProducts, handleDeleteProductFromBasket, isBasketEmpty } =
     useContext(MenuContext);
+  const { isModeAdmin } = useContext(OrderContext);
+
   const totalPrices = basketProducts.reduce((acc, product) => {
+    if (isNaN(product.price)) return acc;
     return product.price * product.quantity + acc;
   }, 0);
   return (
@@ -25,6 +29,7 @@ const Basket = () => {
         <BasketProducts
           basketProducts={basketProducts}
           handleDeleteProductFromBasket={handleDeleteProductFromBasket}
+          isModeAdmin={isModeAdmin}
         />
       )}
       <Footer />

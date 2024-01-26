@@ -17,12 +17,13 @@ export const useBasket = () => {
     );
     const isProductAlreadyInBasket = existingProductIndex !== -1;
     if (!isProductAlreadyInBasket) {
-      productToAddToBasket.quantity = 1;
-      basketProductsCopy.unshift(productToAddToBasket);
+      addNewProductCardInBasket(basketProductsCopy, productToAddToBasket);
     } else {
-      basketProductsCopy[existingProductIndex].quantity++;
+      incrementProductQuantityInBasket(
+        basketProductsCopy,
+        existingProductIndex
+      );
     }
-
     setBasketProducts(basketProductsCopy);
   };
 
@@ -46,4 +47,19 @@ export const useBasket = () => {
     handleDeleteProductFromBasket,
     isBasketEmpty,
   };
+};
+
+const incrementProductQuantityInBasket = (
+  basketProductsCopy,
+  existingProductIndex
+) => {
+  basketProductsCopy[existingProductIndex].quantity++;
+};
+
+const addNewProductCardInBasket = (
+  basketProductsCopy,
+  productToAddToBasket
+) => {
+  productToAddToBasket.quantity = 1;
+  basketProductsCopy.unshift(productToAddToBasket);
 };
