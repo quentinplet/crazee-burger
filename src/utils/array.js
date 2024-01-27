@@ -9,3 +9,7 @@ export const filterArrayById = (array, id) => {
 export const findIndexById = (array, id) => {
   return array.findIndex((element) => element.id === id);
 };
+
+export const isEmptyArray = (array) => {
+  return array.length === 0;
+};

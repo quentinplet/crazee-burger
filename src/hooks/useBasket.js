@@ -4,6 +4,7 @@ import {
   filterArrayById,
   findArrayElementById,
   findIndexById,
+  isEmptyArray,
 } from "../utils/array";
 
 export const useBasket = () => {
@@ -11,7 +12,7 @@ export const useBasket = () => {
   //   const [basketProducts, setBasketProducts] = useState([]);
   const [basketProducts, setBasketProducts] = useState([]);
 
-  const isBasketEmpty = basketProducts.length === 0;
+  const isBasketEmpty = isEmptyArray(basketProducts);
 
   const handleAddProductToBasket = (productToAddToBasket) => {
     const basketProductsCopy = structuredClone(basketProducts);
