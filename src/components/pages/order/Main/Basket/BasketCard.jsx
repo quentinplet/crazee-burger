@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../../../../theme";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -10,9 +10,15 @@ const BasketCard = ({
   quantity,
   onDelete,
   isModeAdmin,
+  onClick,
+  isSelected,
 }) => {
   return (
-    <BasketCardStyled $isModeAdmin={isModeAdmin}>
+    <BasketCardStyled
+      $isModeAdmin={isModeAdmin}
+      onClick={onClick}
+      $isSelected={isSelected}
+    >
       <div className="image">
         <img src={imageSource} alt={title} draggable="false" />
       </div>
@@ -49,6 +55,9 @@ const BasketCardStyled = styled.div`
   box-shadow: ${theme.shadows.basketCard};
 
   position: relative;
+
+  ${({ $isModeAdmin, $isSelected }) =>
+    $isModeAdmin && $isSelected && selectedStyle}
 
   .image {
     box-sizing: border-box;
@@ -146,6 +155,19 @@ const BasketCardStyled = styled.div`
           color: ${theme.colors.white};
         }
       }
+    }
+  }
+`;
+
+const selectedStyle = css`
+  background-color: ${theme.colors.primary};
+  .text-info {
+    .price {
+      color: ${theme.colors.white};
+    }
+
+    .quantity {
+      color: ${theme.colors.white};
     }
   }
 `;

@@ -16,6 +16,7 @@ const Main = () => {
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const [productSelected, setProductSelected] = useState({});
+  const [basketProductSelected, setBasketProductSelected] = useState({});
 
   const titleEditRef = useRef();
 
@@ -35,6 +36,7 @@ const Main = () => {
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
     isBasketEmpty,
+    updateBasketProduct,
   } = useBasket();
 
   const menuContextValue = {
@@ -52,6 +54,9 @@ const Main = () => {
     handleDeleteProductFromBasket,
     basketProducts,
     isBasketEmpty,
+    basketProductSelected,
+    setBasketProductSelected,
+    updateBasketProduct,
   };
 
   return (

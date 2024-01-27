@@ -9,6 +9,7 @@ const EditForm = () => {
     setProductSelected,
     handleEditProduct,
     titleEditRef,
+    updateBasketProduct,
   } = useContext(MenuContext);
 
   const handleChange = (event) => {
@@ -21,6 +22,7 @@ const EditForm = () => {
 
     setProductSelected(productBeingUpdated);
     handleEditProduct(productBeingUpdated);
+    updateBasketProduct(productBeingUpdated);
   };
 
   return (

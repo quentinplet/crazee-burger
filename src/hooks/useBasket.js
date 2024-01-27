@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { fakeBasket } from "../fakeData/fakeBasket";
-import { filterArrayById, findArrayElementById } from "../utils/array";
+import {
+  filterArrayById,
+  findArrayElementById,
+  findIndexById,
+} from "../utils/array";
 
 export const useBasket = () => {
   const fakeBasketTest = fakeBasket.LARGE_WEIRD;
@@ -40,12 +44,26 @@ export const useBasket = () => {
     setBasketProducts(basketUpdated);
   };
 
+  const updateBasketProduct = (menuProductEdited) => {
+    const basketProductsCopy = structuredClone(basketProducts);
+
+    const existingProductIndex = findIndexById(
+      basketProductsCopy,
+      menuProductEdited.id
+    );
+
+    basketProductsCopy[existingProductIndex] = menuProductEdited;
+
+    setBasketProducts(basketProductsCopy);
+  };
+
   return {
     basketProducts,
     setBasketProducts,
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
     isBasketEmpty,
+    updateBasketProduct,
   };
 };
 

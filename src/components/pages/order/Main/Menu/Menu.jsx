@@ -18,6 +18,7 @@ const Menu = ({ menu }) => {
     handleDeleteProductFromBasket,
     productSelected,
     setProductSelected,
+    setBasketProductSelected,
     titleEditRef,
   } = useContext(MenuContext);
 
@@ -31,6 +32,7 @@ const Menu = ({ menu }) => {
     await setCurrentTabSelected("edit");
     const productClickedOn = findArrayElementById(menu, idProductSelected);
     await setProductSelected(productClickedOn);
+    await setBasketProductSelected(productClickedOn);
     titleEditRef.current.focus();
   };
 
