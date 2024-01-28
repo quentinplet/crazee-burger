@@ -9,13 +9,13 @@ const BasketCard = ({
   price,
   quantity,
   onDelete,
-  isModeAdmin,
+  isClickable,
   onClick,
   isSelected,
 }) => {
   return (
     <BasketCardStyled
-      $isModeAdmin={isModeAdmin}
+      $isClickable={isClickable}
       onClick={onClick}
       $isSelected={isSelected}
     >
@@ -43,7 +43,7 @@ const BasketCard = ({
 export default BasketCard;
 
 const BasketCardStyled = styled.div`
-  cursor: ${({ $isModeAdmin }) => ($isModeAdmin ? "pointer" : "default")};
+  cursor: ${({ $isClickable }) => ($isClickable ? "pointer" : "default")};
   box-sizing: border-box;
   height: 86px;
   padding: 8px 16px;
@@ -56,8 +56,8 @@ const BasketCardStyled = styled.div`
 
   position: relative;
 
-  ${({ $isModeAdmin, $isSelected }) =>
-    $isModeAdmin && $isSelected && selectedStyle}
+  ${({ $isClickable, $isSelected }) =>
+    $isClickable && $isSelected && selectedStyle}
 
   .image {
     box-sizing: border-box;

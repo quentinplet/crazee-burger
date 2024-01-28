@@ -29,7 +29,7 @@ const BasketProducts = ({
           title={title ? title : " "}
           imageSource={imageSource ? imageSource : IMAGE_COMING_SOON}
           quantity={quantity}
-          isModeAdmin={isModeAdmin}
+          isClickable={isModeAdmin}
           onClick={() => handleClick(id)}
           isSelected={checkIfBasketProductIsSelected(
             id,
