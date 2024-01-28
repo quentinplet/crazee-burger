@@ -14,26 +14,10 @@ const Basket = () => {
     basketProducts,
     handleDeleteProductFromBasket,
     isBasketEmpty,
-    setProductSelected,
     basketProductSelected,
-    setBasketProductSelected,
-    titleEditRef,
   } = useContext(MenuContext);
 
-  const { isModeAdmin, setIsCollapsed, setCurrentTabSelected } =
-    useContext(OrderContext);
-
-  const handleClickProductBasket = async (idProductBasketSelected) => {
-    if (!isModeAdmin) return;
-    const productClickedOn = basketProducts.find(
-      ({ id }) => id === idProductBasketSelected
-    );
-    await setIsCollapsed(false);
-    await setCurrentTabSelected("edit");
-    await setProductSelected(productClickedOn);
-    titleEditRef.current.focus();
-    setBasketProductSelected(productClickedOn);
-  };
+  const { isModeAdmin } = useContext(OrderContext);
 
   const checkIfBasketProductIsSelected = (
     idProductInBasket,
@@ -56,7 +40,6 @@ const Basket = () => {
           basketProducts={basketProducts}
           handleDeleteProductFromBasket={handleDeleteProductFromBasket}
           isModeAdmin={isModeAdmin}
-          handleClickProductBasket={handleClickProductBasket}
           checkIfBasketProductIsSelected={checkIfBasketProductIsSelected}
           basketProductSelected={basketProductSelected}
         />

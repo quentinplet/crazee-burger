@@ -26,4 +26,5 @@ export default createContext({
   isBasketEmpty: true,
   basketProductSelected: {},
   setBasketProductSelected: () => {},
+  handleProductSelected: () => {},
 });

@@ -8,29 +8,26 @@ const BasketProducts = ({
   basketProducts,
   handleDeleteProductFromBasket,
   isModeAdmin,
-  handleClickProductBasket,
   checkIfBasketProductIsSelected,
   basketProductSelected,
+  handleProductSelected,
 }) => {
-  const handleClick = (id) => {
-    handleClickProductBasket(id);
-  };
-  const handleDelete = (event, idProduct) => {
-    handleDeleteProductFromBasket(idProduct);
+  const handleOnDelete = (event, idProduct) => {
     event.stopPropagation();
+    handleDeleteProductFromBasket(idProduct);
   };
   return (
     <BodyStyled>
       {basketProducts.map(({ id, price, title, imageSource, quantity }) => (
         <BasketCard
           key={id}
-          onDelete={(event) => handleDelete(event, id)}
+          onDelete={(event) => handleOnDelete(event, id)}
           price={formatPrice(price)}
           title={title ? title : " "}
           imageSource={imageSource ? imageSource : IMAGE_COMING_SOON}
           quantity={quantity}
           isClickable={isModeAdmin}
-          onClick={() => handleClick(id)}
+          onClick={() => handleProductSelected(id)}
           isSelected={checkIfBasketProductIsSelected(
             id,
             basketProductSelected.id
