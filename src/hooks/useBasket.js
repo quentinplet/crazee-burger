@@ -22,14 +22,10 @@ export const useBasket = () => {
     );
     const isProductAlreadyInBasket = existingProductIndex !== -1;
     if (!isProductAlreadyInBasket) {
-      addNewProductCardInBasket(basketProductsCopy, productToAddToBasket);
-    } else {
-      incrementProductQuantityInBasket(
-        basketProductsCopy,
-        existingProductIndex
-      );
+      createNewProductCardInBasket(basketProductsCopy, productToAddToBasket);
+      return;
     }
-    setBasketProducts(basketProductsCopy);
+    incrementProductQuantityInBasket(basketProductsCopy, existingProductIndex);
   };
 
   const handleDeleteProductFromBasket = (id) => {
@@ -45,6 +41,23 @@ export const useBasket = () => {
     setBasketProducts(basketUpdated);
   };
 
+  const createNewProductCardInBasket = (
+    basketProductsCopy,
+    productToAddToBasket
+  ) => {
+    productToAddToBasket.quantity = 1;
+    basketProductsCopy.unshift(productToAddToBasket);
+    setBasketProducts(basketProductsCopy);
+  };
+
+  const incrementProductQuantityInBasket = (
+    basketProductsCopy,
+    existingProductIndex
+  ) => {
+    basketProductsCopy[existingProductIndex].quantity++;
+    setBasketProducts(basketProductsCopy);
+  };
+
   const updateBasketProduct = (menuProductEdited) => {
     const basketProductsCopy = structuredClone(basketProducts);
 
@@ -54,6 +67,8 @@ export const useBasket = () => {
     );
 
     basketProductsCopy[existingProductIndex] = menuProductEdited;
+    basketProductsCopy[existingProductIndex].quantity =
+      basketProducts[existingProductIndex].quantity;
 
     setBasketProducts(basketProductsCopy);
   };
@@ -66,19 +81,4 @@ export const useBasket = () => {
     isBasketEmpty,
     updateBasketProduct,
   };
-};
-
-const incrementProductQuantityInBasket = (
-  basketProductsCopy,
-  existingProductIndex
-) => {
-  basketProductsCopy[existingProductIndex].quantity++;
-};
-
-const addNewProductCardInBasket = (
-  basketProductsCopy,
-  productToAddToBasket
-) => {
-  productToAddToBasket.quantity = 1;
-  basketProductsCopy.unshift(productToAddToBasket);
 };
