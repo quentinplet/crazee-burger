@@ -18,7 +18,6 @@ const Main = () => {
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const [productSelected, setProductSelected] = useState({});
-  const [basketProductSelected, setBasketProductSelected] = useState({});
 
   const titleEditRef = useRef();
 
@@ -31,7 +30,6 @@ const Main = () => {
     const productClickedOn = findArrayElementById(menu, idProductSelected);
 
     await setProductSelected(productClickedOn);
-    await setBasketProductSelected(productClickedOn);
 
     titleEditRef.current.focus();
   };
@@ -46,11 +44,9 @@ const Main = () => {
 
   const {
     basketProducts,
-    setBasketProducts,
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
     isBasketEmpty,
-    updateBasketProduct,
   } = useBasket();
 
   const menuContextValue = {
@@ -68,9 +64,6 @@ const Main = () => {
     handleDeleteProductFromBasket,
     basketProducts,
     isBasketEmpty,
-    basketProductSelected,
-    setBasketProductSelected,
-    updateBasketProduct,
     handleProductSelected,
   };
 

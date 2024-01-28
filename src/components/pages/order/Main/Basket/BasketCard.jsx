@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { theme } from "../../../../../theme";
 import { MdDeleteForever } from "react-icons/md";
+import { formatPrice } from "../../../../../utils/maths";
 
 const BasketCard = ({
   imageSource,
@@ -27,7 +28,7 @@ const BasketCard = ({
           <div className="title">
             <span>{title}</span>
           </div>
-          <div className="price">{price}</div>
+          <div className="price">{formatPrice(price)}</div>
         </div>
         <div className="quantity">
           <span> x {quantity}</span>

@@ -1,15 +1,9 @@
 import { useState } from "react";
 import { fakeBasket } from "../fakeData/fakeBasket";
-import {
-  filterArrayById,
-  findArrayElementById,
-  findIndexById,
-  isEmptyArray,
-} from "../utils/array";
+import { filterArrayById, isEmptyArray } from "../utils/array";
 
 export const useBasket = () => {
   const fakeBasketTest = fakeBasket.LARGE_WEIRD;
-  //   const [basketProducts, setBasketProducts] = useState([]);
   const [basketProducts, setBasketProducts] = useState([]);
 
   const isBasketEmpty = isEmptyArray(basketProducts);
@@ -21,6 +15,7 @@ export const useBasket = () => {
       (product) => product.id === productToAddToBasket.id
     );
     const isProductAlreadyInBasket = existingProductIndex !== -1;
+
     if (!isProductAlreadyInBasket) {
       createNewProductCardInBasket(basketProductsCopy, productToAddToBasket);
       return;
@@ -29,14 +24,6 @@ export const useBasket = () => {
   };
 
   const handleDeleteProductFromBasket = (id) => {
-    // const productToDeleteFromBasket = findArrayElementById(
-    //   basketProductsCopy,
-    //   id
-    // );
-    // const indexProductToDeleteFromBasket = basketProductsCopy.indexOf(
-    //   productToDeleteFromBasket
-    // );
-    // basketProductsCopy.splice(indexProductToDeleteFromBasket, 1);
     const basketUpdated = filterArrayById(basketProducts, id);
     setBasketProducts(basketUpdated);
   };
@@ -45,9 +32,9 @@ export const useBasket = () => {
     basketProductsCopy,
     productToAddToBasket
   ) => {
-    productToAddToBasket.quantity = 1;
-    basketProductsCopy.unshift(productToAddToBasket);
-    setBasketProducts(basketProductsCopy);
+    const newBasketProduct = { id: productToAddToBasket.id, quantity: 1 };
+    const newBasket = [newBasketProduct, ...basketProductsCopy];
+    setBasketProducts(newBasket);
   };
 
   const incrementProductQuantityInBasket = (
@@ -58,27 +45,11 @@ export const useBasket = () => {
     setBasketProducts(basketProductsCopy);
   };
 
-  const updateBasketProduct = (menuProductEdited) => {
-    const basketProductsCopy = structuredClone(basketProducts);
-
-    const existingProductIndex = findIndexById(
-      basketProductsCopy,
-      menuProductEdited.id
-    );
-
-    basketProductsCopy[existingProductIndex] = menuProductEdited;
-    basketProductsCopy[existingProductIndex].quantity =
-      basketProducts[existingProductIndex].quantity;
-
-    setBasketProducts(basketProductsCopy);
-  };
-
   return {
     basketProducts,
     setBasketProducts,
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
     isBasketEmpty,
-    updateBasketProduct,
   };
 };
