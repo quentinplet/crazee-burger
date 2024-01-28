@@ -7,7 +7,7 @@ import MenuContext from "../../../../../context/MenuContext";
 import MenuEmpty from "./MenuEmpty";
 import OrderContext from "../../../../../context/OrderContext";
 import { EMPTY_PRODUCT } from "../../../../../enums/product";
-import { findArrayElementById } from "../../../../../utils/array";
+import { findArrayElementById, isEmptyArray } from "../../../../../utils/array";
 
 const DEFAULT_IMAGE = "/images/coming-soon.png";
 
@@ -19,20 +19,10 @@ const Menu = ({ menu }) => {
     productSelected,
     setProductSelected,
     titleEditRef,
+    handleProductSelected,
   } = useContext(MenuContext);
 
-  const { isModeAdmin, setIsCollapsed, setCurrentTabSelected } =
-    useContext(OrderContext);
-
-  const handleClick = async (idProductSelected) => {
-    if (!isModeAdmin) return;
-
-    await setIsCollapsed(false);
-    await setCurrentTabSelected("edit");
-    const productClickedOn = findArrayElementById(menu, idProductSelected);
-    await setProductSelected(productClickedOn);
-    titleEditRef.current.focus();
-  };
+  const { isModeAdmin } = useContext(OrderContext);
 
   const handleClickPropagation = (event) => {
     event.stopPropagation();
@@ -67,7 +57,7 @@ const Menu = ({ menu }) => {
         onDelete={(event) => handleCardDelete(event, id)}
         hasDeleteButton={isModeAdmin}
         // className={isModeAdmin && "admin"}
-        onClick={() => handleClick(id)}
+        onClick={() => handleProductSelected(id)}
         isHoverable={isModeAdmin}
         isSelected={checkIfProductIsSelected(id, productSelected.id)}
         handleClickPropagation={(event) => handleClickPropagation(event)}
@@ -76,7 +66,7 @@ const Menu = ({ menu }) => {
     );
   });
 
-  const displayMenu = menu.length > 0 ? listCard : <MenuEmpty />;
+  const displayMenu = isEmptyArray(menu) ? <MenuEmpty /> : listCard;
 
   return <MenuStyled>{displayMenu}</MenuStyled>;
 };

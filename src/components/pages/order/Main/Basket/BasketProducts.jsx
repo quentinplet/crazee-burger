@@ -1,27 +1,51 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import BasketCard from "./BasketCard";
-import { formatPrice } from "../../../../../utils/maths";
 import { IMAGE_COMING_SOON } from "../../../../../enums/product";
+import { findArrayElementById } from "../../../../../utils/array";
+import MenuContext from "../../../../../context/MenuContext";
+import OrderContext from "../../../../../context/OrderContext";
+import { checkIfProductIsSelected } from "../../../../../utils/helper";
 
-const BasketProducts = ({
-  basketProducts,
-  handleDeleteProductFromBasket,
-  isModeAdmin,
-}) => {
+const BasketProducts = () => {
+  const {
+    basketProducts,
+    menu,
+    handleDeleteProductFromBasket,
+    handleProductSelected,
+    productSelected,
+  } = useContext(MenuContext);
+
+  const { isModeAdmin } = useContext(OrderContext);
+
+  const handleOnDelete = (event, idProduct) => {
+    event.stopPropagation();
+    handleDeleteProductFromBasket(idProduct);
+  };
   return (
     <BodyStyled>
-      {basketProducts.map(({ id, price, title, imageSource, quantity }) => (
-        <BasketCard
-          key={id}
-          onDelete={() => handleDeleteProductFromBasket(id)}
-          price={formatPrice(price)}
-          title={title ? title : " "}
-          imageSource={imageSource ? imageSource : IMAGE_COMING_SOON}
-          quantity={quantity}
-          isModeAdmin={isModeAdmin}
-        />
-      ))}
+      {basketProducts.map((basketProduct) => {
+        const menuProduct = findArrayElementById(menu, basketProduct.id);
+        return (
+          <BasketCard
+            key={basketProduct.id}
+            {...menuProduct}
+            onDelete={(event) => handleOnDelete(event, basketProduct.id)}
+            imageSource={
+              menuProduct.imageSource
+                ? menuProduct.imageSource
+                : IMAGE_COMING_SOON
+            }
+            quantity={basketProduct.quantity}
+            isClickable={isModeAdmin}
+            onClick={() => handleProductSelected(basketProduct.id)}
+            isSelected={checkIfProductIsSelected(
+              basketProduct.id,
+              productSelected.id
+            )}
+          />
+        );
+      })}
     </BodyStyled>
   );
 };

@@ -1,7 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../../../../theme";
 import { MdDeleteForever } from "react-icons/md";
+import { formatPrice } from "../../../../../utils/maths";
 
 const BasketCard = ({
   imageSource,
@@ -9,10 +10,16 @@ const BasketCard = ({
   price,
   quantity,
   onDelete,
-  isModeAdmin,
+  isClickable,
+  onClick,
+  isSelected,
 }) => {
   return (
-    <BasketCardStyled $isModeAdmin={isModeAdmin}>
+    <BasketCardStyled
+      $isClickable={isClickable}
+      onClick={onClick}
+      $isSelected={isSelected}
+    >
       <div className="image">
         <img src={imageSource} alt={title} draggable="false" />
       </div>
@@ -21,7 +28,7 @@ const BasketCard = ({
           <div className="title">
             <span>{title}</span>
           </div>
-          <div className="price">{price}</div>
+          <div className="price">{formatPrice(price)}</div>
         </div>
         <div className="quantity">
           <span> x {quantity}</span>
@@ -37,7 +44,7 @@ const BasketCard = ({
 export default BasketCard;
 
 const BasketCardStyled = styled.div`
-  cursor: ${({ $isModeAdmin }) => ($isModeAdmin ? "pointer" : "default")};
+  cursor: ${({ $isClickable }) => ($isClickable ? "pointer" : "default")};
   box-sizing: border-box;
   height: 86px;
   padding: 8px 16px;
@@ -49,6 +56,9 @@ const BasketCardStyled = styled.div`
   box-shadow: ${theme.shadows.basketCard};
 
   position: relative;
+
+  ${({ $isClickable, $isSelected }) =>
+    $isClickable && $isSelected && selectedStyle}
 
   .image {
     box-sizing: border-box;
@@ -146,6 +156,19 @@ const BasketCardStyled = styled.div`
           color: ${theme.colors.white};
         }
       }
+    }
+  }
+`;
+
+const selectedStyle = css`
+  background-color: ${theme.colors.primary};
+  .text-info {
+    .price {
+      color: ${theme.colors.white};
+    }
+
+    .quantity {
+      color: ${theme.colors.white};
     }
   }
 `;

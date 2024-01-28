@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { fakeBasket } from "../fakeData/fakeBasket";
-import { filterArrayById, findArrayElementById } from "../utils/array";
+import { filterArrayById, isEmptyArray } from "../utils/array";
 
 export const useBasket = () => {
   const fakeBasketTest = fakeBasket.LARGE_WEIRD;
-  //   const [basketProducts, setBasketProducts] = useState([]);
   const [basketProducts, setBasketProducts] = useState([]);
 
-  const isBasketEmpty = basketProducts.length === 0;
+  const isBasketEmpty = isEmptyArray(basketProducts);
 
   const handleAddProductToBasket = (productToAddToBasket) => {
     const basketProductsCopy = structuredClone(basketProducts);
@@ -16,28 +15,34 @@ export const useBasket = () => {
       (product) => product.id === productToAddToBasket.id
     );
     const isProductAlreadyInBasket = existingProductIndex !== -1;
+
     if (!isProductAlreadyInBasket) {
-      addNewProductCardInBasket(basketProductsCopy, productToAddToBasket);
-    } else {
-      incrementProductQuantityInBasket(
-        basketProductsCopy,
-        existingProductIndex
-      );
+      createNewProductCardInBasket(basketProductsCopy, productToAddToBasket);
+      return;
     }
-    setBasketProducts(basketProductsCopy);
+    incrementProductQuantityInBasket(basketProductsCopy, existingProductIndex);
   };
 
   const handleDeleteProductFromBasket = (id) => {
-    // const productToDeleteFromBasket = findArrayElementById(
-    //   basketProductsCopy,
-    //   id
-    // );
-    // const indexProductToDeleteFromBasket = basketProductsCopy.indexOf(
-    //   productToDeleteFromBasket
-    // );
-    // basketProductsCopy.splice(indexProductToDeleteFromBasket, 1);
     const basketUpdated = filterArrayById(basketProducts, id);
     setBasketProducts(basketUpdated);
+  };
+
+  const createNewProductCardInBasket = (
+    basketProductsCopy,
+    productToAddToBasket
+  ) => {
+    const newBasketProduct = { id: productToAddToBasket.id, quantity: 1 };
+    const newBasket = [newBasketProduct, ...basketProductsCopy];
+    setBasketProducts(newBasket);
+  };
+
+  const incrementProductQuantityInBasket = (
+    basketProductsCopy,
+    existingProductIndex
+  ) => {
+    basketProductsCopy[existingProductIndex].quantity++;
+    setBasketProducts(basketProductsCopy);
   };
 
   return {
@@ -47,19 +52,4 @@ export const useBasket = () => {
     handleDeleteProductFromBasket,
     isBasketEmpty,
   };
-};
-
-const incrementProductQuantityInBasket = (
-  basketProductsCopy,
-  existingProductIndex
-) => {
-  basketProductsCopy[existingProductIndex].quantity++;
-};
-
-const addNewProductCardInBasket = (
-  basketProductsCopy,
-  productToAddToBasket
-) => {
-  productToAddToBasket.quantity = 1;
-  basketProductsCopy.unshift(productToAddToBasket);
 };

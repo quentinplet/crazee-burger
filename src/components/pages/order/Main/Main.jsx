@@ -10,9 +10,11 @@ import { EMPTY_PRODUCT } from "../../../../enums/product";
 import Basket from "./Basket/Basket";
 import { useMenu } from "../../../../hooks/useMenu";
 import { useBasket } from "../../../../hooks/useBasket";
+import { findArrayElementById } from "../../../../utils/array";
 
 const Main = () => {
-  const { isModeAdmin, setIsModeAdmin } = useContext(OrderContext);
+  const { isModeAdmin, setIsCollapsed, setCurrentTabSelected } =
+    useContext(OrderContext);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const [productSelected, setProductSelected] = useState({});
@@ -20,6 +22,17 @@ const Main = () => {
   const titleEditRef = useRef();
 
   const menuTest = fakeMenu.MEDIUM;
+
+  const handleProductSelected = async (idProductSelected) => {
+    if (!isModeAdmin) return;
+    await setIsCollapsed(false);
+    await setCurrentTabSelected("edit");
+    const productClickedOn = findArrayElementById(menu, idProductSelected);
+
+    await setProductSelected(productClickedOn);
+
+    titleEditRef.current.focus();
+  };
 
   const {
     menu,
@@ -31,7 +44,6 @@ const Main = () => {
 
   const {
     basketProducts,
-    setBasketProducts,
     handleAddProductToBasket,
     handleDeleteProductFromBasket,
     isBasketEmpty,
@@ -52,6 +64,7 @@ const Main = () => {
     handleDeleteProductFromBasket,
     basketProducts,
     isBasketEmpty,
+    handleProductSelected,
   };
 
   return (
