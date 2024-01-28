@@ -17,7 +17,7 @@ const Main = () => {
     useContext(OrderContext);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
-  const [productSelected, setProductSelected] = useState({});
+  const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
 
   const titleEditRef = useRef();
 
@@ -28,9 +28,7 @@ const Main = () => {
     await setIsCollapsed(false);
     await setCurrentTabSelected("edit");
     const productClickedOn = findArrayElementById(menu, idProductSelected);
-
     await setProductSelected(productClickedOn);
-
     titleEditRef.current.focus();
   };
 

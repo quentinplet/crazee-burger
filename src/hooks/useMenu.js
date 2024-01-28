@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { filterArrayById } from "../utils/array";
-import { formatPrice } from "../utils/maths";
 
 export const useMenu = (fakeMenu) => {
   const [menu, setMenu] = useState(fakeMenu);
@@ -15,7 +14,6 @@ export const useMenu = (fakeMenu) => {
 
   const handleAddProduct = (newProduct) => {
     const menuCopy = structuredClone(menu);
-    newProduct.price = formatPrice(newProduct.price);
     const menuUpdated = [newProduct, ...menuCopy];
     setMenu(menuUpdated);
   };
@@ -25,7 +23,6 @@ export const useMenu = (fakeMenu) => {
     const indexOfProductToEdit = menu.findIndex(
       (product) => product.id === productBeingEdited.id
     );
-
     menuCopy[indexOfProductToEdit] = productBeingEdited;
     setMenu(menuCopy);
   };
