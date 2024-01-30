@@ -21,7 +21,7 @@ const Main = () => {
 
   const titleEditRef = useRef();
 
-  const menuTest = fakeMenu.MEDIUM;
+  const menuTest = fakeMenu.LARGE;
 
   const handleProductSelected = async (idProductSelected) => {
     if (!isModeAdmin) return;
