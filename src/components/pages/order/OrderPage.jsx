@@ -6,9 +6,9 @@ import Navbar from "./Navbar/Navbar";
 import OrderContext from "../../../context/OrderContext";
 
 const OrderPage = () => {
-  const [isModeAdmin, setIsModeAdmin] = useState(true);
+  const [isModeAdmin, setIsModeAdmin] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [currentTabSelected, setCurrentTabSelected] = useState("edit");
+  const [currentTabSelected, setCurrentTabSelected] = useState("add");
 
   const orderContextValue = {
     isModeAdmin,
