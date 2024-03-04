@@ -4,6 +4,7 @@ import Main from "./Main/Main";
 import { theme } from "../../../theme";
 import Navbar from "./Navbar/Navbar";
 import OrderContext from "../../../context/OrderContext";
+import { getUser } from "../../../api/user";
 
 const OrderPage = () => {
   const [isModeAdmin, setIsModeAdmin] = useState(false);
@@ -18,6 +19,9 @@ const OrderPage = () => {
     currentTabSelected,
     setCurrentTabSelected,
   };
+
+  //appel API pour récupérer l'utilisateur "Alex"
+  getUser("Alexx");
 
   return (
     <OrderContext.Provider value={orderContextValue}>
