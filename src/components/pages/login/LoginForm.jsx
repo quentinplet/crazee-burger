@@ -7,6 +7,7 @@ import TextInput from "../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
 import Button from "../../reusable-ui/Button";
 import { authenticateUser, createUser, getUser } from "../../../api/user";
+import Welcome from "./Welcome";
 
 const LoginForm = () => {
   const [username, setUserName] = useState("");
@@ -28,11 +29,7 @@ const LoginForm = () => {
 
   return (
     <LoginFormStyled action="submit" onSubmit={handleSubmit}>
-      <div>
-        <h1>Bienvenue chez nous ! </h1>
-        <hr />
-        <h2>Connectez-vous</h2>
-      </div>
+      <Welcome />
       <div className="inputForm-container">
         <TextInput
           value={username}
