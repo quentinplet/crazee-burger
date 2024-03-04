@@ -43,7 +43,7 @@ const Main = () => {
 
   const initialiseMenu = async () => {
     const menuReceived = await getMenu(userName);
-    console.log("menuReceived", menuReceived);
+    // console.log("menuReceived", menuReceived);
     setMenu(menuReceived);
     if (!menuReceived) return;
   };
