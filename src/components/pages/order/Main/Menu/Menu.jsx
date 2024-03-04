@@ -41,7 +41,7 @@ const Menu = ({ menu }) => {
   const handleAddButton = (event, id) => {
     handleClickPropagation(event);
     const productToAddToBasket = findArrayElementById(menu, id);
-    handleAddProductToBasket(productToAddToBasket);
+    handleAddProductToBasket(userName, productToAddToBasket);
   };
 
   const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
