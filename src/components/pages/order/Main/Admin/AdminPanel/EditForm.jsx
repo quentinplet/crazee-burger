@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import MenuContext from "../../../../../../context/MenuContext";
 import EditInfoMessage from "./EditInfoMessage";
 import Form from "./Form";
+import OrderContext from "../../../../../../context/OrderContext";
 
 const EditForm = () => {
   const {
@@ -10,6 +11,8 @@ const EditForm = () => {
     handleEditProduct,
     titleEditRef,
   } = useContext(MenuContext);
+
+  const { userName } = useContext(OrderContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,7 +23,7 @@ const EditForm = () => {
     };
 
     setProductSelected(productBeingUpdated);
-    handleEditProduct(productBeingUpdated);
+    handleEditProduct(userName, productBeingUpdated);
   };
 
   return (

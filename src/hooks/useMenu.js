@@ -22,13 +22,14 @@ export const useMenu = () => {
     syncBothMenus(username, menuUpdated);
   };
 
-  const handleEditProduct = (productBeingEdited) => {
+  const handleEditProduct = (username, productBeingEdited) => {
     const menuCopy = structuredClone(menu);
     const indexOfProductToEdit = menu.findIndex(
       (product) => product.id === productBeingEdited.id
     );
     menuCopy[indexOfProductToEdit] = productBeingEdited;
     setMenu(menuCopy);
+    syncBothMenus(username, menuCopy);
   };
 
   const generateNewMenu = (username) => {
