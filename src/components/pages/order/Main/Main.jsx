@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Menu from "./Menu/Menu";
@@ -11,9 +11,10 @@ import Basket from "./Basket/Basket";
 import { useMenu } from "../../../../hooks/useMenu";
 import { useBasket } from "../../../../hooks/useBasket";
 import { findArrayElementById } from "../../../../utils/array";
+import { getMenu } from "../../../../api/product";
 
 const Main = () => {
-  const { isModeAdmin, setIsCollapsed, setCurrentTabSelected } =
+  const { isModeAdmin, setIsCollapsed, setCurrentTabSelected, userName } =
     useContext(OrderContext);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
@@ -22,6 +23,14 @@ const Main = () => {
   const titleEditRef = useRef();
 
   const menuTest = fakeMenu.LARGE;
+  const {
+    menu,
+    setMenu,
+    handleAddProduct,
+    handleDeleteProduct,
+    handleEditProduct,
+    generateNewMenu,
+  } = useMenu(menuTest);
 
   const handleProductSelected = async (idProductSelected) => {
     if (!isModeAdmin) return;
@@ -32,13 +41,16 @@ const Main = () => {
     titleEditRef.current.focus();
   };
 
-  const {
-    menu,
-    handleAddProduct,
-    handleDeleteProduct,
-    handleEditProduct,
-    generateNewMenu,
-  } = useMenu(menuTest);
+  const initialiseMenu = async () => {
+    const menuReceived = await getMenu(userName);
+    console.log("menuReceived", menuReceived);
+    if (!menuReceived) return;
+    setMenu(menuReceived);
+  };
+
+  useEffect(() => {
+    initialiseMenu();
+  }, []);
 
   const {
     basketProducts,
