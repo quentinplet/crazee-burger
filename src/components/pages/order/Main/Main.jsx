@@ -12,6 +12,7 @@ import { useMenu } from "../../../../hooks/useMenu";
 import { useBasket } from "../../../../hooks/useBasket";
 import { findArrayElementById } from "../../../../utils/array";
 import { getMenu } from "../../../../api/product";
+import { getLocalStorage } from "../../../../utils/window";
 
 const Main = () => {
   const { isModeAdmin, setIsCollapsed, setCurrentTabSelected, userName } =
@@ -32,6 +33,14 @@ const Main = () => {
     generateNewMenu,
   } = useMenu(menuTest);
 
+  const {
+    basketProducts,
+    setBasketProducts,
+    handleAddProductToBasket,
+    handleDeleteProductFromBasket,
+    isBasketEmpty,
+  } = useBasket();
+
   const handleProductSelected = async (idProductSelected) => {
     if (!isModeAdmin) return;
     await setIsCollapsed(false);
@@ -48,16 +57,17 @@ const Main = () => {
     if (!menuReceived) return;
   };
 
+  const initialiseBasket = () => {
+    const basketReceived = getLocalStorage(userName);
+    console.log("basketReceived", basketReceived);
+    if (!basketReceived) return;
+    setBasketProducts(basketReceived);
+  };
+
   useEffect(() => {
     initialiseMenu();
+    initialiseBasket();
   }, []);
-
-  const {
-    basketProducts,
-    handleAddProductToBasket,
-    handleDeleteProductFromBasket,
-    isBasketEmpty,
-  } = useBasket();
 
   const menuContextValue = {
     handleAddProduct,

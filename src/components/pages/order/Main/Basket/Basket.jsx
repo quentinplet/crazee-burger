@@ -9,7 +9,9 @@ import EmptyBasket from "./EmptyBasket";
 import { isEmptyArray } from "../../../../../utils/array";
 
 const Basket = () => {
-  const { basketProducts } = useContext(MenuContext);
+  const { basketProducts, menu } = useContext(MenuContext);
+
+  if (!menu) return <span>Chargement...</span>;
   return (
     <BasketStyled>
       <Total />
