@@ -61,9 +61,13 @@ const Main = () => {
     if (basketReceived) setBasketProducts(basketReceived);
   };
 
-  useEffect(() => {
-    initialiseMenu();
+  const initialiseUserSession = async () => {
+    await initialiseMenu();
     initialiseBasket();
+  };
+
+  useEffect(() => {
+    initialiseUserSession();
   }, []);
 
   const menuContextValue = {

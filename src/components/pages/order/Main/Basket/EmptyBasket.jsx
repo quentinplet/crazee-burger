@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { theme } from "../../../../../theme";
 import { BASKET_MESSAGE } from "../../../../../enums/product";
 
-const EmptyBasket = (isLoading) => {
+const EmptyBasket = ({ isLoading }) => {
   return (
     <EmptyBasketStyled>
       {isLoading ? BASKET_MESSAGE.LOADING : BASKET_MESSAGE.EMPTY}

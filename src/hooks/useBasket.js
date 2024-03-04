@@ -32,10 +32,10 @@ export const useBasket = () => {
     );
   };
 
-  const handleDeleteProductFromBasket = (id) => {
+  const handleDeleteProductFromBasket = (username, id) => {
     const basketUpdated = filterArrayById(basketProducts, id);
     setBasketProducts(basketUpdated);
-    setLocalStorage(username);
+    setLocalStorage(username, basketUpdated);
   };
 
   const createNewProductCardInBasket = (

@@ -32,7 +32,7 @@ const Menu = ({ menu }) => {
   const handleCardDelete = (event, idProductToDelete) => {
     handleClickPropagation(event);
     handleDeleteProduct(userName, idProductToDelete);
-    handleDeleteProductFromBasket(idProductToDelete);
+    handleDeleteProductFromBasket(userName, idProductToDelete);
     idProductToDelete === productSelected.id &&
       setProductSelected(EMPTY_PRODUCT);
     titleEditRef.current && titleEditRef.current.focus();
