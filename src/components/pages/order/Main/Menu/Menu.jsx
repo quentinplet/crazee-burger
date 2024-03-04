@@ -8,6 +8,7 @@ import MenuEmpty from "./MenuEmpty";
 import OrderContext from "../../../../../context/OrderContext";
 import { EMPTY_PRODUCT } from "../../../../../enums/product";
 import { findArrayElementById, isEmptyArray } from "../../../../../utils/array";
+import Loader from "./Loader";
 
 const DEFAULT_IMAGE = "/images/coming-soon.png";
 
@@ -46,6 +47,8 @@ const Menu = ({ menu }) => {
   const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
     return idProductInMenu === idProductClickedOn;
   };
+
+  if (!menu) return <Loader />;
 
   const listCard = menu.map(({ id, title, price, imageSource }) => {
     return (

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { filterArrayById } from "../utils/array";
 import { syncBothMenus } from "../api/product";
+import { fakeMenu } from "../fakeData/fakeMenu";
 
-export const useMenu = (fakeMenu) => {
-  const [menu, setMenu] = useState(fakeMenu);
+export const useMenu = () => {
+  const [menu, setMenu] = useState(null);
 
   const handleDeleteProduct = (username, productId) => {
     const menuCopy = structuredClone(menu);
@@ -30,8 +31,9 @@ export const useMenu = (fakeMenu) => {
     setMenu(menuCopy);
   };
 
-  const generateNewMenu = () => {
-    setMenu(fakeMenu);
+  const generateNewMenu = (username) => {
+    setMenu(fakeMenu.LARGE);
+    syncBothMenus(username, fakeMenu.LARGE);
   };
 
   return {

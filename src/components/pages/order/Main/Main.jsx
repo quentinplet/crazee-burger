@@ -44,8 +44,8 @@ const Main = () => {
   const initialiseMenu = async () => {
     const menuReceived = await getMenu(userName);
     console.log("menuReceived", menuReceived);
-    if (!menuReceived) return;
     setMenu(menuReceived);
+    if (!menuReceived) return;
   };
 
   useEffect(() => {
