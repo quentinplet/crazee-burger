@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { filterArrayById } from "../utils/array";
+import { syncBothMenus } from "../api/product";
 
 export const useMenu = (fakeMenu) => {
   const [menu, setMenu] = useState(fakeMenu);
 
-  const handleDeleteProduct = (productId) => {
+  const handleDeleteProduct = (username, productId) => {
     const menuCopy = structuredClone(menu);
 
     const menuUpdated = filterArrayById(menuCopy, productId);
 
     setMenu(menuUpdated);
+    syncBothMenus(username, menuUpdated);
   };
 
-  const handleAddProduct = (newProduct) => {
+  const handleAddProduct = (username, newProduct) => {
     const menuCopy = structuredClone(menu);
     const menuUpdated = [newProduct, ...menuCopy];
     setMenu(menuUpdated);
+    syncBothMenus(username, menuUpdated);
   };
 
   const handleEditProduct = (productBeingEdited) => {

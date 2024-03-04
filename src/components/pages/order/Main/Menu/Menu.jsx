@@ -22,7 +22,7 @@ const Menu = ({ menu }) => {
     handleProductSelected,
   } = useContext(MenuContext);
 
-  const { isModeAdmin } = useContext(OrderContext);
+  const { isModeAdmin, userName } = useContext(OrderContext);
 
   const handleClickPropagation = (event) => {
     event.stopPropagation();
@@ -30,7 +30,7 @@ const Menu = ({ menu }) => {
 
   const handleCardDelete = (event, idProductToDelete) => {
     handleClickPropagation(event);
-    handleDeleteProduct(idProductToDelete);
+    handleDeleteProduct(userName, idProductToDelete);
     handleDeleteProductFromBasket(idProductToDelete);
     idProductToDelete === productSelected.id &&
       setProductSelected(EMPTY_PRODUCT);
