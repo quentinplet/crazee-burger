@@ -11,8 +11,7 @@ import Basket from "./Basket/Basket";
 import { useMenu } from "../../../../hooks/useMenu";
 import { useBasket } from "../../../../hooks/useBasket";
 import { findArrayElementById } from "../../../../utils/array";
-import { getMenu } from "../../../../api/product";
-import { getLocalStorage } from "../../../../utils/window";
+import { initialiseUserSession } from "./helpers/initialiseUserSession";
 
 const Main = () => {
   const { isModeAdmin, setIsCollapsed, setCurrentTabSelected, userName } =
@@ -50,24 +49,8 @@ const Main = () => {
     titleEditRef.current.focus();
   };
 
-  const initialiseMenu = async () => {
-    const menuReceived = await getMenu(userName);
-    // console.log("menuReceived", menuReceived);
-    setMenu(menuReceived);
-  };
-
-  const initialiseBasket = () => {
-    const basketReceived = getLocalStorage(userName);
-    if (basketReceived) setBasketProducts(basketReceived);
-  };
-
-  const initialiseUserSession = async () => {
-    await initialiseMenu();
-    initialiseBasket();
-  };
-
   useEffect(() => {
-    initialiseUserSession();
+    initialiseUserSession(userName, setMenu, setBasketProducts);
   }, []);
 
   const menuContextValue = {
