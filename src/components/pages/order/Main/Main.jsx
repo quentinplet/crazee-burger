@@ -54,14 +54,11 @@ const Main = () => {
     const menuReceived = await getMenu(userName);
     // console.log("menuReceived", menuReceived);
     setMenu(menuReceived);
-    if (!menuReceived) return;
   };
 
   const initialiseBasket = () => {
     const basketReceived = getLocalStorage(userName);
-    console.log("basketReceived", basketReceived);
-    if (!basketReceived) return;
-    setBasketProducts(basketReceived);
+    if (basketReceived) setBasketProducts(basketReceived);
   };
 
   useEffect(() => {

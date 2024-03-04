@@ -2,6 +2,7 @@ import { findArrayElementById } from "./array";
 import { replaceFrenchCommaWithDot } from "./maths";
 
 export const calculateSumToPay = (basket, menu) => {
+  if (!menu) return;
   return basket.reduce((acc, product) => {
     const menuProduct = findArrayElementById(menu, product.id);
     if (typeof menuProduct.price === "number")

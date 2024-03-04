@@ -11,11 +11,14 @@ import { isEmptyArray } from "../../../../../utils/array";
 const Basket = () => {
   const { basketProducts, menu } = useContext(MenuContext);
 
-  if (!menu) return <span>Chargement...</span>;
   return (
     <BasketStyled>
       <Total />
-      {isEmptyArray(basketProducts) ? <EmptyBasket /> : <BasketProducts />}
+      {isEmptyArray(basketProducts) || !menu ? (
+        <EmptyBasket isLoading={menu === undefined} />
+      ) : (
+        <BasketProducts />
+      )}
       <Footer />
     </BasketStyled>
   );
