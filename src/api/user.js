@@ -9,7 +9,6 @@ export const getUser = async (UserId) => {
   const docSnapshot = await getDoc(docRef);
 
   if (docSnapshot.exists()) {
-    // return docSnapshot.data();
     const userReceived = docSnapshot.data();
     return userReceived;
   }
@@ -26,7 +25,7 @@ export const createUser = async (userId) => {
 
   const newUserToCreate = {
     username: userId,
-    menu: fakeMenu.SMALL,
+    menu: fakeMenu.LARGE,
   };
 
   await setDoc(docRef, newUserToCreate);

@@ -22,7 +22,6 @@ const Main = () => {
 
   const titleEditRef = useRef();
 
-  const menuTest = fakeMenu.LARGE;
   const {
     menu,
     setMenu,
@@ -30,7 +29,7 @@ const Main = () => {
     handleDeleteProduct,
     handleEditProduct,
     generateNewMenu,
-  } = useMenu(menuTest);
+  } = useMenu();
 
   const {
     basketProducts,
