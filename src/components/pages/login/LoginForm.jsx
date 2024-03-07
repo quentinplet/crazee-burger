@@ -6,7 +6,7 @@ import { theme } from "../../../theme";
 import TextInput from "../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
 import Button from "../../reusable-ui/Button";
-import { authenticateUser, createUser, getUser } from "../../../api/user";
+import { authenticateUser } from "../../../api/user";
 import Welcome from "./Welcome";
 
 const LoginForm = () => {
@@ -20,11 +20,10 @@ const LoginForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    authenticateUser(username);
-
+    const userReceived = await authenticateUser(username);
+    if (!userReceived) return alert("Utilisateur non trouvé");
     setUserName("");
-    navigate(`/order/${username}`);
+    navigate(`/order/${userReceived.username}`);
   };
 
   return (

@@ -1,9 +1,9 @@
 import { getMenu } from "../../../../../api/product";
+import { authenticateUser } from "../../../../../api/user";
 import { getLocalStorage } from "../../../../../utils/window";
 
 const initialiseMenu = async (userName, setMenu) => {
   const menuReceived = await getMenu(userName);
-  // console.log("menuReceived", menuReceived);
   setMenu(menuReceived);
 };
 

@@ -17,7 +17,6 @@ export const getMenu = async (UserId) => {
   const docRef = doc(db, "users", UserId);
 
   const docSnapshot = await getDoc(docRef);
-
   if (docSnapshot.exists()) {
     const { menu } = docSnapshot.data();
     // console.log("menu", menu);

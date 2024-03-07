@@ -4,7 +4,6 @@ import Main from "./Main/Main";
 import { theme } from "../../../theme";
 import Navbar from "./Navbar/Navbar";
 import OrderContext from "../../../context/OrderContext";
-import { getUser } from "../../../api/user";
 import { useParams } from "react-router-dom";
 
 const OrderPage = () => {
@@ -24,7 +23,7 @@ const OrderPage = () => {
   };
 
   //appel API pour récupérer l'utilisateur "Alex"
-  getUser("Alexx");
+  // getUser("Alexx");
 
   return (
     <OrderContext.Provider value={orderContextValue}>
