@@ -6,32 +6,32 @@ import { theme } from "../../../theme";
 import TextInput from "../../reusable-ui/TextInput";
 import { BsPersonCircle } from "react-icons/bs";
 import Button from "../../reusable-ui/Button";
+import { authenticateUser } from "../../../api/user";
+import Welcome from "./Welcome";
 
 const LoginForm = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [username, setUserName] = useState("");
 
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setInputValue(event.target.value);
+    setUserName(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setInputValue("");
-    navigate(`/order/${inputValue}`);
+    const userReceived = await authenticateUser(username);
+    if (!userReceived) return alert("Utilisateur non trouvé");
+    setUserName("");
+    navigate(`/order/${userReceived.username}`);
   };
 
   return (
     <LoginFormStyled action="submit" onSubmit={handleSubmit}>
-      <div>
-        <h1>Bienvenue chez nous ! </h1>
-        <hr />
-        <h2>Connectez-vous</h2>
-      </div>
+      <Welcome />
       <div className="inputForm-container">
         <TextInput
-          value={inputValue}
+          value={username}
           onChange={handleChange}
           Icon={<BsPersonCircle />}
           placeholder={"Entrez votre prénom"}

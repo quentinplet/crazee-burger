@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BsPersonCircle } from "react-icons/bs";
 import { theme } from "../../../../theme";
+import OrderContext from "../../../../context/OrderContext";
 
 const Profile = () => {
-  const { userName } = useParams();
+  const { userName } = useContext(OrderContext);
   return (
     <ProfileStyled>
       <div className="info">

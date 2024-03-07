@@ -8,6 +8,7 @@ import MenuEmpty from "./MenuEmpty";
 import OrderContext from "../../../../../context/OrderContext";
 import { EMPTY_PRODUCT } from "../../../../../enums/product";
 import { findArrayElementById, isEmptyArray } from "../../../../../utils/array";
+import Loader from "./Loader";
 
 const DEFAULT_IMAGE = "/images/coming-soon.png";
 
@@ -22,7 +23,7 @@ const Menu = ({ menu }) => {
     handleProductSelected,
   } = useContext(MenuContext);
 
-  const { isModeAdmin } = useContext(OrderContext);
+  const { isModeAdmin, userName } = useContext(OrderContext);
 
   const handleClickPropagation = (event) => {
     event.stopPropagation();
@@ -30,8 +31,8 @@ const Menu = ({ menu }) => {
 
   const handleCardDelete = (event, idProductToDelete) => {
     handleClickPropagation(event);
-    handleDeleteProduct(idProductToDelete);
-    handleDeleteProductFromBasket(idProductToDelete);
+    handleDeleteProduct(userName, idProductToDelete);
+    handleDeleteProductFromBasket(userName, idProductToDelete);
     idProductToDelete === productSelected.id &&
       setProductSelected(EMPTY_PRODUCT);
     titleEditRef.current && titleEditRef.current.focus();
@@ -40,12 +41,14 @@ const Menu = ({ menu }) => {
   const handleAddButton = (event, id) => {
     handleClickPropagation(event);
     const productToAddToBasket = findArrayElementById(menu, id);
-    handleAddProductToBasket(productToAddToBasket);
+    handleAddProductToBasket(userName, productToAddToBasket);
   };
 
   const checkIfProductIsSelected = (idProductInMenu, idProductClickedOn) => {
     return idProductInMenu === idProductClickedOn;
   };
+
+  if (!menu) return <Loader />;
 
   const listCard = menu.map(({ id, title, price, imageSource }) => {
     return (

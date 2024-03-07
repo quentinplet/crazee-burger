@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
+import { BASKET_MESSAGE } from "../../../../../enums/product";
 
-const EmptyBasket = () => {
-  return <EmptyBasketStyled>Votre Commande est vide </EmptyBasketStyled>;
+const EmptyBasket = ({ isLoading }) => {
+  return (
+    <EmptyBasketStyled>
+      {isLoading ? BASKET_MESSAGE.LOADING : BASKET_MESSAGE.EMPTY}
+    </EmptyBasketStyled>
+  );
 };
 
 export default EmptyBasket;

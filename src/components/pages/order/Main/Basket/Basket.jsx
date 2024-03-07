@@ -9,11 +9,16 @@ import EmptyBasket from "./EmptyBasket";
 import { isEmptyArray } from "../../../../../utils/array";
 
 const Basket = () => {
-  const { basketProducts } = useContext(MenuContext);
+  const { basketProducts, menu } = useContext(MenuContext);
+
   return (
     <BasketStyled>
       <Total />
-      {isEmptyArray(basketProducts) ? <EmptyBasket /> : <BasketProducts />}
+      {isEmptyArray(basketProducts) || !menu ? (
+        <EmptyBasket isLoading={menu === undefined} />
+      ) : (
+        <BasketProducts />
+      )}
       <Footer />
     </BasketStyled>
   );

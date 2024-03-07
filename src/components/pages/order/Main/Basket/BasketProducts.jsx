@@ -16,11 +16,13 @@ const BasketProducts = () => {
     productSelected,
   } = useContext(MenuContext);
 
+  const { userName } = useContext(OrderContext);
+
   const { isModeAdmin } = useContext(OrderContext);
 
   const handleOnDelete = (event, idProduct) => {
     event.stopPropagation();
-    handleDeleteProductFromBasket(idProduct);
+    handleDeleteProductFromBasket(userName, idProduct);
   };
   return (
     <BodyStyled>

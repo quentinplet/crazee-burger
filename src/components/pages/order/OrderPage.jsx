@@ -4,11 +4,13 @@ import Main from "./Main/Main";
 import { theme } from "../../../theme";
 import Navbar from "./Navbar/Navbar";
 import OrderContext from "../../../context/OrderContext";
+import { useParams } from "react-router-dom";
 
 const OrderPage = () => {
-  const [isModeAdmin, setIsModeAdmin] = useState(true);
+  const [isModeAdmin, setIsModeAdmin] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [currentTabSelected, setCurrentTabSelected] = useState("edit");
+  const [currentTabSelected, setCurrentTabSelected] = useState("add");
+  const { userName } = useParams();
 
   const orderContextValue = {
     isModeAdmin,
@@ -17,7 +19,11 @@ const OrderPage = () => {
     setIsCollapsed,
     currentTabSelected,
     setCurrentTabSelected,
+    userName,
   };
+
+  //appel API pour récupérer l'utilisateur "Alex"
+  // getUser("Alexx");
 
   return (
     <OrderContext.Provider value={orderContextValue}>

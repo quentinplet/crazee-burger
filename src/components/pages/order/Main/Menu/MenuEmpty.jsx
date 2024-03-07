@@ -5,7 +5,7 @@ import OrderContext from "../../../../../context/OrderContext";
 import MenuContext from "../../../../../context/MenuContext";
 
 const MenuEmpty = () => {
-  const { isModeAdmin } = useContext(OrderContext);
+  const { isModeAdmin, userName } = useContext(OrderContext);
   const { generateNewMenu } = useContext(MenuContext);
 
   const displayMenuEmpty = () => {
@@ -17,7 +17,7 @@ const MenuEmpty = () => {
           <Button
             className="button"
             label="Générer de nouveaux produits"
-            onClick={generateNewMenu}
+            onClick={() => generateNewMenu(userName)}
           />
         </>
       );

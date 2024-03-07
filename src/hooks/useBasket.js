@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { fakeBasket } from "../fakeData/fakeBasket";
 import { filterArrayById, isEmptyArray } from "../utils/array";
+import { setLocalStorage } from "../utils/window";
 
 export const useBasket = () => {
   const fakeBasketTest = fakeBasket.LARGE_WEIRD;
@@ -8,7 +9,7 @@ export const useBasket = () => {
 
   const isBasketEmpty = isEmptyArray(basketProducts);
 
-  const handleAddProductToBasket = (productToAddToBasket) => {
+  const handleAddProductToBasket = (username, productToAddToBasket) => {
     const basketProductsCopy = structuredClone(basketProducts);
 
     const existingProductIndex = basketProductsCopy.findIndex(
@@ -17,32 +18,45 @@ export const useBasket = () => {
     const isProductAlreadyInBasket = existingProductIndex !== -1;
 
     if (!isProductAlreadyInBasket) {
-      createNewProductCardInBasket(basketProductsCopy, productToAddToBasket);
+      createNewProductCardInBasket(
+        username,
+        basketProductsCopy,
+        productToAddToBasket
+      );
       return;
     }
-    incrementProductQuantityInBasket(basketProductsCopy, existingProductIndex);
+    incrementProductQuantityInBasket(
+      username,
+      basketProductsCopy,
+      existingProductIndex
+    );
   };
 
-  const handleDeleteProductFromBasket = (id) => {
+  const handleDeleteProductFromBasket = (username, id) => {
     const basketUpdated = filterArrayById(basketProducts, id);
     setBasketProducts(basketUpdated);
+    setLocalStorage(username, basketUpdated);
   };
 
   const createNewProductCardInBasket = (
+    username,
     basketProductsCopy,
     productToAddToBasket
   ) => {
     const newBasketProduct = { id: productToAddToBasket.id, quantity: 1 };
     const newBasket = [newBasketProduct, ...basketProductsCopy];
     setBasketProducts(newBasket);
+    setLocalStorage(username, newBasket);
   };
 
   const incrementProductQuantityInBasket = (
+    username,
     basketProductsCopy,
     existingProductIndex
   ) => {
     basketProductsCopy[existingProductIndex].quantity++;
     setBasketProducts(basketProductsCopy);
+    setLocalStorage(username, basketProductsCopy);
   };
 
   return {
